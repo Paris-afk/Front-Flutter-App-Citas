@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'user_profile.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -113,7 +114,21 @@ class HomePage extends StatelessWidget{
                           color: Colors.orange[900]
                         ),
                         child: Center(
-                          child: Text("Iniciar Sesion",style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),),
+                          child: Column(
+                            children: [
+                              FlatButton(
+                                onPressed: (){
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => UserProfile()
+                                      )
+                                  );
+                                },
+                                child: Text("Iniciar Sesion",style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),),
+                              ),
+                            ],
+                          ),
                         )
                       ),
                       SizedBox(height: 20,),
