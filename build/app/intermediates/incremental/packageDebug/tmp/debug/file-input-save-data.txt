@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Tue Aug 18 23:22:04 CDT 2020
+#Wed Aug 19 14:12:55 CDT 2020
 4.path=flutter_assets/kernel_blob.bin
 8.set=NATIVE_RESOURCE
 6.path=lib/x86_64/libflutter.so
