@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'user_profile.dart';
+import 'user/user_profile.dart';
 
 void main() => runApp(
   MaterialApp(
