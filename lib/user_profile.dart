@@ -47,37 +47,102 @@ class _UserProfile extends State<UserProfile> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-
-                  Text(
-                    'Email: ',
-                    style: TextStyle(
-                      fontSize: 22,
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        Icon(Icons.email),
+                        Container(
+                          margin: EdgeInsets.only(left: 15),
+                          child: Text(
+                            'Email: ',
+                            style: TextStyle(
+                                fontSize: 22
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Address: ',
-                    style: TextStyle(
-                      fontSize: 22,
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        Icon(Icons.lightbulb_outline),
+                        Container(
+                          margin: EdgeInsets.only(left: 15),
+                          child: Text(
+                            'Hobbies: ',
+                            style: TextStyle(
+                                fontSize: 22
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Sex: ',
-                    style: TextStyle(
-                      fontSize: 22,
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        Icon(Icons.wc),
+                        Container(
+                          margin: EdgeInsets.only(left:15),
+                          child: Text(
+                            'Sex: ',
+                            style: TextStyle(
+                                fontSize: 22
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Preferences: ',
-                    style: TextStyle(
-                      fontSize: 22,
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        Icon(Icons.people),
+                        Container(
+                            margin: EdgeInsets.only(left:15),
+                            child:  Text(
+                              'Preferences: ',
+                              style: TextStyle(
+                                  fontSize: 22
+                              ),
+                            ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Show me: ',
-                    style: TextStyle(
-                      fontSize: 22,
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        Icon(Icons.person),
+                        Container(
+                          margin: EdgeInsets.only(left:15),
+                          child: Text(
+                            'Show me: ',
+                            style: TextStyle(
+                                fontSize: 22
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  IconButton(
+                    icon: Icon(Icons.edit),
+                    onPressed: (){
+                      print('Moving to Edit Profile');
+                    },
+                  )
                 ],
               ),
             )
