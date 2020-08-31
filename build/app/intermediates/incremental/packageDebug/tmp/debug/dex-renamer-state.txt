@@ -1,4 +1,4 @@
-#Wed Aug 19 21:56:00 CDT 2020
-base.0=/home/yassin/Documentos/apps_projects/Front-Flutter-App-Citas/build/app/intermediates/transforms/dexMerger/debug/0
+#Mon Aug 31 16:53:20 CDT 2020
+base.0=C\:\\Users\\paris\\AndroidStudioProjects\\citas_proyecto\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
