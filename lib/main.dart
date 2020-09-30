@@ -118,6 +118,7 @@ class HomePage extends StatelessWidget{
                             children: [
                               FlatButton(
                                 onPressed: (){
+                                  print('Session started');
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

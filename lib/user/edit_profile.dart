@@ -83,6 +83,7 @@ class _UserEdit extends State<UserEdit>{
                           icon: Icon(Icons.save),
                           onPressed: (){
                             print('Info changed');
+                            Navigator.pop(context);
                           },
                         ),
                       ],

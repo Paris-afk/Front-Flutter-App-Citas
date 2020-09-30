@@ -141,6 +141,7 @@ class _UserProfile extends State<UserProfile> {
                   IconButton(
                     icon: Icon(Icons.edit),
                     onPressed: (){
+                      print('Moving to edit your profile');
                       Navigator.push(
                           context,
                           MaterialPageRoute(
