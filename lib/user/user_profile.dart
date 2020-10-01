@@ -9,6 +9,15 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfile extends State<UserProfile> {
   final _profileImage = 'https://picsum.photos/500';
+  final _age = "19";
+  final _description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique a ligula vel interdum. Vestibulum lacus diam, ultricies dignissim ligula at, ultricies laoreet metus. Pellentesque volutpat justo sapien, nec vestibulum diam fermentum sit amet. Aenean a diam risus. Pellentesque non ligula ac erat fringilla vehicula. Donec quis enim non ipsum elementum mollis id et velit. Maecenas non augue nulla. Curabitur est orci, scelerisque interdum nulla ac, congue dictum justo. Proin ornare tellus vel metus bibendum faucibus. Praesent eu mauris felis. Nulla in nibh sollicitudin, interdum justo ut, aliquet dolor. Aenean tempor neque ipsum, ac gravida justo venenatis pulvinar. Praesent ac velit eget justo tristique viverra quis eu lectus. ";
+  final _email = "yassinovp@gmail.com";
+  final _hobbies = "Rubiks cubes";
+  final _sex = "Men";
+  final _gender = "Hetero";
+  final _preferences = "Woman";
+  final _showMe = "Woman";
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +26,26 @@ class _UserProfile extends State<UserProfile> {
         child: Column (
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 60,),
             Container(
-              height: MediaQuery.of(context).size.width,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image(
-                  image: NetworkImage(_profileImage),
-                  fit: BoxFit.cover,
-                ),
+              height: MediaQuery.of(context).size.width / 2,
+              alignment: Alignment.center,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(200),
+                    child: Image.network(
+                      _profileImage,
+                      fit: BoxFit.cover,
+                    ),
+
+                  ),
+                ],
               ),
+
             ),
+            SizedBox(height: 60,),
             Container(
               width: MediaQuery.of(context).size.width,
               //color: Colors.blue,
@@ -37,6 +56,16 @@ class _UserProfile extends State<UserProfile> {
                   fontWeight: FontWeight.bold,
                   fontSize: 30,
                 ),
+              ),
+            ),
+
+            Container(
+              padding: EdgeInsets.all(20),
+              width: MediaQuery.of(context).size.width,
+              //color: Colors.blue,
+              child: Text(
+                _description,
+                textAlign: TextAlign.justify,
               ),
             ),
 
@@ -57,7 +86,7 @@ class _UserProfile extends State<UserProfile> {
                         Container(
                           margin: EdgeInsets.only(left: 15),
                           child: Text(
-                            'Email: ',
+                            'Email: ' + _email,
                             style: TextStyle(
                                 fontSize: 22
                             ),
@@ -75,7 +104,7 @@ class _UserProfile extends State<UserProfile> {
                         Container(
                           margin: EdgeInsets.only(left: 15),
                           child: Text(
-                            'Hobbies: ',
+                            'Hobbies: ' + _hobbies,
                             style: TextStyle(
                                 fontSize: 22
                             ),
@@ -93,7 +122,25 @@ class _UserProfile extends State<UserProfile> {
                         Container(
                           margin: EdgeInsets.only(left:15),
                           child: Text(
-                            'Sex: ',
+                            'Sex: ' + _sex,
+                            style: TextStyle(
+                                fontSize: 22
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    child: Row(
+                      children: [
+                        Icon(Icons.accessibility),
+                        Container(
+                          margin: EdgeInsets.only(left:15),
+                          child: Text(
+                            'Gender: ' + _gender,
                             style: TextStyle(
                                 fontSize: 22
                             ),
@@ -111,7 +158,7 @@ class _UserProfile extends State<UserProfile> {
                         Container(
                             margin: EdgeInsets.only(left:15),
                             child:  Text(
-                              'Preferences: ',
+                              'Preferences: ' + _preferences,
                               style: TextStyle(
                                   fontSize: 22
                               ),
@@ -129,7 +176,7 @@ class _UserProfile extends State<UserProfile> {
                         Container(
                           margin: EdgeInsets.only(left:15),
                           child: Text(
-                            'Show me: ',
+                            'Show me: ' + _showMe,
                             style: TextStyle(
                                 fontSize: 22
                             ),
@@ -156,6 +203,32 @@ class _UserProfile extends State<UserProfile> {
           ]
         ),
         //Image asset an then the list of data of the user
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.amberAccent,
+        backgroundColor: Colors.redAccent,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.insert_emoticon, color: Colors.white,),
+            title: Text('Match', style: TextStyle(color: Colors.white),),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat, color: Colors.white,),
+            title: Text('RandChat', style: TextStyle(color: Colors.white),),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search, color: Colors.white,),
+            title: Text('Search', style: TextStyle(color: Colors.white),),
+          ),
+          /*BottomNavigationBarItem(
+            icon: Icon(Icons.person, color: Colors.white,),
+            title: Text('Search', style: TextStyle(color: Colors.white),),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people, color: Colors.white,),
+            title: Text('Swipes', style: TextStyle(color: Colors.white),),
+          ),*/
+        ],
       ),
     );
   }

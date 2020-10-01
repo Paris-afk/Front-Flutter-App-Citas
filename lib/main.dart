@@ -5,6 +5,10 @@ void main() => runApp(
   MaterialApp(
     debugShowCheckedModeBanner: false,
     home: HomePage(),
+    theme: ThemeData(
+      primaryColor: Colors.redAccent,
+      accentColor: Colors.yellow,
+    ),
   )
 );
 
