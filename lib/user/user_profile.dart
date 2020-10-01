@@ -10,6 +10,8 @@ class UserProfile extends StatefulWidget {
 class _UserProfile extends State<UserProfile> {
   final _profileImage = 'https://picsum.photos/500';
   final _age = "19";
+  final _name = "Juan";
+  final _last_name = "Perez";
   final _description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique a ligula vel interdum. Vestibulum lacus diam, ultricies dignissim ligula at, ultricies laoreet metus. Pellentesque volutpat justo sapien, nec vestibulum diam fermentum sit amet. Aenean a diam risus. Pellentesque non ligula ac erat fringilla vehicula. Donec quis enim non ipsum elementum mollis id et velit. Maecenas non augue nulla. Curabitur est orci, scelerisque interdum nulla ac, congue dictum justo. Proin ornare tellus vel metus bibendum faucibus. Praesent eu mauris felis. Nulla in nibh sollicitudin, interdum justo ut, aliquet dolor. Aenean tempor neque ipsum, ac gravida justo venenatis pulvinar. Praesent ac velit eget justo tristique viverra quis eu lectus. ";
   final _email = "yassinovp@gmail.com";
   final _hobbies = "Rubiks cubes";
@@ -39,7 +41,29 @@ class _UserProfile extends State<UserProfile> {
                       _profileImage,
                       fit: BoxFit.cover,
                     ),
-
+                  ),
+                  Container(
+                    alignment: Alignment.bottomRight,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child:  Container(
+                      width: MediaQuery.of(context).size.width / 5,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(0),
+                      height: 80,
+                      decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(200)
+                      ),
+                      child: Text(
+                        _age,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -50,7 +74,7 @@ class _UserProfile extends State<UserProfile> {
               width: MediaQuery.of(context).size.width,
               //color: Colors.blue,
               child: Text(
-                'Juan Perez',
+                _name + ' ' + _last_name,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -205,6 +229,7 @@ class _UserProfile extends State<UserProfile> {
         //Image asset an then the list of data of the user
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.amberAccent,
         backgroundColor: Colors.redAccent,
         items: [
@@ -220,14 +245,14 @@ class _UserProfile extends State<UserProfile> {
             icon: Icon(Icons.search, color: Colors.white,),
             title: Text('Search', style: TextStyle(color: Colors.white),),
           ),
-          /*BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.person, color: Colors.white,),
             title: Text('Search', style: TextStyle(color: Colors.white),),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people, color: Colors.white,),
             title: Text('Swipes', style: TextStyle(color: Colors.white),),
-          ),*/
+          ),
         ],
       ),
     );
