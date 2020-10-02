@@ -35,7 +35,6 @@ class HomePage extends StatelessWidget{
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
-
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text("Login", style: TextStyle(color: Colors.white, fontSize: 40),),

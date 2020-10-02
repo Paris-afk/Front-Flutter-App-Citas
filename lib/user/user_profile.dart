@@ -30,7 +30,7 @@ class _UserProfile extends State<UserProfile> {
           children: [
             SizedBox(height: 60,),
             Container(
-              height: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.width / 1.5,
               alignment: Alignment.center,
               child: Stack(
                 alignment: Alignment.center,
