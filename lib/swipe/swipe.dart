@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import '../widgets/BottomNavBar.dart';
 
 class Swipes extends StatefulWidget{
   @override
@@ -9,17 +11,13 @@ class Swipes extends StatefulWidget{
 class _Swipes  extends State<Swipes>{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
+    return Column(
           children: [
             Text(
               "Swipes section"
             ),
           ],
-        ),
-      ),
-    );
+        );
   }
 
 }

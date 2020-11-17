@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/yassin/Documentos/apps_projects/Front-Flutter-App-Citas/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sr/values-sr.xml",
+            "outputFile": "/home/yassin/Documentos/flutter-projects/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-sr/values-sr.xml",
             "map": [
                 {
                     "source": "/home/yassin/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/870bb74b3719e1df4a31a28e054cfc23/res/values-sr/values-sr.xml",

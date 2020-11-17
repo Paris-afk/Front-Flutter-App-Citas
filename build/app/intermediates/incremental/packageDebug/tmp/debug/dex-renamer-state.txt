@@ -1,4 +1,4 @@
-#Fri Oct 02 00:48:27 CDT 2020
-base.0=/home/yassin/Documentos/apps_projects/Front-Flutter-App-Citas/build/app/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
+#Mon Nov 16 20:10:10 CST 2020
+base.0=/home/yassin/Documentos/flutter-projects/build/app/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
+path.0=classes.dex

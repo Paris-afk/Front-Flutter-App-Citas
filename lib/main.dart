@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'user/user_profile.dart';
+import 'rootLayout.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -125,7 +126,7 @@ class HomePage extends StatelessWidget{
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => UserProfile()
+                                          builder: (context) => RootLayout()
                                       )
                                   );
                                 },
