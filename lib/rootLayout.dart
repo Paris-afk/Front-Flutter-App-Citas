@@ -40,30 +40,38 @@ class _RootLayout extends State<RootLayout>{
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.amberAccent,
+        unselectedItemColor: Colors.white,
         backgroundColor: Colors.redAccent,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.insert_emoticon, color: Colors.white,),
-            title: Text('Match', style: TextStyle(color: Colors.white),),
+            icon: Icon(
+              Icons.insert_emoticon,
+            ),
+            label: 'Match',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat, color: Colors.white,),
-            title: Text('RandChat', style: TextStyle(color: Colors.white),),
+            icon: Icon(
+              Icons.chat,
+            ),
+            label: 'RandChat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Colors.white,),
-            title: Text('Search', style: TextStyle(color: Colors.white),),
+            icon: Icon(
+              Icons.search,
+            ),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.white,),
-            title: Text('Search', style: TextStyle(color: Colors.white),),
+            icon: Icon(
+              Icons.person,
+            ),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
             icon: Icon(
               Icons.people,
-              color: Colors.white,
             ),
-            title: Text('Swipes', style: TextStyle(color: Colors.white),),
+            label: 'Swipes',
           ),
         ],
         currentIndex: _selectedIndex,
