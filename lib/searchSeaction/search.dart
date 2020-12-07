@@ -57,9 +57,9 @@ class _Search extends State<Search> {
             Container(
               height: MediaQuery.of(context).size.height - 100,
               child: ListView(
-                  padding: const EdgeInsets.all(15),
+                  //padding: const EdgeInsets.all(15),
                   children: List.generate(
-                    10,
+                    16,
                     (index) => ListTile(
                       leading: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
