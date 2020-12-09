@@ -15,14 +15,14 @@ class _RandChat extends State<RandChat> {
     return Column(
       children: [
         SizedBox(
-          height: 28,
+          height: 24,
         ),
         Container(
-          width: MediaQuery.of(context).size.width ,
+          width: MediaQuery.of(context).size.width,
           color: Colors.redAccent,
           padding: EdgeInsets.all(15),
           child: Text(
-              "Chat with random people near you",
+            "Chat with random people near you",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -35,7 +35,8 @@ class _RandChat extends State<RandChat> {
               children: List.generate(
                   15,
                   (index) => ListTile(
-                    contentPadding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                        contentPadding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
                         title: Text(
                           'Yassin Orlando Vazquez Paz',
                           style: TextStyle(
@@ -52,7 +53,8 @@ class _RandChat extends State<RandChat> {
                           ],
                         ),
                         onTap: () {
-                          print('Chatting with someone near you in Random Chat');
+                          print(
+                              'Chatting with someone near you in Random Chat');
                         },
                       ))),
         ),

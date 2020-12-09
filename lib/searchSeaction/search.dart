@@ -16,7 +16,7 @@ class _Search extends State<Search> {
     return Column(
       children: [
         SizedBox(
-          height: 40,
+          height: 24,
         ),
         Column(
           children: [
@@ -57,29 +57,29 @@ class _Search extends State<Search> {
             Container(
               height: MediaQuery.of(context).size.height - 100,
               child: ListView(
-                  //padding: const EdgeInsets.all(15),
-                  children: List.generate(
-                    16,
-                    (index) => ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(200),
-                        child: Image.network(
-                          'https://picsum.photos/500',
-                          width: 50,
-                          fit: BoxFit.cover,
-                        ),
+                //padding: const EdgeInsets.all(15),
+                children: List.generate(
+                  16,
+                  (index) => ListTile(
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(200),
+                      child: Image.network(
+                        'https://picsum.photos/500',
+                        width: 50,
+                        fit: BoxFit.cover,
                       ),
-                      title: Text(
-                        'Yassin Orlando Vazquez Paz',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      subtitle: Text('City: Tabasco'),
-                      onTap: () {},
                     ),
+                    title: Text(
+                      'Yassin Orlando Vazquez Paz',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    subtitle: Text('City: Tabasco'),
+                    onTap: () {},
                   ),
+                ),
               ),
             ),
           ],

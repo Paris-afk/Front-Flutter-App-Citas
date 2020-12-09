@@ -111,7 +111,7 @@ class _UserProfile extends State<UserProfile> {
                         child: Text(
                           'Email: ' + _email,
                           style: TextStyle(
-                              fontSize: 22
+                              fontSize: 20
                           ),
                         ),
                       ),

@@ -32,7 +32,6 @@ class HomePage extends StatelessWidget{
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: 60,),
             Padding(
               padding: EdgeInsets.all(20),
               child: Column(
@@ -44,7 +43,6 @@ class HomePage extends StatelessWidget{
                 ],
               ),
             ),
-            SizedBox(height: 20,),
             Expanded(
 
               child: Container(
@@ -58,7 +56,6 @@ class HomePage extends StatelessWidget{
                   padding: EdgeInsets.all(20),
                   child: Column(
                     children: <Widget>[
-                      SizedBox(height: 60,),
                       Container(
                         padding: EdgeInsets.all(20),
                         decoration: BoxDecoration(
@@ -105,7 +102,6 @@ class HomePage extends StatelessWidget{
                           ],
                         ),
                       ),
-                      SizedBox(height: 40,),
                       Text(
                         "Olvidaste tu contraseña?", style: TextStyle(color:Colors.grey),
                       ),

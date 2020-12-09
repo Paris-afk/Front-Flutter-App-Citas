@@ -2,28 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 //---------Widgets of the root pages
-import 'matches/matches.dart';
+//import 'matches/matches.dart';
+import 'matches/rootmatches.dart';
 import 'randChat/randChat.dart';
 import 'searchSeaction/search.dart';
 import 'user/user_profile.dart';
 import 'swipe/swipe.dart';
 
-class RootLayout extends StatefulWidget{
+class RootLayout extends StatefulWidget {
   @override
   _RootLayout createState() => _RootLayout();
 }
 
-class _RootLayout extends State<RootLayout>{
+class _RootLayout extends State<RootLayout> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    Matches(),
+    RootMatches(),
     RandChat(),
     Search(),
     UserProfile(),
     Swipes(),
   ];
-
 
   void _onItemTapped(int index) {
     setState(() {
@@ -79,5 +79,4 @@ class _RootLayout extends State<RootLayout>{
       ),
     );
   }
-
 }

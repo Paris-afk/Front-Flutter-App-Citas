@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class Matches extends StatefulWidget{
+class Matches extends StatefulWidget {
   @override
   _Matches createState() => _Matches();
 }
 
-class _Matches extends State<Matches>{
+class _Matches extends State<Matches> {
+  final List<Tab> tabs = <Tab>[
+    Tab(text: 'Zeroth'),
+    Tab(text: 'First'),
+    Tab(text: 'Second'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +21,7 @@ class _Matches extends State<Matches>{
           height: 28,
         ),
         Container(
-          width: MediaQuery.of(context).size.width ,
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.all(20),
           child: Text(
             "Chat with random people near you",
@@ -26,13 +32,11 @@ class _Matches extends State<Matches>{
         ),
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(60),
-                  topRight: Radius.circular(60)
-              ),
-              color: Colors.redAccent,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(60), topRight: Radius.circular(60)),
+            color: Colors.redAccent,
           ),
-          height: MediaQuery.of(context).size.height/1.2,
+          height: MediaQuery.of(context).size.height / 1.2,
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.all(20),
           child: Column(
@@ -43,7 +47,8 @@ class _Matches extends State<Matches>{
                 child: ListView(
                   children: [
                     ListTile(
-                      contentPadding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+                      contentPadding: EdgeInsets.only(
+                          top: 5, bottom: 5, left: 10, right: 10),
                       leading: ClipRRect(
                         borderRadius: BorderRadius.circular(200),
                         child: Image.network(
@@ -60,11 +65,10 @@ class _Matches extends State<Matches>{
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      onTap: (){
+                      onTap: () {
                         print('Chating with someone');
                       },
                     ),
-
                   ],
                 ),
               ),
