@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import '../widgets/chat/chatLayout.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -77,7 +78,14 @@ class _Search extends State<Search> {
                       ),
                     ),
                     subtitle: Text('City: Tabasco'),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Chat()
+                          )
+                      );
+                    },
                   ),
                 ),
               ),

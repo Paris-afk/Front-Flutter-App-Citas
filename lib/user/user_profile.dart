@@ -1,7 +1,6 @@
 import 'package:citas_proyecto/user/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../widgets/BottomNavBar.dart';
 
 class UserProfile extends StatefulWidget {
   @override

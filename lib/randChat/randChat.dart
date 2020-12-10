@@ -14,21 +14,6 @@ class _RandChat extends State<RandChat> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: 24,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          color: Colors.redAccent,
-          padding: EdgeInsets.all(15),
-          child: Text(
-            "Chat with random people near you",
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-        ),
         Container(
           height: MediaQuery.of(context).size.height - 100,
           child: ListView(

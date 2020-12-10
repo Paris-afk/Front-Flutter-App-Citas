@@ -25,6 +25,26 @@ class _RootLayout extends State<RootLayout> {
     Swipes(),
   ];
 
+  _appBarFunction(){
+    switch(_selectedIndex){
+      case 0:
+        return AppBar(
+          backgroundColor: Colors.redAccent,
+          title: Text('Activity'),
+        );
+        break;
+      case 1:
+        return AppBar(
+          backgroundColor: Colors.redAccent,
+          title: Text('Chat with random people near you'),
+        );
+        break;
+      default:
+        return null;
+        break;
+    }
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -34,6 +54,7 @@ class _RootLayout extends State<RootLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: _appBarFunction(),
       body: SingleChildScrollView(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
