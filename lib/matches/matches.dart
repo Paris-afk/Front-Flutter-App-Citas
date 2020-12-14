@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../widgets/chat/chatLayout.dart';
 
 class Matches extends StatefulWidget {
   @override
@@ -7,75 +8,47 @@ class Matches extends StatefulWidget {
 }
 
 class _Matches extends State<Matches> {
-  final List<Tab> tabs = <Tab>[
-    Tab(text: 'Zeroth'),
-    Tab(text: 'First'),
-    Tab(text: 'Second'),
-  ];
+  final _chats = <Widget>[];
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: 28,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.all(20),
-          child: Text(
-            "Chat with random people near you",
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(60), topRight: Radius.circular(60)),
-            color: Colors.redAccent,
-          ),
-          height: MediaQuery.of(context).size.height / 1.2,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Text('Your matches'),
-              Container(
-                height: MediaQuery.of(context).size.height - 200,
-                child: ListView(
-                  children: [
-                    ListTile(
-                      contentPadding: EdgeInsets.only(
-                          top: 5, bottom: 5, left: 10, right: 10),
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(200),
-                        child: Image.network(
-                          'https://picsum.photos/500',
-                          width: 50,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      title: Text(
-                        'Yassin Orlando Vazquez Paz',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () {
-                        print('Chating with someone');
-                      },
-                    ),
-                  ],
-                ),
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: ListView(
+        //padding: const EdgeInsets.all(15),
+        children: List.generate(
+          16,
+          (index) => ListTile(
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(200),
+              child: Image.network(
+                'https://picsum.photos/500',
+                width: 50,
+                fit: BoxFit.cover,
               ),
-            ],
+            ),
+            title: Text(
+              'Yassin Orlando Vazquez Paz',
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            subtitle: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('City: Tabasco'),
+                Text('Sex: Male'),
+                Text('Age: 21'),
+              ],
+            ),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Chat()));
+            },
           ),
         ),
-      ],
+      ),
     );
   }
 }

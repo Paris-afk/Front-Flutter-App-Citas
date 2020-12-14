@@ -49,14 +49,14 @@ class _Search extends State<Search> {
                         }
                         return Text('Searching');
                       },
-                      child: Text('Search'),
+                      child: Icon(Icons.search),
                     ),
                   ],
                 ),
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 100,
+              height: MediaQuery.of(context).size.height - 160,
               child: ListView(
                 //padding: const EdgeInsets.all(15),
                 children: List.generate(
@@ -77,14 +77,17 @@ class _Search extends State<Search> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    subtitle: Text('City: Tabasco'),
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('City: Tabasco'),
+                        Text('Sex: Male'),
+                        Text('Age: 21'),
+                      ],
+                    ),
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Chat()
-                          )
-                      );
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Chat()));
                     },
                   ),
                 ),

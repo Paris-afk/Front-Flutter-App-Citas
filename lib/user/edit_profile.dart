@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/src/material/dropdown.dart';
 
-class UserEdit extends StatefulWidget{
+class UserEdit extends StatefulWidget {
   @override
   _UserEdit createState() => _UserEdit();
-
 }
 
-class _UserEdit extends State<UserEdit>{
+class _UserEdit extends State<UserEdit> {
   final _profileImage = 'https://picsum.photos/500';
   final _age = '19';
   final _name = 'Juan';
   final _last_name = 'Perez';
-  var _description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique a ligula vel interdum. Vestibulum lacus diam, ultricies digniss';
+  var _description =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique a ligula vel interdum. Vestibulum lacus diam, ultricies digniss';
   var _email = "yassinovp@gmail.com";
   var _hobbies = ["Reading", "Traveling", "Languages"];
   String _sex = "Male";
@@ -24,25 +24,33 @@ class _UserEdit extends State<UserEdit>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Edit profile'),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width ,
+              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.redAccent,
               ),
               child: Column(
                 children: [
-                  SizedBox(height: 60,),
+                  SizedBox(
+                    height: 60,
+                  ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(200),
-                    child: Image.network(_profileImage,
+                    child: Image.network(
+                      _profileImage,
                       width: MediaQuery.of(context).size.width / 2,
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Text(
                     _name + " " + _last_name + " - " + _age,
                     style: TextStyle(
@@ -51,17 +59,19 @@ class _UserEdit extends State<UserEdit>{
                       fontSize: 20,
                     ),
                   ),
-                  SizedBox(height: 30,),
+                  SizedBox(
+                    height: 30,
+                  ),
                 ],
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width ,
+              width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(10),
               child: Column(
                 children: [
                   Text(
-                      "Edit your data",
+                    "Edit your data",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -212,22 +222,18 @@ class _UserEdit extends State<UserEdit>{
                       );
                     }).toList(),
                   ),
-                  
                   Builder(
                     builder: (context) => IconButton(
                         icon: Icon(Icons.save),
-                        onPressed: ()  {
+                        onPressed: () {
                           print("Saved changes");
                           Scaffold.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(
-                                  "Changes saved"
-                              ),
+                              content: Text("Changes saved"),
                             ),
                           );
                           //Navigator.pop(context);
-                        }
-                    ),
+                        }),
                   ),
                 ],
               ),
@@ -237,5 +243,4 @@ class _UserEdit extends State<UserEdit>{
       ),
     );
   }
-
 }

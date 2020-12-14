@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import './matches.dart';
+import './likes.dart';
 
 class RootMatches extends StatefulWidget {
   const RootMatches({Key key}) : super(key: key);
@@ -41,18 +43,13 @@ class _RootMatches extends State<RootMatches>
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height - 180,
           child: TabBarView(
             controller: _tabController,
-            children: myTabs.map((Tab tab) {
-              final String label = tab.text.toLowerCase();
-              return Center(
-                child: Text(
-                  'This is the $label tab',
-                  style: const TextStyle(fontSize: 36),
-                ),
-              );
-            }).toList(),
+            children: [
+              Matches(),
+              Likes(),
+            ],
           ),
         ),
       ],

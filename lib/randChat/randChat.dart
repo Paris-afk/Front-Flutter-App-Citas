@@ -1,6 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import '../widgets/chat/chatLayout.dart';
 
 class RandChat extends StatefulWidget {
   @override
@@ -15,13 +16,21 @@ class _RandChat extends State<RandChat> {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height - 100,
+          height: MediaQuery.of(context).size.height - 130,
           child: ListView(
               children: List.generate(
                   15,
                   (index) => ListTile(
                         contentPadding: EdgeInsets.only(
                             top: 5, bottom: 5, left: 10, right: 10),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(200),
+                          child: Image.network(
+                            'https://picsum.photos/500',
+                            width: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         title: Text(
                           'Yassin Orlando Vazquez Paz',
                           style: TextStyle(
@@ -38,8 +47,8 @@ class _RandChat extends State<RandChat> {
                           ],
                         ),
                         onTap: () {
-                          print(
-                              'Chatting with someone near you in Random Chat');
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Chat()));
                         },
                       ))),
         ),

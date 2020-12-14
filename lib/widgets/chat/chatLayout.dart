@@ -1,31 +1,106 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import './chatProfile.dart';
+import './chatMessages.dart';
 
-class Chat extends StatefulWidget{
+class Chat extends StatefulWidget {
+  const Chat({Key key}) : super(key: key);
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+  _Chat createState() => _Chat();
 }
 
-class _Chat extends State<Chat>{
+class _Chat extends State<Chat> with SingleTickerProviderStateMixin {
+  final _formKey = GlobalKey<FormState>();
+  String _message = '';
+  final List<Tab> myTabs = <Tab>[
+    Tab(text: 'Chat'),
+    Tab(text: 'Profile'),
+  ];
+
+  final List<Widget> views = <Widget>[
+    ChatMessages(),
+    ChatProfile(),
+  ];
+
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(vsync: this, length: myTabs.length);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(200),
-          child: Image.network(
-            'https://picsum.photos/500',
-            width: 50,
-            fit: BoxFit.cover,
+        title: Text('Yassín Orlando Vázquez Paz'),
+        bottom: TabBar(
+          controller: _tabController,
+          tabs: myTabs,
+          labelColor: Colors.white,
+          indicatorSize: TabBarIndicatorSize.tab,
+        ),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: views,
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 50.0,
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: _formKey,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Search for people',
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                    },
+                  ),
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Colors.redAccent;
+                        return Colors
+                            .yellowAccent; // Use the component's default.
+                      },
+                    ),
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState.validate() && _message != '') {
+                      //Process data
+                      print('Message sent');
+                    }
+                  },
+                  child: Icon(
+                    Icons.send,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        title: Text('Yassín Orlando Vázquez Paz'),
-      ),
-      body: Center(
-        child: Text('Chat'),
       ),
     );
   }
