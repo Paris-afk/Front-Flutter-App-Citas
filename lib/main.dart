@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'user/user_profile.dart';
-import 'rootLayout.dart';
+import 'package:flutter/widgets.dart';
+import './logins/SignInLayout.dart';
+import 'package:citas_proyecto/rootLayout.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -102,14 +103,14 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 15,
                       ),
                       Text(
                         "Olvidaste tu contraseña?",
                         style: TextStyle(color: Colors.grey),
                       ),
                       SizedBox(
-                        height: 40,
+                        height: 15,
                       ),
                       Container(
                           height: 50,
@@ -132,6 +133,38 @@ class HomePage extends StatelessWidget {
                                   },
                                   child: Text(
                                     "Iniciar Sesion",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                          height: 50,
+                          margin: EdgeInsets.symmetric(horizontal: 60),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.orange[900]),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                FlatButton(
+                                  onPressed: () {
+                                    print('Session started');
+                                    Navigator.pop(context);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignInLayout()));
+                                  },
+                                  child: Text(
+                                    "Sign In",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
