@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import '../widgets/chat/chatLayout.dart';
+import '../../widgets/chat/chatLayout.dart';
 
 class Search extends StatefulWidget {
   @override

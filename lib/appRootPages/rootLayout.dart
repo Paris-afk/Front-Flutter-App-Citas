@@ -25,8 +25,8 @@ class _RootLayout extends State<RootLayout> {
     Swipes(),
   ];
 
-  _appBarFunction(){
-    switch(_selectedIndex){
+  _appBarFunction() {
+    switch (_selectedIndex) {
       case 0:
         return AppBar(
           backgroundColor: Colors.redAccent,

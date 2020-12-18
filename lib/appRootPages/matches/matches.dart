@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../widgets/chat/chatLayout.dart';
+import '../../widgets/chat/chatLayout.dart';
 
 class Matches extends StatefulWidget {
   @override

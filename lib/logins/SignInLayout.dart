@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'SignInForm.dart';
+import './SignIn/SignInStructure.dart';
 
 class SignInLayout extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class SignInLayout extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 colors: [Colors.orange[900], Colors.orange[400]])),
-        child: SignInForm(),
+        child: SignInStructure(),
       ),
     );
   }

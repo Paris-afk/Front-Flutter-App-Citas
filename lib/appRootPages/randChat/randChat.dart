@@ -1,7 +1,7 @@
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import '../widgets/chat/chatLayout.dart';
+import '../../widgets/chat/chatLayout.dart';
 
 class RandChat extends StatefulWidget {
   @override

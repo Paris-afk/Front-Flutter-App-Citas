@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './logins/SignInLayout.dart';
-import 'package:citas_proyecto/rootLayout.dart';
+import 'package:citas_proyecto/appRootPages/rootLayout.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
