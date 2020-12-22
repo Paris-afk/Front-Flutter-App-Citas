@@ -1,11 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../../appRootPages/rootLayout.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SignInForm extends StatefulWidget {
   SignInForm({Key key}) : super(key: key);
 
   @override
   _SignInForm createState() => _SignInForm();
+}
+
+class User {
+  final String email;
+  final String password;
+  //final String description;
+  final String name;
+  final String lastname;
+  final String birthDate;
+  //int _birthDate;
+  final String sex;
+  final String preferences;
+
+  User(
+      {this.email,
+      this.password,
+      this.name,
+      this.lastname,
+      this.birthDate,
+      this.sex,
+      this.preferences});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      email: json['email'],
+      password: json['password'],
+      name: json['name'],
+      lastname: json['lastname'],
+      birthDate: json['age'],
+      sex: json['sex'],
+      preferences: json['preferences'],
+    );
+  }
 }
 
 class _SignInForm extends State<SignInForm> {
@@ -15,10 +51,39 @@ class _SignInForm extends State<SignInForm> {
   String _description;
   String _name;
   String _last_name;
-  String _age;
-  //int _age;
-  String _sex;
-  String _preferences;
+  String _birthDate;
+  //int _birthDate;
+  String _genre;
+  String _sexual_preference;
+  Future<User> _futureUser;
+
+  Future<User> createUser(String name, String lastname, String email,
+      String password, String preferences, String genre, String age) async {
+    final http.Response response = await http.post(
+      'http://localhost:3000/api/user/',
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode({
+        'name': name,
+        'lastname': lastname,
+        'email': email,
+        'password': password,
+        'sexual_preference': 0,
+        'genre': 0,
+        'birthDate': age,
+      }),
+    );
+    if (response.statusCode == 201) {
+      // If the server did return a 201 CREATED response,
+      // then parse the JSON.
+      return User.fromJson(jsonDecode(response.body));
+    } else {
+      // If the server did not return a 201 CREATED response,
+      // then throw an exception.
+      throw Exception('Failed to load album');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -153,13 +218,13 @@ class _SignInForm extends State<SignInForm> {
             },
             onChanged: (String newAge) {
               setState(() {
-                _age = newAge;
+                _birthDate = newAge;
               });
             },
           ),
           DropdownButtonFormField<String>(
             hint: Text("Sex"),
-            value: _sex,
+            value: _genre,
             icon: Icon(Icons.arrow_downward),
             iconSize: 24,
             elevation: 16,
@@ -172,7 +237,7 @@ class _SignInForm extends State<SignInForm> {
             },
             onChanged: (String newSex) {
               setState(() {
-                _sex = newSex;
+                _genre = newSex;
               });
             },
             items: <String>['Male', 'Female']
@@ -185,7 +250,7 @@ class _SignInForm extends State<SignInForm> {
           ),
           DropdownButtonFormField<String>(
             hint: Text("Preferences"),
-            value: _preferences,
+            value: _sexual_preference,
             icon: Icon(Icons.arrow_downward),
             iconSize: 24,
             elevation: 16,
@@ -198,7 +263,7 @@ class _SignInForm extends State<SignInForm> {
             },
             onChanged: (String newPreferences) {
               setState(() {
-                _preferences = newPreferences;
+                _sexual_preference = newPreferences;
               });
             },
             items: <String>['Male', 'Female', 'Both']
@@ -226,8 +291,25 @@ class _SignInForm extends State<SignInForm> {
                 // If the form is valid, display a snackbar. In the real world,
                 // you'd often call a server or save the information in a database.
 
-                Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text('Processing Data')));
+                setState(() {
+                  _futureUser = createUser(_name, _last_name, _email, _password,
+                      _sexual_preference, _genre, _birthDate);
+                });
+                FutureBuilder<User>(
+                  future: _futureUser,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(snapshot.data.name);
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+
+                    return CircularProgressIndicator();
+                  },
+                );
+
+                /*Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('Processing Data')));*/
 
                 print(_email +
                     '\n' +
@@ -237,17 +319,15 @@ class _SignInForm extends State<SignInForm> {
                     '\n' +
                     _last_name +
                     '\n' +
-                    _age.toString() +
+                    _birthDate.toString() +
                     '\n' +
-                    _sex +
+                    _genre +
                     '\n' +
-                    _preferences);
+                    _sexual_preference);
+                /*Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RootLayout()));*/
               }
-              /*Navigator.pop(context);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => RootLayout()));*/
             },
             child: Text('Create account'),
           ),
