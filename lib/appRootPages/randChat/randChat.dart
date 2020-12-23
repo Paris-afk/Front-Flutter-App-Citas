@@ -32,8 +32,43 @@ class _RandChat extends State<RandChat> {
             future: futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print(snapshot.data);
-                return Text(snapshot.data[0].toString());
+                //print(snapshot.data);
+                return ListView(
+                  children: [
+                    for (var tile in snapshot.data)
+                      ListTile(
+                        contentPadding: EdgeInsets.only(
+                            top: 5, bottom: 5, left: 10, right: 10),
+                        leading: ClipRRect(
+                          borderRadius: BorderRadius.circular(200),
+                          child: Image.network(
+                            'https://picsum.photos/500',
+                            width: 50,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        title: Text(
+                          tile['name'],
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('City: Tabasco'),
+                            Text('Sex: ' + tile['id_genre'].toString()),
+                            //Text('Age: ' + tile['date_birth'].toString()),  it overflows by some pixels
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Chat()));
+                        },
+                      )
+                  ],
+                );
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
