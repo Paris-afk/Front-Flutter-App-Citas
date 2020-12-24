@@ -48,7 +48,7 @@ class _RandChat extends State<RandChat> {
                           ),
                         ),
                         title: Text(
-                          tile['name'],
+                          tile['name'] + ' ' + tile['lastname'],
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
