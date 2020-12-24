@@ -44,6 +44,8 @@ class _Likes extends State<Likes> {
                         children: [
                           Image.network(
                             tile['picture']['large'],
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
                             fit: BoxFit.cover,
                           ),
                           Container(
@@ -52,6 +54,7 @@ class _Likes extends State<Likes> {
                             child: Container(
                               color: Colors.redAccent,
                               padding: EdgeInsets.all(10),
+                              width: 100,
                               height: 70,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
