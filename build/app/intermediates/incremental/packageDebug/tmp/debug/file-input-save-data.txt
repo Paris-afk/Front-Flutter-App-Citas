@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Dec 24 15:46:35 CST 2020
+#Sun Dec 27 22:04:40 CST 2020
 3.set=ASSET
 8.base=/home/yassin/Documentos/flutter-projects/build/app/intermediates/merged_assets/debug/mergeDebugAssets/out
 3.path=flutter_assets/fonts/MaterialIcons-Regular.otf

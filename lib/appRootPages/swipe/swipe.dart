@@ -205,7 +205,7 @@ class _Swipes extends State<Swipes> {
     return Column(
       children: [
         SizedBox(
-          height: 22,
+          height: 28,
         ),
         Center(
           child: Stack(

@@ -115,7 +115,7 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Email: ' + snapshot.data[0]['email'],
+                                snapshot.data[0]['email'],
                                 style: TextStyle(fontSize: 20),
                               ),
                             ),
@@ -217,10 +217,28 @@ class _UserProfile extends State<UserProfile> {
                 )
               ]);
         } else if (snapshot.hasError) {
-          return Text("${snapshot.error}");
+          return Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                ),
+                Text("${snapshot.error}")
+              ],
+            ),
+          );
         }
         // By default, show a loading spinner.
-        return Center(child: CircularProgressIndicator());
+        return Center(
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 2,
+              ),
+              CircularProgressIndicator()
+            ],
+          ),
+        );
       },
     );
   }

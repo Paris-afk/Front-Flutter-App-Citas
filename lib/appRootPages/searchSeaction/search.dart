@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import '../../widgets/chat/chatLayout.dart';
+import '../../widgets/tile.dart';
 import './getResearch.dart';
 
 class Search extends StatefulWidget {
@@ -27,7 +27,8 @@ class _Search extends State<Search> {
 
   void searchUser(String userName) {
     for (var i = 0; i < _placeholder.length; i++) {
-      if (_placeholder[i]['name']['first'] == userName) {
+      if (_placeholder[i]['name']['first'] == userName ||
+          _placeholder[i]['name']['last'] == userName) {
         //print('Using loop: ${_placeholder[i]}');
         setState(() {
           _people.add(_placeholder[i]);
@@ -84,87 +85,25 @@ class _Search extends State<Search> {
                 ),
               ),
             ),
-            //----------------Results
+            //--////////////////////////////////Results ////////////////////////////////////7
             Container(
               height: MediaQuery.of(context).size.height - 160,
-              child: ListView(
-                  //padding: const EdgeInsets.all(15),
-                  children: [
-                    if (_people.length > 0)
-                      for (var tile in _people)
-                        ListTile(
-                          contentPadding: EdgeInsets.only(
-                              top: 5, bottom: 5, left: 10, right: 10),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(200),
-                            child: Image.network(
-                              tile['picture']['thumbnail'],
-                              width: 50,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          title: Text(
-                            tile['name']['first'] + ' ' + tile['name']['last'],
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('City: ' + tile['location']['city']),
-                              Text('Sex: ' + tile['gender']),
-                              Text('Age: ' + tile['dob']['age'].toString()),
-                            ],
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Chat()));
-                          },
-                        )
-                    else
-                      Center(
-                        child: Text('No result found'),
-                      ),
-                  ]),
-              /*child: ListView(
-                //padding: const EdgeInsets.all(15),
-                children: List.generate(
-                  16,
-                  (index) => ListTile(
-                    leading: ClipRRect(
-                      borderRadius: BorderRadius.circular(200),
-                      child: Image.network(
-                        'https://picsum.photos/500',
-                        width: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    title: Text(
-                      'Yassin Orlando Vazquez Paz',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('City: Tabasco'),
-                        Text('Sex: Male'),
-                        Text('Age: 21'),
-                      ],
-                    ),
-                    onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Chat()));
-                    },
+              child: ListView(children: [
+                if (_people.length > 0)
+                  for (var tile in _people)
+                    UserTile(
+                      img: tile['picture']['thumbnail'],
+                      name: tile['name']['first'],
+                      lastname: tile['name']['last'],
+                      city: tile['location']['city'],
+                      sex: tile['gender'],
+                      age: tile['dob']['age'].toString(),
+                    )
+                else
+                  Center(
+                    child: Text('No result found'),
                   ),
-                ),
-              ),*/
+              ]),
             ),
           ],
         ),

@@ -72,44 +72,9 @@ class _RandChat extends State<RandChat> {
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
-              // By default, show a loading spinner.
               return Center(child: CircularProgressIndicator());
             },
           ),
-          /*child: ListView(
-              children: List.generate(
-                  15,
-                  (index) => ListTile(
-                        contentPadding: EdgeInsets.only(
-                            top: 5, bottom: 5, left: 10, right: 10),
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(200),
-                          child: Image.network(
-                            'https://picsum.photos/500',
-                            width: 50,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        title: Text(
-                          'Yassin Orlando Vazquez Paz',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('City: Tabasco'),
-                            Text('Sex: Male'),
-                            Text('Age: 21'),
-                          ],
-                        ),
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Chat()));
-                        },
-                      ))),*/
         ),
       ],
     );
