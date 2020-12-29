@@ -19,6 +19,10 @@ class _Swipes extends State<Swipes> {
     futureProfiles = fetchUserProfiles();
   }
 
+  void swipeRight() {
+    futureProfiles.then((value) => {value});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,10 +35,9 @@ class _Swipes extends State<Swipes> {
             future: futureProfiles,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print(snapshot.data);
                 return Stack(
                   children: [
-                    for (var user in snapshot.data)
+                    for (var user in snapshot.data.reversed)
                       Card(
                         child: Container(
                           width: MediaQuery.of(context).size.width,
@@ -53,12 +56,18 @@ class _Swipes extends State<Swipes> {
                   ],
                 );
               } else if (snapshot.hasError) {
-                return Text("${snapshot.error}");
+                return Card(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width + 150,
+                    child: Center(child: Text("${snapshot.error}")),
+                  ),
+                );
               }
               return Card(
                 child: Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width + 100,
+                  height: MediaQuery.of(context).size.width + 150,
                   child: Center(child: CircularProgressIndicator()),
                 ),
               );
