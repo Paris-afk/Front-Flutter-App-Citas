@@ -22,12 +22,6 @@ class _Swipes extends State<Swipes> {
     futureProfiles.then((value) => welcomeImages = value);
   }
 
-  void swipeRight() {
-    futureProfiles.then((value) {
-      print(value);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     CardController controller;
@@ -38,12 +32,12 @@ class _Swipes extends State<Swipes> {
           height: 50,
         ),
         Container(
-          height: MediaQuery.of(context).size.width + 150,
+          height: MediaQuery.of(context).size.width + 200,
           child: FutureBuilder<List<dynamic>>(
             future: futureProfiles,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print(welcomeImages);
+                //print(welcomeImages);
                 return TinderSwapCard(
                   swipeUp: false,
                   swipeDown: false,
@@ -85,7 +79,11 @@ class _Swipes extends State<Swipes> {
                   swipeCompleteCallback:
                       (CardSwipeOrientation orientation, int index) {
                     /// Get orientation & index of swiped card!
-                    print('ORIENTATION: ' + orientation.toString());
+                    if (orientation == CardSwipeOrientation.RIGHT) {
+                      print('LIKE');
+                    } else {
+                      print('PASS');
+                    }
                   },
                 );
               } else if (snapshot.hasError) {
@@ -117,19 +115,15 @@ class _Swipes extends State<Swipes> {
                 child: Icon(Icons.close),
                 backgroundColor: Colors.redAccent,
                 onPressed: () {
+                  controller.triggerLeft();
                   print("Swipe left");
-                }),
-            FloatingActionButton(
-                child: Icon(Icons.settings_backup_restore),
-                onPressed: () {
-                  print("Sorry, I fucked up... Go back");
                 }),
             FloatingActionButton(
                 child: Icon(Icons.check),
                 backgroundColor: Colors.greenAccent,
                 onPressed: () {
+                  controller.triggerRight();
                   print("Swipe right");
-                  swipeRight();
                 }),
           ],
         ),
