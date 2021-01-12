@@ -13,7 +13,7 @@ class _UserProfile extends State<UserProfile> {
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique a ligula vel interdum. Vestibulum lacus diam, ultricies dignissim ligula at, ultricies laoreet metus. Pellentesque volutpat justo sapien, nec vestibulum diam fermentum sit amet. Aenean a diam risus. Pellentesque non ligula ac erat fringilla vehicula. Donec quis enim non ipsum elementum mollis id et velit. Maecenas non augue nulla. Curabitur est orci, scelerisque interdum nulla ac, congue dictum justo. Proin ornare tellus vel metus bibendum faucibus. Praesent eu mauris felis. Nulla in nibh sollicitudin, interdum justo ut, aliquet dolor. Aenean tempor neque ipsum, ac gravida justo venenatis pulvinar. Praesent ac velit eget justo tristique viverra quis eu lectus. ";
   String _hobbies = "Rubiks cubes";
 
-  Future<List<dynamic>> futureUser;
+  Future<Map<String, dynamic>> futureUser;
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _UserProfile extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<Map<String, dynamic>>(
       future: futureUser,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
@@ -42,7 +42,8 @@ class _UserProfile extends State<UserProfile> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(200),
                         child: Image.network(
-                          snapshot.data[0]['picture']['large'],
+                          'https://picsum.photos/id/237/700/500',
+                          //snapshot.data[0]['picture']['large'],
                           width: MediaQuery.of(context).size.width / 1.5,
                           height: MediaQuery.of(context).size.height,
                           fit: BoxFit.cover,
@@ -60,7 +61,8 @@ class _UserProfile extends State<UserProfile> {
                               color: Colors.redAccent,
                               borderRadius: BorderRadius.circular(200)),
                           child: Text(
-                            snapshot.data[0]['dob']['age'].toString(),
+                            snapshot.data['age'].toString(),
+                            //snapshot.data[0]['dob']['age'].toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 40,
@@ -80,9 +82,11 @@ class _UserProfile extends State<UserProfile> {
                   width: MediaQuery.of(context).size.width,
                   //color: Colors.blue,
                   child: Text(
+                    snapshot.data['name'] + ' ' + snapshot.data['lastname'],
+                    /*
                     snapshot.data[0]['name']['first'] +
                         ' ' +
-                        snapshot.data[0]['name']['last'],
+                        snapshot.data[0]['name']['last'],*/
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -115,7 +119,7 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                snapshot.data[0]['email'],
+                                snapshot.data['email'],
                                 style: TextStyle(fontSize: 20),
                               ),
                             ),
@@ -147,7 +151,9 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Sex: ' + snapshot.data[0]['gender'],
+                                'Sex: ' +
+                                    snapshot.data['id_sexual_preference']
+                                        .toString(),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -163,7 +169,8 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Gender: ' + snapshot.data[0]['gender'],
+                                'Gender: ' +
+                                    snapshot.data['id_genre'].toString(),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -179,7 +186,9 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Preferences: ' + snapshot.data[0]['gender'],
+                                'Preferences: ' +
+                                    snapshot.data['id_sexual_preference']
+                                        .toString(),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -195,7 +204,9 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Show me: ' + snapshot.data[0]['gender'],
+                                'Show me: ' +
+                                    snapshot.data['id_sexual_preference']
+                                        .toString(),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
