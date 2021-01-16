@@ -59,7 +59,7 @@ class _RandChat extends State<RandChat> {
                           children: [
                             Text('City: Tabasco'),
                             Text('Sex: ' + tile['id_genre'].toString()),
-                            //Text('Age: ' + tile['date_birth'].toString()),  it overflows by some pixels
+                            Text('Age: ' + tile['age'].toString()),
                           ],
                         ),
                         onTap: () {

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../appRootPages/rootLayout.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import './postUser.dart';
 
 class SignInForm extends StatefulWidget {
   SignInForm({Key key}) : super(key: key);
@@ -11,79 +10,19 @@ class SignInForm extends StatefulWidget {
   _SignInForm createState() => _SignInForm();
 }
 
-class User {
-  final String email;
-  final String password;
-  //final String description;
-  final String name;
-  final String lastname;
-  final String birthDate;
-  //int _birthDate;
-  final String sex;
-  final String preferences;
-
-  User(
-      {this.email,
-      this.password,
-      this.name,
-      this.lastname,
-      this.birthDate,
-      this.sex,
-      this.preferences});
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-      email: json['email'],
-      password: json['password'],
-      name: json['name'],
-      lastname: json['lastname'],
-      birthDate: json['age'],
-      sex: json['sex'],
-      preferences: json['preferences'],
-    );
-  }
-}
-
 class _SignInForm extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
-  String _email;
-  String _password;
-  String _description;
   String _name;
   String _last_name;
-  String _birthDate;
-  //int _birthDate;
-  String _genre;
+  String _email;
+  String _password;
   String _sexual_preference;
+  int _selected_preference;
+  String _sex;
+  int _selected_sex;
+  int _age;
+  String _description;
   Future<User> _futureUser;
-
-  Future<User> createUser(String name, String lastname, String email,
-      String password, String preferences, String genre, String age) async {
-    final http.Response response = await http.post(
-      'http://localhost:3000/api/user/',
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode({
-        'name': name,
-        'lastname': lastname,
-        'email': email,
-        'password': password,
-        'sexual_preference': 0,
-        'genre': 0,
-        'birthDate': age,
-      }),
-    );
-    if (response.statusCode == 201) {
-      // If the server did return a 201 CREATED response,
-      // then parse the JSON.
-      return User.fromJson(jsonDecode(response.body));
-    } else {
-      // If the server did not return a 201 CREATED response,
-      // then throw an exception.
-      throw Exception('Failed to load album');
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,24 +78,24 @@ class _SignInForm extends State<SignInForm> {
               });
             },
           ),
-          /*TextFormField(
-                              decoration: InputDecoration(
-                                hintText: "Description",
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none,
-                              ),
-                              validator: (String value) {
-                                if (value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                              onChanged: (String newDescription) {
-                                setState(() {
-                                  _description = newDescription.trim();
-                                });
-                              },
-                            ),*/
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Description",
+              hintStyle: TextStyle(color: Colors.grey),
+              border: InputBorder.none,
+            ),
+            validator: (String value) {
+              if (value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
+            onChanged: (String newDescription) {
+              setState(() {
+                _description = newDescription.trim();
+              });
+            },
+          ),
           TextFormField(
             decoration: InputDecoration(
               hintText: "Name",
@@ -218,13 +157,13 @@ class _SignInForm extends State<SignInForm> {
             },
             onChanged: (String newAge) {
               setState(() {
-                _birthDate = newAge;
+                _age = int.parse(newAge);
               });
             },
           ),
           DropdownButtonFormField<String>(
             hint: Text("Sex"),
-            value: _genre,
+            value: _sex,
             icon: Icon(Icons.arrow_downward),
             iconSize: 24,
             elevation: 16,
@@ -237,7 +176,12 @@ class _SignInForm extends State<SignInForm> {
             },
             onChanged: (String newSex) {
               setState(() {
-                _genre = newSex;
+                if (newSex == 'Male') {
+                  _selected_sex = 1;
+                } else {
+                  _selected_sex = 2;
+                }
+                _sex = newSex;
               });
             },
             items: <String>['Male', 'Female']
@@ -263,6 +207,13 @@ class _SignInForm extends State<SignInForm> {
             },
             onChanged: (String newPreferences) {
               setState(() {
+                if (newPreferences == 'Male') {
+                  _selected_preference = 1;
+                } else if (newPreferences == 'Female') {
+                  _selected_preference = 2;
+                } else {
+                  _selected_preference = 3;
+                }
                 _sexual_preference = newPreferences;
               });
             },
@@ -274,63 +225,78 @@ class _SignInForm extends State<SignInForm> {
               );
             }).toList(),
           ),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.pressed))
-                    return Colors.redAccent;
-                  return Colors
-                      .deepOrangeAccent; // Use the component's default.
-                },
-              ),
-            ),
-            onPressed: () {
-              // Validate returns true if the form is valid, otherwise false.
-              if (_formKey.currentState.validate()) {
-                // If the form is valid, display a snackbar. In the real world,
-                // you'd often call a server or save the information in a database.
-
-                setState(() {
-                  _futureUser = createUser(_name, _last_name, _email, _password,
-                      _sexual_preference, _genre, _birthDate);
-                });
-                FutureBuilder<User>(
-                  future: _futureUser,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return Text(snapshot.data.name);
-                    } else if (snapshot.hasError) {
-                      return Text("${snapshot.error}");
-                    }
-
-                    return CircularProgressIndicator();
+          if (_futureUser == null)
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.pressed))
+                      return Colors.redAccent;
+                    return Colors
+                        .deepOrangeAccent; // Use the component's default.
                   },
-                );
+                ),
+              ),
+              child: Text('Create account'),
+              onPressed: () {
+                // Validate returns true if the form is valid, otherwise false.
+                if (_formKey.currentState.validate()) {
+                  // If the form is valid, display a snackbar. In the real world,
+                  // you'd often call a server or save the information in a database.
 
-                /*Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text('Processing Data')));*/
+                  setState(() {
+                    _futureUser = createUser(
+                        _name,
+                        _last_name,
+                        _email,
+                        _password,
+                        _selected_preference,
+                        _selected_sex,
+                        _age.toInt(),
+                        _description);
+                  });
 
-                print(_email +
-                    '\n' +
-                    _password +
-                    '\n' +
-                    _name +
-                    '\n' +
-                    _last_name +
-                    '\n' +
-                    _birthDate.toString() +
-                    '\n' +
-                    _genre +
-                    '\n' +
-                    _sexual_preference);
-                /*Navigator.pop(context);
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RootLayout()));*/
-              }
-            },
-            child: Text('Create account'),
-          ),
+                  /*Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text('Processing Data')));*/
+
+                  print(_email +
+                      '\n' +
+                      _password +
+                      '\n' +
+                      _name +
+                      '\n' +
+                      _last_name +
+                      '\n' +
+                      _age.toString() +
+                      '\n' +
+                      _sex +
+                      '\n' +
+                      _sexual_preference);
+                  /*Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => RootLayout()));*/
+                }
+              },
+            )
+          else
+            FutureBuilder<User>(
+              future: _futureUser,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  //Scaffold.of(context).showSnackBar(
+                  //SnackBar(content: Text(snapshot.data.name)));
+                  print('Bien hecho: ' + snapshot.data.name);
+                  return Text(snapshot.data.name);
+                } else if (snapshot.hasError) {
+                  //Scaffold.of(context).showSnackBar(
+                  //SnackBar(content: Text("${snapshot.error}")));
+                  print('Mal hecho: ' + snapshot.error.toString());
+                  return Text("${snapshot.error}");
+                }
+
+                return CircularProgressIndicator();
+              },
+            )
         ],
       ),
     );
