@@ -44,7 +44,7 @@ class _SignInForm extends State<SignInForm> {
                     if (value.isEmpty) {
                       return 'Please enter some text';
                     }
-                    if (!value.contains('@') && !value.contains('.com')) {
+                    if (!value.contains('@') || !value.contains('.com')) {
                       print('Invalid password');
                       return 'It\'s not an email address';
                     }
