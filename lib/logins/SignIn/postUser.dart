@@ -46,7 +46,7 @@ Future<User> createUser(
     int age,
     String description) async {
   final http.Response response = await http.post(
-    'http://10.0.2.2:3000/api/user/',
+    'http://192.168.56.1:3000/api/user/',
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

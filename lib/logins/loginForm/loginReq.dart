@@ -8,31 +8,29 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      jwt: json['jwt'],
+      jwt: json['body'],
     );
   }
 }
 
 Future<User> getUserLogin(String email, String password) async {
-  final queryParameters = {
-    'email': email,
-    'password': password,
-  };
-  final uri = Uri.http('10.0.2.2:3000', '/api/auth/login', queryParameters);
-  //final headers = {HttpHeaders.contentTypeHeader: 'application/json'};
-  //final response = await http.get(uri, headers: headers);
-
-  final http.Response response = await http.get(
-    uri,
+  print(email + ' ' + password);
+  final http.Response response = await http.post(
+    'http://192.168.56.1:3000/api/auth/login',
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
+    body: jsonEncode(<String, String>{
+      'email': email,
+      'password': password
+    }),
   );
   if (response.statusCode == 200) {
-    print(response.body.toString());
-    return User.fromJson(jsonDecode(response.body));
+    var user = User.fromJson(jsonDecode(response.body));
+    print(user.jwt);
+    return user;
   } else {
-    print(response.statusCode.toString());
+    print('STATUS FAILED: ' + response.statusCode.toString());
     throw Exception('Failed to log in');
   }
 }

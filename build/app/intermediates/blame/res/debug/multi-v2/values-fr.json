@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/yassin/Documentos/flutter-projects/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-fr/values-fr.xml",
+            "outputFile": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr\\values-fr.xml",
             "map": [
                 {
-                    "source": "/home/yassin/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/870bb74b3719e1df4a31a28e054cfc23/res/values-fr/values-fr.xml",
+                    "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\742302b733cac4aeee0f7490264c16a9\\res\\values-fr\\values-fr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
