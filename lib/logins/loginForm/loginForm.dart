@@ -4,6 +4,7 @@ import '../SignInLayout.dart';
 import 'package:citas_proyecto/appRootPages/rootLayout.dart';
 import './loginReq.dart';
 import '../../main.dart';
+import 'package:get/get.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -322,12 +323,7 @@ class _LoginForm extends State<LoginForm> {
                                     ),
                                     child: Text('Continue'),
                                     onPressed: () {
-                                      Navigator.pop(context);
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      RootLayout()));
+                                      Get.off(RootLayout()); //Pasa a la aplicación con la sesión iniciada
                                     },
                                   )
                                 ],
