@@ -224,12 +224,7 @@ class _LoginForm extends State<LoginForm> {
                                               ),
                                               onPressed: () {
                                                 print('Sign in');
-                                                Navigator.pop(context);
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SignInLayout()));
+                                                Get.to(SignInLayout());
                                               },
                                             ),
                                           ],

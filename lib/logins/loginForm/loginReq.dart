@@ -1,4 +1,4 @@
-import 'package:citas_proyecto/controllers/user_jwt_controller.dart';
+import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:get/get.dart';
@@ -34,7 +34,7 @@ Future<User> getUserLogin(String email, String password) async {
 
     userJWTcontroller.jwt.value = user.jwt.toString();
     userJWTcontroller.data.addAll(user.data);
-    print('User JWT: ' + userJWTcontroller.jwt.value + '   with data: ' + userJWTcontroller.data.toString());
+    print('User JWT: ' + userJWTcontroller.jwt.value + '   with data: ' + userJWTcontroller.data['id_user'].toString());
 
     return user;
   } else {

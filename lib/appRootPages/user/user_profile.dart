@@ -9,8 +9,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfile extends State<UserProfile> {
-  String _description =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tristique a ligula vel interdum. Vestibulum lacus diam, ultricies dignissim ligula at, ultricies laoreet metus. Pellentesque volutpat justo sapien, nec vestibulum diam fermentum sit amet. Aenean a diam risus. Pellentesque non ligula ac erat fringilla vehicula. Donec quis enim non ipsum elementum mollis id et velit. Maecenas non augue nulla. Curabitur est orci, scelerisque interdum nulla ac, congue dictum justo. Proin ornare tellus vel metus bibendum faucibus. Praesent eu mauris felis. Nulla in nibh sollicitudin, interdum justo ut, aliquet dolor. Aenean tempor neque ipsum, ac gravida justo venenatis pulvinar. Praesent ac velit eget justo tristique viverra quis eu lectus. ";
   String _hobbies = "Rubiks cubes";
 
   Future<Map<String, dynamic>> futureUser;
@@ -62,7 +60,6 @@ class _UserProfile extends State<UserProfile> {
                               borderRadius: BorderRadius.circular(200)),
                           child: Text(
                             snapshot.data['age'].toString(),
-                            //snapshot.data[0]['dob']['age'].toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 40,
@@ -80,13 +77,8 @@ class _UserProfile extends State<UserProfile> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  //color: Colors.blue,
                   child: Text(
-                    snapshot.data['name'] + ' ' + snapshot.data['lastname'],
-                    /*
-                    snapshot.data[0]['name']['first'] +
-                        ' ' +
-                        snapshot.data[0]['name']['last'],*/
+                    snapshot.data['name'] + '\n' + snapshot.data['lastname'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -99,7 +91,7 @@ class _UserProfile extends State<UserProfile> {
                   width: MediaQuery.of(context).size.width,
                   //color: Colors.blue,
                   child: Text(
-                    _description,
+                    snapshot.data['description'],
                     textAlign: TextAlign.justify,
                   ),
                 ),
@@ -151,16 +143,14 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Sex: ' +
-                                    snapshot.data['id_sexual_preference']
-                                        .toString(),
+                                (snapshot.data['id_genre'] == 1) ? 'Sex: Male':'Sex: Female',
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
                           ],
                         ),
                       ),
-                      Container(
+                      /*Container(
                         margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
                         width: MediaQuery.of(context).size.width,
                         child: Row(
@@ -176,7 +166,7 @@ class _UserProfile extends State<UserProfile> {
                             ),
                           ],
                         ),
-                      ),
+                      ),*/
                       Container(
                         margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
                         width: MediaQuery.of(context).size.width,
@@ -186,9 +176,7 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Preferences: ' +
-                                    snapshot.data['id_sexual_preference']
-                                        .toString(),
+                                (snapshot.data['id_sexual_preference'] == 1) ? 'Preferences: Men':'Preferences: Women',
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -204,9 +192,7 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                'Show me: ' +
-                                    snapshot.data['id_sexual_preference']
-                                        .toString(),
+                                (snapshot.data['id_sexual_preference'] == 1) ? 'Show me: Men':'Show me: Women',
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),

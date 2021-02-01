@@ -4,6 +4,7 @@ import '../../appRootPages/rootLayout.dart';
 import '../SignInLayout.dart';
 import '../../main.dart';
 import './postUser.dart';
+import 'package:get/get.dart';
 
 class SignInForm extends StatefulWidget {
   SignInForm({Key key}) : super(key: key);
@@ -260,9 +261,6 @@ class _SignInForm extends State<SignInForm> {
 
                       Scaffold.of(context).showSnackBar(
                           SnackBar(content: Text('Processing Data')));
-                      /*Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RootLayout()));*/
                     }
                   },
                 )
@@ -293,11 +291,7 @@ class _SignInForm extends State<SignInForm> {
                       ),
                       child: Text('Continue'),
                       onPressed: () {
-                        Navigator.pop(context);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                        Get.off(HomePage());
                       },
                     )
                   ],
