@@ -16,12 +16,14 @@ Future<Map<String, dynamic>> updateUser(
     String description) async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
-  //int idUser = int.parse(userJWTcontroller.data['id_user']);
   final response = await http.put(
     'http://192.168.56.1:3000/api/user/',
-    headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    },
     body: jsonEncode(<String, dynamic>{
-      'id_user': idUser,
+      'id': idUser.toString(),
       'name': name,
       'lastname': lastname,
       'email': email,

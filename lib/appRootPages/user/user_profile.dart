@@ -19,6 +19,12 @@ class _UserProfile extends State<UserProfile> {
     futureUser = fetchUser();
   }
 
+  onGoBack(dynamic value) {
+    setState(() {
+      futureUser = fetchUser();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
@@ -206,7 +212,7 @@ class _UserProfile extends State<UserProfile> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => UserEdit()),
-                          );
+                          ).then((value) => onGoBack(value));
                         },
                       )
                     ],
