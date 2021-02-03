@@ -1,4 +1,4 @@
-import './edit_profile.dart';
+import 'edit profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'request/fetchUser.dart';
