@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../appRootPages/rootLayout.dart';
+import './user_image_picking/user_img_picker.dart';
 import '../SignInLayout.dart';
 import '../../main.dart';
 import './postUser.dart';
@@ -26,6 +27,7 @@ class _SignInForm extends State<SignInForm> {
   int _age;
   String _description;
   Future<User> _futureUser;
+  var changeToImgPicker = null;
 
   @override
   Widget build(BuildContext context) {
@@ -272,30 +274,37 @@ class _SignInForm extends State<SignInForm> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 print('Bien hecho: ' + snapshot.data.name);
-                return Center(
-                    child: Column(
-                  children: [
-                    Text(snapshot.data.name),
-                    //Aquí voy a agregar un formulario para agregar las imagenes
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>(
-                          (Set<MaterialState> states) {
-                            if (states.contains(MaterialState.pressed))
-                              return Colors.redAccent;
-                            return Colors
-                                .deepOrangeAccent; // Use the component's default.
-                          },
+
+                return (changeToImgPicker == null)
+                    ? Center(
+                        child: Column(
+                          children: [
+                            Text(snapshot.data.name),
+                            //Aquí voy a agregar un formulario para agregar las imagenes
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.pressed))
+                                      return Colors.redAccent;
+                                    return Colors
+                                        .deepOrangeAccent; // Use the component's default.
+                                  },
+                                ),
+                              ),
+                              child: Text('Continue'),
+                              onPressed: () {
+                                setState(() {
+                                  changeToImgPicker = 'Continue';
+                                });
+                                //Get.off(HomePage());
+                              },
+                            )
+                          ],
                         ),
-                      ),
-                      child: Text('Continue'),
-                      onPressed: () {
-                        Get.off(HomePage());
-                      },
-                    )
-                  ],
-                ));
+                      )
+                    : UserImgPicker();
               } else if (snapshot.hasError) {
                 print('Mal hecho: ' + snapshot.error.toString());
                 return Center(
