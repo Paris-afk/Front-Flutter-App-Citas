@@ -31,6 +31,7 @@ Future<User> getUserLogin(String email, String password) async {
   );
   if (response.statusCode == 200) {
     var user = User.fromJson(jsonDecode(response.body));
+    
 
     userJWTcontroller.jwt.value = user.jwt.toString();
     userJWTcontroller.data.addAll(user.data);

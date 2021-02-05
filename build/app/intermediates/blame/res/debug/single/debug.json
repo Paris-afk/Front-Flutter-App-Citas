@@ -56,12 +56,12 @@
         "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\742302b733cac4aeee0f7490264c16a9\\res\\drawable\\notification_bg.xml"
     },
     {
-        "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\layout-v16_notification_template_custom_big.xml.flat",
-        "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\742302b733cac4aeee0f7490264c16a9\\res\\layout-v16\\notification_template_custom_big.xml"
-    },
-    {
         "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_notification_bg_low_pressed.9.png.flat",
         "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\742302b733cac4aeee0f7490264c16a9\\res\\drawable-xhdpi-v4\\notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\layout-v16_notification_template_custom_big.xml.flat",
+        "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\742302b733cac4aeee0f7490264c16a9\\res\\layout-v16\\notification_template_custom_big.xml"
     },
     {
         "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notify_panel_notification_icon_bg.png.flat",
@@ -122,6 +122,10 @@
     {
         "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
         "source": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\xml_flutter_image_picker_file_paths.xml.flat",
+        "source": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\image_picker\\intermediates\\packaged_res\\debug\\xml\\flutter_image_picker_file_paths.xml"
     },
     {
         "merged": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4_notification_bg_normal_pressed.9.png.flat",

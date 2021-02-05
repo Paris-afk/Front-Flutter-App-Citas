@@ -1,14 +1,17 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
-INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
-INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
-INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
-MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
+INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
+INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
+INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
+MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-22:12
+MERGED from [:flutter_plugin_android_lifecycle] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\flutter_plugin_android_lifecycle\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\exifinterface-1.3.0.aar\8b282b248e01b33aef33c66b8590ef9f\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\0ed7fbefa5b050753c4e9b80e4436203\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\bf5e33e1984dfd4476f32a550765969d\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\aeebc8435567c29935ad651b362ee578\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\e6576378e15a36ad9c9457c0f0dce204\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\bf5e33e1984dfd4476f32a550765969d\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\e0441a98e3a434d84d63dc41f9adb1aa\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\742302b733cac4aeee0f7490264c16a9\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.2.0.aar\6cf20119276824f834a12234602a7827\AndroidManifest.xml:17:1-24:12
@@ -27,11 +30,11 @@ INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Cita
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\debug\AndroidManifest.xml
 	android:versionCode
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-34:12
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:1-38:12
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -41,10 +44,28 @@ MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\
 MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:3:5-66
 	android:name
 		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:3:22-64
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:4:5-81
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:8:5-81
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:4:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:5:5-80
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-80
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:5:22-77
+uses-permission#android.permission.CAMERA
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:6:5-65
+	android:name
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:6:22-62
 application
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:10:5-33:19
-MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:10:5-33:19
-MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:10:5-33:19
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:13:5-37:19
+MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:13:5-37:19
+MERGED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:13:5-37:19
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:10:5-20:19
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:10:5-20:19
 MERGED from [androidx.core:core:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\742302b733cac4aeee0f7490264c16a9\AndroidManifest.xml:24:5-89
 MERGED from [androidx.core:core:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\742302b733cac4aeee0f7490264c16a9\AndroidManifest.xml:24:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\7ed6ebab1b3e333bd6c585a364efe6dd\AndroidManifest.xml:24:5-25:19
@@ -52,58 +73,64 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\ya
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\742302b733cac4aeee0f7490264c16a9\AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:12:9-39
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:12:9-39
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:15:9-39
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:15:9-39
 	android:icon
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:13:9-43
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:13:9-43
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:16:9-43
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:16:9-43
 	android:usesCleartextTraffic
 		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\debug\AndroidManifest.xml:7:18-53
 	android:name
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:11:9-57
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:11:9-57
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:14:9-57
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:14:9-57
 activity#com.example.citas_proyecto.MainActivity
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:14:9-32:20
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:18:9-36:20
 	android:launchMode
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:16:13-43
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:20:13-43
 	android:hardwareAccelerated
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:19:13-47
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:23:13-47
 	android:windowSoftInputMode
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:20:13-55
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:24:13-55
 	android:configChanges
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:18:13-144
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:22:13-144
 	android:theme
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:17:13-47
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:21:13-47
 	android:name
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:15:13-41
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:19:13-41
 meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:25:13-27:40
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:29:13-31:40
 	android:value
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:27:17-37
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:31:17-37
 	android:name
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:26:17-82
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:30:17-82
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:28:13-31:29
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:32:13-35:29
 action#android.intent.action.MAIN
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:29:17-68
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:33:17-68
 	android:name
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:29:25-66
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:33:25-66
 category#android.intent.category.LAUNCHER
-ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:30:17-76
+ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:34:17-76
 	android:name
-		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:30:27-74
+		ADDED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml:34:27-74
 uses-sdk
 INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml
 INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\flutter_plugin_android_lifecycle\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [:flutter_plugin_android_lifecycle] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\flutter_plugin_android_lifecycle\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\exifinterface-1.3.0.aar\8b282b248e01b33aef33c66b8590ef9f\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\exifinterface-1.3.0.aar\8b282b248e01b33aef33c66b8590ef9f\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\0ed7fbefa5b050753c4e9b80e4436203\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\0ed7fbefa5b050753c4e9b80e4436203\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\bf5e33e1984dfd4476f32a550765969d\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\bf5e33e1984dfd4476f32a550765969d\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\aeebc8435567c29935ad651b362ee578\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\aeebc8435567c29935ad651b362ee578\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\e6576378e15a36ad9c9457c0f0dce204\AndroidManifest.xml:20:5-44
 MERGED from [androidx.loader:loader:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\e6576378e15a36ad9c9457c0f0dce204\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\bf5e33e1984dfd4476f32a550765969d\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\bf5e33e1984dfd4476f32a550765969d\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\e0441a98e3a434d84d63dc41f9adb1aa\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.0.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\e0441a98e3a434d84d63dc41f9adb1aa\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.1.0] C:\Users\yassi\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\742302b733cac4aeee0f7490264c16a9\AndroidManifest.xml:20:5-22:41
@@ -130,3 +157,19 @@ INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Cita
 	android:minSdkVersion
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\main\AndroidManifest.xml
 		INJECTED from D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\android\app\src\debug\AndroidManifest.xml
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:11:9-19:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:15:13-47
+	android:authorities
+		ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:13:13-74
+	android:exported
+		ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:12:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:16:13-18:75
+	android:resource
+		ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:18:17-72
+	android:name
+		ADDED from [:image_picker] D:\yassi\Documents\programming\flutter_proj\Front-Flutter-App-Citas\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:17:17-67

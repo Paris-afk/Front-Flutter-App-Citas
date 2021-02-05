@@ -3,6 +3,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'dart:io';
+import 'dart:async';
+import './user_img_req.dart';
 
 class UserImgPicker extends StatefulWidget {
   UserImgPicker({Key key}) : super(key: key);
@@ -12,30 +15,142 @@ class UserImgPicker extends StatefulWidget {
 }
 
 class _UserImgPicker extends State<UserImgPicker> {
+  File _image;
+  final picker = ImagePicker();
+  var _pickImageError;
+  Future postImg = null;
+
+
+  Future getImage() async {
+    try {
+      await Future.delayed(Duration(milliseconds: 500));
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
+      setState(() {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+        } else {
+          print('No image selected.');
+        }
+      });
+    } catch (e) {
+      setState(() {
+        _pickImageError = e;
+        print('Image error: ' + _pickImageError);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          Text('Here you will post your image'),
-          ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.pressed))
-                    return Colors.redAccent;
-                  return Colors
-                      .deepOrangeAccent; // Use the component's default.
-                },
-              ),
-            ),
-            child: Text('Log in'),
-            onPressed: () {
-              Get.off(HomePage());
-            },
-          )
-        ],
-      ),
+      child: (_image == null)
+          ? Column(
+              children: [
+                Text('Now let people see you'),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed))
+                          return Colors.redAccent;
+                        return Colors
+                            .deepOrangeAccent; // Use the component's default.
+                      },
+                    ),
+                  ),
+                  child: Text('Upload image'),
+                  onPressed: getImage,
+                )
+              ],
+            )
+          : (postImg == null)
+              ? Column(
+                  children: [
+                    Image.file(_image),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.resolveWith<Color>(
+                          (Set<MaterialState> states) {
+                            if (states.contains(MaterialState.pressed))
+                              return Colors.redAccent;
+                            return Colors
+                                .deepOrangeAccent; // Use the component's default.
+                          },
+                        ),
+                      ),
+                      child: Text('Continue'),
+                      onPressed: () {
+                        setState(() {
+                          postImg = postUserProfileImg(_image);
+                          print('IMAGEN YA POSTEADA ALV: ' + postImg.toString());
+                        });
+                        //Get.off(HomePage());
+                      },
+                    )
+                  ],
+                )
+              : FutureBuilder(
+                  future: postImg,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: [
+                          Text('Image uploaded'),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith<Color>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.pressed))
+                                    return Colors.redAccent;
+                                  return Colors
+                                      .deepOrangeAccent; // Use the component's default.
+                                },
+                              ),
+                            ),
+                            child: Text('Continue'),
+                            onPressed: (){
+                              Get.off(HomePage());
+                            },
+                          )
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      print('Mal hecho: ' + snapshot.error.toString());
+                      return Center(
+                        child: Column(
+                          children: [
+                            Text("${snapshot.error}"),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Text("Could not create user. Please try again"),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.resolveWith<Color>(
+                                  (Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.pressed))
+                                      return Colors.redAccent;
+                                    return Colors
+                                        .deepOrangeAccent; // Use the component's default.
+                                  },
+                                ),
+                              ),
+                              child: Text('Try later'),
+                              onPressed: () {
+                                Get.off(HomePage());
+                              },
+                            )
+                          ],
+                        ),
+                      );
+                    }
+
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
     );
   }
 }

@@ -273,13 +273,13 @@ class _SignInForm extends State<SignInForm> {
             future: _futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print('Bien hecho: ' + snapshot.data.name);
+                print('Bien hecho: ' + snapshot.data.data.toString() + snapshot.data.jwt);
 
                 return (changeToImgPicker == null)
                     ? Center(
                         child: Column(
                           children: [
-                            Text(snapshot.data.name),
+                            Text(snapshot.data.data.toString() + snapshot.data.jwt),
                             //Aquí voy a agregar un formulario para agregar las imagenes
                             ElevatedButton(
                               style: ButtonStyle(

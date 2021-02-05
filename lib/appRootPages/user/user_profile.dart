@@ -1,7 +1,10 @@
+import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import 'edit profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'request/fetchUser.dart';
+import 'dart:io';
+import 'package:get/get.dart';
 
 class UserProfile extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfile extends State<UserProfile> {
   String _hobbies = "Rubiks cubes";
+  final userJWTcontroller = Get.put(UserJWT());
 
   Future<Map<String, dynamic>> futureUser;
 
@@ -17,6 +21,7 @@ class _UserProfile extends State<UserProfile> {
   void initState() {
     super.initState();
     futureUser = fetchUser();
+    fetchUserImg();
   }
 
   onGoBack(dynamic value) {
@@ -27,6 +32,8 @@ class _UserProfile extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
+    String token = userJWTcontroller.jwt.value;
+
     return FutureBuilder<Map<String, dynamic>>(
       future: futureUser,
       builder: (context, snapshot) {
@@ -45,13 +52,41 @@ class _UserProfile extends State<UserProfile> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(200),
-                        child: Image.network(
-                          'https://picsum.photos/id/237/700/500',
+                        child: 
+                        Image.file(
+                          File(
+                            snapshot.data['profile_picture']
+                          ),
+                        ),
+                        /*Image(
+                          image: NetworkImage(
+                            'http://10.0.2.2:3000/api/image/profile/' +
+                                snapshot.data['id_user'].toString(),
+                            headers: {
+                              "Accept": "application/json",
+                              HttpHeaders.authorizationHeader:
+                                  "Bearer $token"
+                            },
+                          ),
+                        ),*/
+                        /*Image.network(
+                          'http://10.0.2.2:3000/api/image/profile/' +
+                              snapshot.data['id_user'].toString(),
                           //snapshot.data[0]['picture']['large'],
+                          headers: {
+                            "Accept": "application/json",
+                            HttpHeaders.authorizationHeader:
+                                "Bearer " + userJWTcontroller.jwt.value
+                          },
+                          loadingBuilder: (context, child, progress) {
+                            return progress == null
+                                ? child
+                                : LinearProgressIndicator();
+                          },
                           width: MediaQuery.of(context).size.width / 1.5,
                           height: MediaQuery.of(context).size.height,
                           fit: BoxFit.cover,
-                        ),
+                        ),*/
                       ),
                       Container(
                         alignment: Alignment.bottomRight,
@@ -149,7 +184,9 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                (snapshot.data['id_genre'] == 1) ? 'Sex: Male':'Sex: Female',
+                                (snapshot.data['id_genre'] == 1)
+                                    ? 'Sex: Male'
+                                    : 'Sex: Female',
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -182,7 +219,9 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                (snapshot.data['id_sexual_preference'] == 1) ? 'Preferences: Men':'Preferences: Women',
+                                (snapshot.data['id_sexual_preference'] == 1)
+                                    ? 'Preferences: Men'
+                                    : 'Preferences: Women',
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -198,7 +237,9 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                (snapshot.data['id_sexual_preference'] == 1) ? 'Show me: Men':'Show me: Women',
+                                (snapshot.data['id_sexual_preference'] == 1)
+                                    ? 'Show me: Men'
+                                    : 'Show me: Women',
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
