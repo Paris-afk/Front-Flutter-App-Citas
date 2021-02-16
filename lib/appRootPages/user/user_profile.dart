@@ -21,7 +21,7 @@ class _UserProfile extends State<UserProfile> {
   void initState() {
     super.initState();
     futureUser = fetchUser();
-    fetchUserImg();
+    //fetchUserImg();
   }
 
   onGoBack(dynamic value) {
@@ -38,6 +38,7 @@ class _UserProfile extends State<UserProfile> {
       future: futureUser,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          print(snapshot.data['profile_picture'].split('\\').last.toString());
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -52,41 +53,27 @@ class _UserProfile extends State<UserProfile> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(200),
-                        child: 
-                        Image.file(
-                          File(
-                            snapshot.data['profile_picture']
-                          ),
-                        ),
-                        /*Image(
-                          image: NetworkImage(
-                            'http://10.0.2.2:3000/api/image/profile/' +
-                                snapshot.data['id_user'].toString(),
-                            headers: {
-                              "Accept": "application/json",
-                              HttpHeaders.authorizationHeader:
-                                  "Bearer $token"
-                            },
-                          ),
-                        ),*/
-                        /*Image.network(
+                        child: Image.network(
                           'http://10.0.2.2:3000/api/image/profile/' +
-                              snapshot.data['id_user'].toString(),
+                              snapshot.data['profile_picture']
+                                  .split('\\')
+                                  .last
+                                  .toString(),
                           //snapshot.data[0]['picture']['large'],
                           headers: {
-                            "Accept": "application/json",
+                            //"Accept": "application/json",
                             HttpHeaders.authorizationHeader:
                                 "Bearer " + userJWTcontroller.jwt.value
                           },
                           loadingBuilder: (context, child, progress) {
                             return progress == null
                                 ? child
-                                : LinearProgressIndicator();
+                                : CircularProgressIndicator();
                           },
                           width: MediaQuery.of(context).size.width / 1.5,
                           height: MediaQuery.of(context).size.height,
                           fit: BoxFit.cover,
-                        ),*/
+                        ),
                       ),
                       Container(
                         alignment: Alignment.bottomRight,

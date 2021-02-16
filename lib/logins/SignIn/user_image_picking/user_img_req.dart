@@ -32,6 +32,8 @@ Future postUserProfileImg(File file) async {
     contentType: new MediaType('image', 'jpg'),
   );
 
+  print(multipartFile.filename.toString());
+
   request.files.add(multipartFile);
 
   var response = await request.send();

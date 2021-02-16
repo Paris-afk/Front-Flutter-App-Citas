@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'dart:io';
 import 'dart:async';
 import './user_img_req.dart';
+import 'package:citas_proyecto/appRootPages/rootLayout.dart';
 
 class UserImgPicker extends StatefulWidget {
   UserImgPicker({Key key}) : super(key: key);
@@ -111,7 +112,7 @@ class _UserImgPicker extends State<UserImgPicker> {
                             ),
                             child: Text('Continue'),
                             onPressed: (){
-                              Get.off(HomePage());
+                              Get.offAll(RootLayout());
                             },
                           )
                         ],
