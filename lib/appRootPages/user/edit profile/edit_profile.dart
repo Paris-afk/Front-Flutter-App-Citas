@@ -4,6 +4,9 @@ import 'package:flutter/src/material/dropdown.dart';
 import 'package:get/get.dart';
 import '../request/fetchUser.dart';
 import './update_profile_req.dart';
+import 'dart:io';
+import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
+import '../edit_profile_img/edit_img_form.dart';
 
 class UserEdit extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class UserEdit extends StatefulWidget {
 class _UserEdit extends State<UserEdit> {
   //final userDataController = Get.put(UserJWT());
   final _formKey = GlobalKey<FormState>();
-  final _profileImage = 'https://picsum.photos/500';
+  final userJWTcontroller = Get.put(UserJWT());
   Future<Map<String, dynamic>> futureUser;
   Future<Map<String, dynamic>> _futureUserUpdate;
 
@@ -52,6 +55,14 @@ class _UserEdit extends State<UserEdit> {
       appBar: AppBar(
         title: Text('Edit profile'),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Get.to(EditProfileImg());
+        },
+        label: Text('Change image'),
+        icon: Icon(Icons.edit),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       body: (_futureUserUpdate == null)
           ? FutureBuilder<Map<String, dynamic>>(
               future: futureUser,
@@ -73,8 +84,24 @@ class _UserEdit extends State<UserEdit> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
-                                  _profileImage,
-                                  width: MediaQuery.of(context).size.width / 2,
+                                  'http://10.0.2.2:3000/api/image/profile/' +
+                                      snapshot.data['profile_picture']
+                                          .split('\\')
+                                          .last
+                                          .toString(),
+                                  headers: {
+                                    HttpHeaders.authorizationHeader:
+                                        "Bearer " + userJWTcontroller.jwt.value
+                                  },
+                                  loadingBuilder: (context, child, progress) {
+                                    return progress == null
+                                        ? child
+                                        : CircularProgressIndicator();
+                                  },
+                                  width:
+                                      MediaQuery.of(context).size.width / 1.5,
+                                  height:
+                                      MediaQuery.of(context).size.height / 3,
                                   fit: BoxFit.cover,
                                 ),
                               ),
