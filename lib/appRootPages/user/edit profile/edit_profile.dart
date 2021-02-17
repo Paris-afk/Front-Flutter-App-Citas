@@ -19,9 +19,16 @@ class _UserEdit extends State<UserEdit> {
   final userJWTcontroller = Get.put(UserJWT());
   Future<Map<String, dynamic>> futureUser;
   Future<Map<String, dynamic>> _futureUserUpdate;
+  String profileImgName;
 
   String _name, _last_name, _email, _description, _sex, _sexual_preference;
   int _idUser, _age, _selected_sex, _selected_preference;
+
+  onGoBack(dynamic value) {
+    setState(() {
+      futureUser = fetchUser();
+    });
+  }
 
   @override
   void initState() {
@@ -46,6 +53,8 @@ class _UserEdit extends State<UserEdit> {
         _sexual_preference = 'Both';
         _selected_preference = 3;
       }
+
+      profileImgName = value['profile_picture'].split('\\').last.toString();
     });
   }
 
@@ -57,7 +66,9 @@ class _UserEdit extends State<UserEdit> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          Get.to(EditProfileImg());
+          Get.to(EditProfileImg(
+            imgName: this.profileImgName,
+          )).then((value) => onGoBack(value));
         },
         label: Text('Change image'),
         icon: Icon(Icons.edit),

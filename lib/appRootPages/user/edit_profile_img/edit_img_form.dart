@@ -4,8 +4,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import 'dart:io';
 import 'package:get/get.dart';
+import 'package:citas_proyecto/logins/SignIn/user_image_picking/user_img_req.dart';
+
 
 class EditProfileImg extends StatefulWidget {
+  final String imgName;
+
+  const EditProfileImg ({ Key key, this.imgName }): super(key: key);
+
   @override
   _EditProfileImg createState() => _EditProfileImg();
 }
@@ -15,6 +21,7 @@ class _EditProfileImg extends State<EditProfileImg> {
   File _image;
   final picker = ImagePicker();
   var _pickImageError;
+  Future postImg = null;
 
   Future getImage() async {
     try {
@@ -49,10 +56,7 @@ class _EditProfileImg extends State<EditProfileImg> {
                     padding: EdgeInsets.all(20),
                     child: Image.network(
                       'http://10.0.2.2:3000/api/image/profile/' +
-                          userJWTcontroller.data['profile_picture']
-                              .split('\\')
-                              .last
-                              .toString(),
+                          widget.imgName,
                       headers: {
                         HttpHeaders.authorizationHeader:
                             "Bearer " + userJWTcontroller.jwt.value
@@ -74,23 +78,63 @@ class _EditProfileImg extends State<EditProfileImg> {
                   ),
                 ],
               )
-            : Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Image.file(
-                      _image,
-                      width: MediaQuery.of(context).size.width / 1.2,
-                      height: MediaQuery.of(context).size.height / 2.5,
-                    ),
+            : (postImg == null)
+                ? Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Image.file(
+                          _image,
+                          width: MediaQuery.of(context).size.width / 1.2,
+                          height: MediaQuery.of(context).size.height / 2.5,
+                        ),
+                      ),
+                      FloatingActionButton.extended(
+                        onPressed: () {
+                          setState(() {
+                            postImg = postUserProfileImg(_image);
+                            print('IMAGEN YA POSTEADA ALV: ' +
+                                postImg.toString());
+                          });
+                        },
+                        label: Text('Save'),
+                        icon: Icon(Icons.save),
+                      ),
+                    ],
+                  )
+                : FutureBuilder(
+                    future: postImg,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        Get.back();
+                      } else if (snapshot.hasError) {
+                        print('Mal hecho: ' + snapshot.error.toString());
+                        return Center(
+                          child: Column(
+                            children: [
+                              //Text("${snapshot.error}"),
+                              SizedBox(
+                                height: 50,
+                              ),
+                              Text("Could not change image. Please try again"),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              FloatingActionButton.extended(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                label: Text('Try later'),
+                                icon: Icon(Icons.arrow_back),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+
+                      return Center(child: CircularProgressIndicator());
+                    },
                   ),
-                  FloatingActionButton.extended(
-                    //onPressed: getImage,
-                    label: Text('Save'),
-                    icon: Icon(Icons.save),
-                  ),
-                ],
-              ),
       ),
     );
   }
