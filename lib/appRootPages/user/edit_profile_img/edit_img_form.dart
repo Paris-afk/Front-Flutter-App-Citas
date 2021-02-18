@@ -6,11 +6,10 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:citas_proyecto/logins/SignIn/user_image_picking/user_img_req.dart';
 
-
 class EditProfileImg extends StatefulWidget {
   final String imgName;
 
-  const EditProfileImg ({ Key key, this.imgName }): super(key: key);
+  const EditProfileImg({Key key, this.imgName}) : super(key: key);
 
   @override
   _EditProfileImg createState() => _EditProfileImg();
@@ -95,7 +94,6 @@ class _EditProfileImg extends State<EditProfileImg> {
                             postImg = postUserProfileImg(_image);
                             print('IMAGEN YA POSTEADA ALV: ' +
                                 postImg.toString());
-                                userJWTcontroller.data['profile_picture'] = postImg.toString();
                           });
                         },
                         label: Text('Save'),

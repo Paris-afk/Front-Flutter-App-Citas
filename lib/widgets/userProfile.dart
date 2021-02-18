@@ -1,14 +1,27 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
+import 'dart:io';
 
 class UsersProfile extends StatelessWidget {
-  final String image1, name, lastname, age, city, sex, image2;
+  final String image1,
+      name,
+      lastname,
+      description,
+      preferences,
+      age,
+      city,
+      sex,
+      image2;
 
   const UsersProfile(
       {Key key,
       this.image1,
       this.name,
       this.lastname,
+      this.description,
+      this.preferences,
       this.age,
       this.city,
       this.sex,
@@ -17,16 +30,26 @@ class UsersProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userJWTcontroller = Get.put(UserJWT());
+
     return SingleChildScrollView(
       child: Column(
         children: [
           Stack(
             children: [
               Image.network(
-                image1,
+                'http://10.0.2.2:3000/api/image/profile/' +
+                    image1.split('\\').last.toString(),
+                headers: {
+                  HttpHeaders.authorizationHeader:
+                      "Bearer " + userJWTcontroller.jwt.value
+                },
+                loadingBuilder: (context, child, progress) {
+                  return progress == null ? child : CircularProgressIndicator();
+                },
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
-                height: MediaQuery.of(context).size.height,
+                //height: MediaQuery.of(context).size.height,
               ),
               Container(
                 alignment: Alignment.bottomCenter,
@@ -72,6 +95,13 @@ class UsersProfile extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 10, bottom: 10),
+                  child: Text(
+                    description,
+                    textAlign: TextAlign.justify,
+                  ),
+                ),
                 Text(
                   'City: ' + city,
                   style: TextStyle(
@@ -85,17 +115,13 @@ class UsersProfile extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec suscipit augue urna, sit amet varius ligula fermentum in. Aliquam rhoncus luctus massa vitae feugiat. Morbi sed felis ante. Sed consectetur consectetur quam, ac pulvinar arcu semper vel. Fusce nibh dui, eleifend et viverra in, interdum vestibulum orci. Mauris quis efficitur arcu, non aliquam arcu. Curabitur vitae lectus iaculis nunc congue placerat. Donec feugiat justo quis accumsan venenatis. Maecenas eget quam eget elit luctus congue. Pellentesque aliquet neque enim, ut luctus nisl gravida ut. ',
-                  textAlign: TextAlign.justify,
+                  'Preference: ' + preferences,
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
                 ),
               ],
             ),
-          ),
-          Image.network(
-            image2,
-            width: MediaQuery.of(context).size.width,
-            fit: BoxFit.cover,
-            height: MediaQuery.of(context).size.height,
           ),
           Container(
             padding: EdgeInsets.all(10),
@@ -136,6 +162,20 @@ class UsersProfile extends StatelessWidget {
                     backgroundColor: Colors.orange),
               ],
             ),
+          ),
+          Image.network(
+            'http://10.0.2.2:3000/api/image/profile/' +
+                image2.split('\\').last.toString(),
+            headers: {
+              HttpHeaders.authorizationHeader:
+                  "Bearer " + userJWTcontroller.jwt.value
+            },
+            loadingBuilder: (context, child, progress) {
+              return progress == null ? child : CircularProgressIndicator();
+            },
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+            //height: MediaQuery.of(context).size.height,
           ),
         ],
       ),

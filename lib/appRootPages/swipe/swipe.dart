@@ -12,14 +12,14 @@ class Swipes extends StatefulWidget {
 }
 
 class _Swipes extends State<Swipes> {
-  List<dynamic> welcomeImages = [];
+  List<dynamic> profiles = [];
   Future<List<dynamic>> futureProfiles;
 
   @override
   void initState() {
     super.initState();
     futureProfiles = fetchUserProfiles();
-    futureProfiles.then((value) => welcomeImages = value);
+    futureProfiles.then((value) => profiles = value);
   }
 
   @override
@@ -37,12 +37,12 @@ class _Swipes extends State<Swipes> {
             future: futureProfiles,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                //print(welcomeImages);
+                //print(profiles);
                 return TinderSwapCard(
                   swipeUp: false,
                   swipeDown: false,
                   orientation: AmassOrientation.BOTTOM,
-                  totalNum: welcomeImages.length,
+                  totalNum: profiles.length,
                   stackNum: 2,
                   swipeEdge: 2.0,
                   maxWidth: MediaQuery.of(context).size.width,
@@ -54,13 +54,15 @@ class _Swipes extends State<Swipes> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                       child: UsersProfile(
-                        image1: welcomeImages[index]['picture']['large'],
-                        name: welcomeImages[index]['name']['first'],
-                        lastname: welcomeImages[index]['name']['last'],
-                        age: welcomeImages[index]['dob']['age'].toString(),
-                        city: welcomeImages[index]['location']['city'],
-                        sex: welcomeImages[index]['gender'],
-                        image2: welcomeImages[index]['picture']['large'],
+                        image1: profiles[index]['profile_picture'] ?? '1613543672213image_picker3866565216126773732.jpg',
+                        name: profiles[index]['name'],
+                        lastname: profiles[index]['lastname'],
+                        description: profiles[index]['description'] ?? '1613543672213image_picker3866565216126773732.jpg',
+                        preferences: profiles[index]['id_sexual_preference'].toString(),
+                        age: profiles[index]['age'].toString(),
+                        city: 'Tabasco',
+                        sex: profiles[index]['id_genre'].toString(),
+                        image2: profiles[index]['profile_picture'] ?? '1613543672213image_picker3866565216126773732.jpg',
                       ),
                     ),
                   ),
