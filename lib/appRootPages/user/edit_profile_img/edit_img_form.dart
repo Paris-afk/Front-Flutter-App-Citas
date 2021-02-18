@@ -95,6 +95,7 @@ class _EditProfileImg extends State<EditProfileImg> {
                             postImg = postUserProfileImg(_image);
                             print('IMAGEN YA POSTEADA ALV: ' +
                                 postImg.toString());
+                                userJWTcontroller.data['profile_picture'] = postImg.toString();
                           });
                         },
                         label: Text('Save'),
