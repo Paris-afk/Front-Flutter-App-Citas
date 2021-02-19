@@ -54,15 +54,15 @@ class _Swipes extends State<Swipes> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                       child: UsersProfile(
-                        image1: profiles[index]['profile_picture'] ?? '1613543672213image_picker3866565216126773732.jpg',
+                        image1: profiles[index]['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
                         name: profiles[index]['name'],
                         lastname: profiles[index]['lastname'],
-                        description: profiles[index]['description'] ?? '1613543672213image_picker3866565216126773732.jpg',
+                        description: profiles[index]['description'] ?? '1613691970195image_picker4608841315600757623.jpg',
                         preferences: profiles[index]['id_sexual_preference'].toString(),
                         age: profiles[index]['age'].toString(),
                         city: 'Tabasco',
                         sex: profiles[index]['id_genre'].toString(),
-                        image2: profiles[index]['profile_picture'] ?? '1613543672213image_picker3866565216126773732.jpg',
+                        image2: profiles[index]['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
                       ),
                     ),
                   ),
@@ -83,8 +83,10 @@ class _Swipes extends State<Swipes> {
                     /// Get orientation & index of swiped card!
                     if (orientation == CardSwipeOrientation.RIGHT) {
                       print('LIKE');
+                      actionForUserProfile('like', profiles[index]['id_user'].toString());
                     } else {
                       print('PASS');
+                      actionForUserProfile('dislike', profiles[index]['id_user'].toString());
                     }
                   },
                 );
