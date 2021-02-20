@@ -45,7 +45,7 @@ class UsersProfile extends StatelessWidget {
                       "Bearer " + userJWTcontroller.jwt.value
                 },
                 loadingBuilder: (context, child, progress) {
-                  return progress == null ? child : CircularProgressIndicator();
+                  return progress == null ? child : Center(child: CircularProgressIndicator());
                 },
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
@@ -171,7 +171,7 @@ class UsersProfile extends StatelessWidget {
                   "Bearer " + userJWTcontroller.jwt.value
             },
             loadingBuilder: (context, child, progress) {
-              return progress == null ? child : CircularProgressIndicator();
+              return progress == null ? child : Center(child: CircularProgressIndicator());
             },
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,

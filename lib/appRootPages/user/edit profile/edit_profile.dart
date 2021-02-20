@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../request/fetchUser.dart';
 import './update_profile_req.dart';
 import 'dart:io';
+import 'dart:async';
 import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import '../edit_profile_img/edit_img_form.dart';
 
@@ -398,14 +399,15 @@ class _UserEdit extends State<UserEdit> {
                                               .validate()) {
                                             setState(() {
                                               _futureUserUpdate = updateUser(
-                                                  _idUser,
-                                                  _name,
-                                                  _last_name,
-                                                  _email,
-                                                  _selected_preference,
-                                                  _selected_sex,
-                                                  _age,
-                                                  _description);
+                                                _idUser,
+                                                _name,
+                                                _last_name,
+                                                _email,
+                                                _selected_preference,
+                                                _selected_sex,
+                                                _age,
+                                                _description,
+                                              );
                                             });
                                           }
                                         },
@@ -451,30 +453,32 @@ class _UserEdit extends State<UserEdit> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   print('Bien hecho: ' + snapshot.data.toString());
-                  return Center(
-                      child: Column(
-                    children: [
-                      Text(snapshot.data.toString()),
-                      //Aquí voy a agregar un formulario para agregar las imagenes
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.resolveWith<Color>(
-                            (Set<MaterialState> states) {
-                              if (states.contains(MaterialState.pressed))
-                                return Colors.redAccent;
-                              return Colors
-                                  .deepOrangeAccent; // Use the component's default.
-                            },
+                  Get.back();
+                  /*return Center(
+                    child: Column(
+                      children: [
+                        Text(snapshot.data.toString()),
+                        //Aquí voy a agregar un formulario para agregar las imagenes
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                if (states.contains(MaterialState.pressed))
+                                  return Colors.redAccent;
+                                return Colors
+                                    .deepOrangeAccent; // Use the component's default.
+                              },
+                            ),
                           ),
-                        ),
-                        child: Text('Continue'),
-                        onPressed: () {
-                          Get.back();
-                        },
-                      )
-                    ],
-                  ));
+                          child: Text('Continue'),
+                          onPressed: () {
+                            Get.back();
+                          },
+                        )
+                      ],
+                    ),
+                  );*/
                 } else if (snapshot.hasError) {
                   print('Mal hecho: ' + snapshot.error.toString());
                   return Center(
