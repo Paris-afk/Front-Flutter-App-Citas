@@ -9,7 +9,7 @@ Future<Map<String, dynamic>> fetchUser() async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.get(
-    'http://192.168.56.1:3000/api/user/' + userJWTcontroller.data['id_user'].toString(),
+    'http://10.0.2.2:3000/api/user/' + userJWTcontroller.data['id_user'].toString(),
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
   );
 

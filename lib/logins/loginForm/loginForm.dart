@@ -5,6 +5,7 @@ import 'package:citas_proyecto/appRootPages/rootLayout.dart';
 import './loginReq.dart';
 import '../../main.dart';
 import 'package:get/get.dart';
+import 'dart:async';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -50,259 +51,260 @@ class _LoginForm extends State<LoginForm> {
             ),
             Expanded(
               child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60)),
-                  ),
-                  child: (_futureUser == null)
-                      ? Form(
-                          key: _formKey,
-                          child: Padding(
-                            padding: EdgeInsets.all(20),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 40,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(20),
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color.fromRGBO(
-                                                  225, 95, 27, .3),
-                                              blurRadius: 20,
-                                              offset: Offset(0, 10))
-                                        ]),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                                      color:
-                                                          Colors.grey[200]))),
-                                          child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.emailAddress,
-                                            decoration: InputDecoration(
-                                              hintText:
-                                                  "Email o numero de telefono",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                              border: InputBorder.none,
-                                            ),
-                                            validator: (String value) {
-                                              if (value.isEmpty) {
-                                                return 'Please enter some text';
-                                              }
-                                              if (!value.contains('@') ||
-                                                  !value.contains('.com')) {
-                                                print('Invalid password');
-                                                return 'It\'s not an email address';
-                                              }
-                                              if (value.contains(' ')) {
-                                                return 'No spaces allowed';
-                                              }
-                                              return null;
-                                            },
-                                            onChanged: (String writtenEmail) {
-                                              setState(() {
-                                                _email = writtenEmail;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              border: Border(
-                                                  bottom: BorderSide(
-                                                      color:
-                                                          Colors.grey[200]))),
-                                          child: TextFormField(
-                                            obscureText: true,
-                                            decoration: InputDecoration(
-                                              hintText: "Password",
-                                              hintStyle:
-                                                  TextStyle(color: Colors.grey),
-                                              border: InputBorder.none,
-                                            ),
-                                            validator: (String value) {
-                                              if (value.isEmpty) {
-                                                return 'Please enter some text';
-                                              }
-                                              if (value.contains(' ')) {
-                                                return 'No spaces allowed';
-                                              }
-                                              return null;
-                                            },
-                                            onChanged:
-                                                (String writtenPassword) {
-                                              setState(() {
-                                                _password = writtenPassword;
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Text(
-                                    "Olvidaste tu contraseña?",
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                      height: 50,
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 60),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.orange[900]),
-                                      child: Center(
-                                        child: Column(
-                                          children: [
-                                            FlatButton(
-                                              child: Text(
-                                                "Iniciar Sesion",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              onPressed: () {
-                                                print('Session started');
-                                                if (_formKey.currentState
-                                                    .validate()) {
-                                                  // If the form is valid, display a snackbar. In the real world,
-                                                  // you'd often call a server or save the information in a database.
-
-                                                  setState(() {
-                                                    _futureUser = getUserLogin(
-                                                      _email,
-                                                      _password,
-                                                    );
-                                                  });
-                                                }
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  Container(
-                                      height: 50,
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 60),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.orange[900]),
-                                      child: Center(
-                                        child: Column(
-                                          children: [
-                                            FlatButton(
-                                              child: Text(
-                                                "Sign In",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              onPressed: () {
-                                                print('Sign in');
-                                                Get.to(SignInLayout());
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      )),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Text(
-                                    "Continua con redes sociales?",
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                      topRight: Radius.circular(60)),
+                ),
+                child: (_futureUser == null)
+                    ? Form(
+                        key: _formKey,
+                        child: Padding(
+                          padding: EdgeInsets.all(20),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 40,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.all(20),
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color:
+                                                Color.fromRGBO(225, 95, 27, .3),
+                                            blurRadius: 20,
+                                            offset: Offset(0, 10))
+                                      ]),
+                                  child: Column(
                                     children: <Widget>[
-                                      Expanded(
-                                        child: Container(
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: Colors.blue),
-                                            child: Center(
-                                              child: Text(
-                                                "Facebook",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )),
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.grey[200]))),
+                                        child: TextFormField(
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          decoration: InputDecoration(
+                                            hintText:
+                                                "Email o numero de telefono",
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: InputBorder.none,
+                                          ),
+                                          validator: (String value) {
+                                            if (value.isEmpty) {
+                                              return 'Please enter some text';
+                                            }
+                                            if (!value.contains('@') ||
+                                                !value.contains('.com')) {
+                                              print('Invalid password');
+                                              return 'It\'s not an email address';
+                                            }
+                                            if (value.contains(' ')) {
+                                              return 'No spaces allowed';
+                                            }
+                                            return null;
+                                          },
+                                          onChanged: (String writtenEmail) {
+                                            setState(() {
+                                              _email = writtenEmail;
+                                            });
+                                          },
+                                        ),
                                       ),
-                                      SizedBox(
-                                        width: 30,
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    color: Colors.grey[200]))),
+                                        child: TextFormField(
+                                          obscureText: true,
+                                          decoration: InputDecoration(
+                                            hintText: "Password",
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: InputBorder.none,
+                                          ),
+                                          validator: (String value) {
+                                            if (value.isEmpty) {
+                                              return 'Please enter some text';
+                                            }
+                                            if (value.contains(' ')) {
+                                              return 'No spaces allowed';
+                                            }
+                                            return null;
+                                          },
+                                          onChanged: (String writtenPassword) {
+                                            setState(() {
+                                              _password = writtenPassword;
+                                            });
+                                          },
+                                        ),
                                       ),
-                                      Expanded(
-                                        child: Container(
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                                color: Colors.red),
-                                            child: Center(
-                                              child: Text(
-                                                "Google",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                            )),
-                                      )
                                     ],
-                                  )
-                                ],
-                              ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  "Olvidaste tu contraseña?",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                    height: 50,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 60),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.orange[900]),
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          FlatButton(
+                                            child: Text(
+                                              "Iniciar Sesion",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onPressed: () {
+                                              print('Session started');
+                                              if (_formKey.currentState
+                                                  .validate()) {
+                                                // If the form is valid, display a snackbar. In the real world,
+                                                // you'd often call a server or save the information in a database.
+
+                                                setState(() {
+                                                  _futureUser = getUserLogin(
+                                                    _email,
+                                                    _password,
+                                                  );
+                                                  _futureUser.then(
+                                                    (value) {
+                                                      print(
+                                                          'ESTE ES EL VALOR OBTENIDO: ' +
+                                                              value.data
+                                                                  .toString());
+                                                      if (value.data != null) {
+                                                        Get.off(RootLayout());
+                                                      }
+                                                    },
+                                                  );
+                                                });
+                                              }
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Container(
+                                    height: 50,
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 60),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.orange[900]),
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          FlatButton(
+                                            child: Text(
+                                              "Sign In",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onPressed: () {
+                                              print('Sign in');
+                                              Get.to(SignInLayout());
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Continua con redes sociales?",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              color: Colors.blue),
+                                          child: Center(
+                                            child: Text(
+                                              "Facebook",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      width: 30,
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              color: Colors.red),
+                                          child: Center(
+                                            child: Text(
+                                              "Google",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          )),
+                                    )
+                                  ],
+                                )
+                              ],
                             ),
                           ),
-                        )
-                      : FutureBuilder<User>(
-                          future: _futureUser,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              print('Bien hecho: ' + snapshot.data.jwt);
-                              return Center(
-                                  child: Column(
+                        ),
+                      )
+                    : FutureBuilder<User>(
+                        future: _futureUser,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            print('Bien hecho: ' + snapshot.data.jwt);
+                          } else if (snapshot.hasError) {
+                            print('Mal hecho: ' + snapshot.error.toString());
+                            return Center(
+                              child: Column(
                                 children: [
+                                  Text("${snapshot.error}"),
                                   SizedBox(
-                                    height: MediaQuery.of(context).size.height/3,
+                                    height: 50,
                                   ),
-                                  Container(
-                                    child: Text('Session started',
-                                      style: TextStyle(fontSize: 30),
-                                    ),
-                                  ),
-                                  //Aquí voy a agregar un formulario para agregar las imagenes
+                                  Text(
+                                      "Could not create user. Please try again"),
                                   ElevatedButton(
                                     style: ButtonStyle(
                                       backgroundColor: MaterialStateProperty
@@ -316,55 +318,25 @@ class _LoginForm extends State<LoginForm> {
                                         },
                                       ),
                                     ),
-                                    child: Text('Continue'),
+                                    child: Text('Try again'),
                                     onPressed: () {
-                                      Get.off(RootLayout()); //Pasa a la aplicación con la sesión iniciada
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomePage()));
                                     },
                                   )
                                 ],
-                              ));
-                            } else if (snapshot.hasError) {
-                              print('Mal hecho: ' + snapshot.error.toString());
-                              return Center(
-                                child: Column(
-                                  children: [
-                                    Text("${snapshot.error}"),
-                                    SizedBox(
-                                      height: 50,
-                                    ),
-                                    Text(
-                                        "Could not create user. Please try again"),
-                                    ElevatedButton(
-                                      style: ButtonStyle(
-                                        backgroundColor: MaterialStateProperty
-                                            .resolveWith<Color>(
-                                          (Set<MaterialState> states) {
-                                            if (states.contains(
-                                                MaterialState.pressed))
-                                              return Colors.redAccent;
-                                            return Colors
-                                                .deepOrangeAccent; // Use the component's default.
-                                          },
-                                        ),
-                                      ),
-                                      child: Text('Try again'),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    HomePage()));
-                                      },
-                                    )
-                                  ],
-                                ),
-                              );
-                            }
+                              ),
+                            );
+                          }
 
-                            return Center(child: CircularProgressIndicator());
-                          },
-                        )),
+                          return Center(child: CircularProgressIndicator());
+                        },
+                      ),
+              ),
             )
           ],
         ),

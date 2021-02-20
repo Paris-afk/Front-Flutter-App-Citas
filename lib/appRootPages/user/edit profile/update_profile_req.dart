@@ -17,7 +17,7 @@ Future<Map<String, dynamic>> updateUser(
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.put(
-    'http://192.168.56.1:3000/api/user/',
+    'http://10.0.2.2:3000/api/user/',
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: "Bearer $token"
