@@ -41,7 +41,7 @@ Future postUserProfileImg(File file) async {
     response.stream.transform(utf8.decoder).listen((value) {
       print(value);
     });
-    return 'Everything alright, let\'s meet people!';
+    return 'success';
   } else {
     throw Exception('Failed to post user');
   }

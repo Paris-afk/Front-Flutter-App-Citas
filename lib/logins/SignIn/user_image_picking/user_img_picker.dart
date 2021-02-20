@@ -21,7 +21,6 @@ class _UserImgPicker extends State<UserImgPicker> {
   var _pickImageError;
   Future postImg = null;
 
-
   Future getImage() async {
     try {
       await Future.delayed(Duration(milliseconds: 500));
@@ -84,7 +83,11 @@ class _UserImgPicker extends State<UserImgPicker> {
                       onPressed: () {
                         setState(() {
                           postImg = postUserProfileImg(_image);
-                          print('IMAGEN YA POSTEADA ALV: ' + postImg.toString());
+                          postImg.then((value) {
+                            if (value.toString() == 'success') {
+                              Get.offAll(RootLayout());
+                            }
+                          });
                         });
                         //Get.off(HomePage());
                       },
@@ -95,28 +98,8 @@ class _UserImgPicker extends State<UserImgPicker> {
                   future: postImg,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return Column(
-                        children: [
-                          Text('Image uploaded'),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color>(
-                                (Set<MaterialState> states) {
-                                  if (states.contains(MaterialState.pressed))
-                                    return Colors.redAccent;
-                                  return Colors
-                                      .deepOrangeAccent; // Use the component's default.
-                                },
-                              ),
-                            ),
-                            child: Text('Continue'),
-                            onPressed: (){
-                              Get.offAll(RootLayout());
-                            },
-                          )
-                        ],
-                      );
+                      print('IMAGE POSTED');
+                      
                     } else if (snapshot.hasError) {
                       print('Mal hecho: ' + snapshot.error.toString());
                       return Center(

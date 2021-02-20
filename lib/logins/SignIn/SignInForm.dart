@@ -27,7 +27,7 @@ class _SignInForm extends State<SignInForm> {
   int _age;
   String _description;
   Future<User> _futureUser;
-  var changeToImgPicker = null;
+  //var changeToImgPicker = null;
 
   @override
   Widget build(BuildContext context) {
@@ -275,36 +275,8 @@ class _SignInForm extends State<SignInForm> {
               if (snapshot.hasData) {
                 print('Bien hecho: ' + snapshot.data.data.toString() + snapshot.data.jwt);
 
-                return (changeToImgPicker == null)
-                    ? Center(
-                        child: Column(
-                          children: [
-                            Text(snapshot.data.data.toString() + snapshot.data.jwt),
-                            //Aquí voy a agregar un formulario para agregar las imagenes
-                            ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.resolveWith<Color>(
-                                  (Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.pressed))
-                                      return Colors.redAccent;
-                                    return Colors
-                                        .deepOrangeAccent; // Use the component's default.
-                                  },
-                                ),
-                              ),
-                              child: Text('Continue'),
-                              onPressed: () {
-                                setState(() {
-                                  changeToImgPicker = 'Continue';
-                                });
-                                //Get.off(HomePage());
-                              },
-                            )
-                          ],
-                        ),
-                      )
-                    : UserImgPicker();
+                return UserImgPicker();
+                
               } else if (snapshot.hasError) {
                 print('Mal hecho: ' + snapshot.error.toString());
                 return Center(
