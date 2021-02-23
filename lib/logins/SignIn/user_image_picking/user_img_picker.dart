@@ -7,6 +7,7 @@ import 'dart:io';
 import 'dart:async';
 import './user_img_req.dart';
 import 'package:citas_proyecto/appRootPages/rootLayout.dart';
+import '../hobbies_picker/hobbies_picker.dart';
 
 class UserImgPicker extends StatefulWidget {
   UserImgPicker({Key key}) : super(key: key);
@@ -85,7 +86,7 @@ class _UserImgPicker extends State<UserImgPicker> {
                           postImg = postUserProfileImg(_image);
                           postImg.then((value) {
                             if (value.toString() == 'success') {
-                              Get.offAll(RootLayout());
+                              HobbiesPicker();
                             }
                           });
                         });
@@ -99,7 +100,7 @@ class _UserImgPicker extends State<UserImgPicker> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       print('IMAGE POSTED');
-                      
+                      return HobbiesPicker();
                     } else if (snapshot.hasError) {
                       print('Mal hecho: ' + snapshot.error.toString());
                       return Center(
