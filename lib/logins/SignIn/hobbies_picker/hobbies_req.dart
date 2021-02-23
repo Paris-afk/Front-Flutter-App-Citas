@@ -22,3 +22,29 @@ Future<List<dynamic>> getHobbiesList() async {
     throw Exception('Failed to load your profile');
   }
 }
+
+Future postHobbies(List hobbiesList) async {
+  final userJWTcontroller = Get.put(UserJWT());
+  String token = userJWTcontroller.jwt.value;
+  final response = await http.post(
+    'http://10.0.2.2:3000/api/user/hobbies',
+    headers: {
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    },
+    body: jsonEncode(
+      <String, dynamic>{
+        'idUser': userJWTcontroller.data['id_user'].toString(),
+        'hobbies': hobbiesList,
+      },
+    ),
+  );
+
+  if (response.statusCode == 200) {
+    print(response.body.toString());
+
+    return 'success';
+  } else {
+    throw Exception('Failed to post user');
+  }
+}
