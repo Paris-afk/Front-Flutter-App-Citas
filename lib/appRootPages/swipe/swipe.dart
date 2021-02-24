@@ -19,7 +19,7 @@ class _Swipes extends State<Swipes> {
   void initState() {
     super.initState();
     futureProfiles = fetchUserProfiles();
-    futureProfiles.then((value) => profiles = value);
+    futureProfiles.then((value) => profiles = value.reversed.toList());
   }
 
   @override
@@ -54,6 +54,7 @@ class _Swipes extends State<Swipes> {
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
                       child: UsersProfile(
+                        userId: profiles[index]['id_user'].toString(),
                         image1: profiles[index]['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
                         name: profiles[index]['name'],
                         lastname: profiles[index]['lastname'],

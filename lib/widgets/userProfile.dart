@@ -2,10 +2,12 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
+import 'package:citas_proyecto/widgets/get_user_hobbies.dart';
 import 'dart:io';
 
-class UsersProfile extends StatelessWidget {
-  final String image1,
+class UsersProfile extends StatefulWidget {
+  final String userId,
+      image1,
       name,
       lastname,
       description,
@@ -15,18 +17,38 @@ class UsersProfile extends StatelessWidget {
       sex,
       image2;
 
-  const UsersProfile(
-      {Key key,
-      this.image1,
-      this.name,
-      this.lastname,
-      this.description,
-      this.preferences,
-      this.age,
-      this.city,
-      this.sex,
-      this.image2})
-      : super(key: key);
+  const UsersProfile({
+    Key key,
+    this.userId,
+    this.image1,
+    this.name,
+    this.lastname,
+    this.description,
+    this.preferences,
+    this.age,
+    this.city,
+    this.sex,
+    this.image2,
+  }) : super(key: key);
+
+  _UsersProfile createState() => _UsersProfile();
+}
+
+class _UsersProfile extends State<UsersProfile> {
+  Future<List> futureHobbies;
+  List hobbieList;
+
+  @override
+  void initState() {
+    super.initState();
+    futureHobbies = fetchUserHobbies(widget.userId.toString());
+    futureHobbies.then((values) {
+      for (var hobby in values) {
+        hobbieList.add(hobby['description']);
+      }
+      print('TUS HOBBIES: ' + hobbieList.toString());
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +61,15 @@ class UsersProfile extends StatelessWidget {
             children: [
               Image.network(
                 'http://10.0.2.2:3000/api/image/profile/' +
-                    image1.split('\\').last.toString(),
+                    widget.image1.split('\\').last.toString(),
                 headers: {
                   HttpHeaders.authorizationHeader:
                       "Bearer " + userJWTcontroller.jwt.value
                 },
                 loadingBuilder: (context, child, progress) {
-                  return progress == null ? child : Center(child: CircularProgressIndicator());
+                  return progress == null
+                      ? child
+                      : Center(child: CircularProgressIndicator());
                 },
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.cover,
@@ -66,7 +90,7 @@ class UsersProfile extends StatelessWidget {
                         child: Column(
                           children: [
                             Text(
-                              name + ' ' + lastname,
+                              widget.name + ' ' + widget.lastname,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
@@ -74,7 +98,7 @@ class UsersProfile extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              age,
+                              widget.age,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 22,
@@ -98,30 +122,63 @@ class UsersProfile extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 10, bottom: 10),
                   child: Text(
-                    description,
+                    widget.description,
                     textAlign: TextAlign.justify,
                   ),
                 ),
                 Text(
-                  'City: ' + city,
+                  'City: ' + widget.city,
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
                 Text(
-                  'Sex: ' + sex,
+                  'Sex: ' + widget.sex,
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
                 Text(
-                  'Preference: ' + preferences,
+                  'Preference: ' + widget.preferences,
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
               ],
             ),
+          ),
+          FutureBuilder(
+            future: futureHobbies,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Container(
+                  padding: EdgeInsets.all(10),
+                  width: MediaQuery.of(context).size.width,
+                  child: Wrap(
+                    spacing: 8.0, // gap between adjacent chips
+                    runSpacing: 4.0, // gap between lines
+                    children: <Widget>[
+                      for (var hobby in hobbieList)
+                        Chip(
+                          label: Text(
+                            hobby,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          backgroundColor: Colors.orange,
+                        )
+                    ],
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                Text('Error on getting your hobby list');
+              }
+
+              return Text('No hobbies');
+            },
           ),
           Container(
             padding: EdgeInsets.all(10),
@@ -165,13 +222,15 @@ class UsersProfile extends StatelessWidget {
           ),
           Image.network(
             'http://10.0.2.2:3000/api/image/profile/' +
-                image2.split('\\').last.toString(),
+                widget.image2.split('\\').last.toString(),
             headers: {
               HttpHeaders.authorizationHeader:
                   "Bearer " + userJWTcontroller.jwt.value
             },
             loadingBuilder: (context, child, progress) {
-              return progress == null ? child : Center(child: CircularProgressIndicator());
+              return progress == null
+                  ? child
+                  : Center(child: CircularProgressIndicator());
             },
             width: MediaQuery.of(context).size.width,
             fit: BoxFit.cover,

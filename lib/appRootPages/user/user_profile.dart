@@ -1,4 +1,5 @@
 import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
+import 'package:citas_proyecto/widgets/get_user_hobbies.dart';
 import 'edit profile/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,16 +13,26 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfile extends State<UserProfile> {
-  String _hobbies = "Rubiks cubes";
+  List hobbieList = [];
   final userJWTcontroller = Get.put(UserJWT());
 
   Future<Map<String, dynamic>> futureUser;
+  Future<List> futureHobbies;
 
   @override
   void initState() {
     super.initState();
     futureUser = fetchUser();
-    //fetchUserImg();
+    futureUser.then((value) {
+      futureHobbies =
+          fetchUserHobbies(userJWTcontroller.data['id_user'].toString());
+      futureHobbies.then((values) {
+        for (var hobby in values) {
+          hobbieList.add(hobby['description']);
+        }
+        print('TUS HOBBIES: ' + hobbieList.toString());
+      });
+    });
   }
 
   onGoBack(dynamic value) {
@@ -32,8 +43,6 @@ class _UserProfile extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    String token = userJWTcontroller.jwt.value;
-
     return FutureBuilder<Map<String, dynamic>>(
       future: futureUser,
       builder: (context, snapshot) {
@@ -59,9 +68,7 @@ class _UserProfile extends State<UserProfile> {
                                   .split('\\')
                                   .last
                                   .toString(),
-                          //snapshot.data[0]['picture']['large'],
                           headers: {
-                            //"Accept": "application/json",
                             HttpHeaders.authorizationHeader:
                                 "Bearer " + userJWTcontroller.jwt.value
                           },
@@ -117,7 +124,6 @@ class _UserProfile extends State<UserProfile> {
                 Container(
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width,
-                  //color: Colors.blue,
                   child: Text(
                     snapshot.data['description'],
                     textAlign: TextAlign.justify,
@@ -151,22 +157,6 @@ class _UserProfile extends State<UserProfile> {
                         width: MediaQuery.of(context).size.width,
                         child: Row(
                           children: [
-                            Icon(Icons.lightbulb_outline),
-                            Container(
-                              margin: EdgeInsets.only(left: 15),
-                              child: Text(
-                                'Hobbies: ' + _hobbies,
-                                style: TextStyle(fontSize: 22),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          children: [
                             Icon(Icons.wc),
                             Container(
                               margin: EdgeInsets.only(left: 15),
@@ -180,23 +170,6 @@ class _UserProfile extends State<UserProfile> {
                           ],
                         ),
                       ),
-                      /*Container(
-                        margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          children: [
-                            Icon(Icons.accessibility),
-                            Container(
-                              margin: EdgeInsets.only(left: 15),
-                              child: Text(
-                                'Gender: ' +
-                                    snapshot.data['id_genre'].toString(),
-                                style: TextStyle(fontSize: 22),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),*/
                       Container(
                         margin: EdgeInsets.only(top: 5.0, bottom: 5.0),
                         width: MediaQuery.of(context).size.width,
@@ -232,6 +205,54 @@ class _UserProfile extends State<UserProfile> {
                             ),
                           ],
                         ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 5.0),
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          children: [
+                            Icon(Icons.lightbulb_outline),
+                            Container(
+                              margin: EdgeInsets.only(left: 15),
+                              child: Text(
+                                'Hobbies: ',
+                                style: TextStyle(fontSize: 22),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      FutureBuilder(
+                        future: futureHobbies,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Container(
+                              padding: EdgeInsets.all(10),
+                              width: MediaQuery.of(context).size.width,
+                              child: Wrap(
+                                spacing: 8.0, // gap between adjacent chips
+                                runSpacing: 4.0, // gap between lines
+                                children: <Widget>[
+                                  for (var hobby in hobbieList)
+                                    Chip(
+                                      label: Text(
+                                        hobby,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.orange,
+                                    )
+                                ],
+                              ),
+                            );
+                          } else if (snapshot.hasError) {
+                            Text('Error on getting your hobby list');
+                          }
+
+                          return Text('No hobbies');
+                        },
                       ),
                       IconButton(
                         icon: Icon(Icons.edit),
