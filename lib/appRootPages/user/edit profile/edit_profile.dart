@@ -111,7 +111,7 @@ class _UserEdit extends State<UserEdit> {
                                         : CircularProgressIndicator();
                                   },
                                   width:
-                                      MediaQuery.of(context).size.width / 1.5,
+                                      MediaQuery.of(context).size.width / 1.8,
                                   height:
                                       MediaQuery.of(context).size.height / 3,
                                   fit: BoxFit.cover,

@@ -19,8 +19,8 @@ Future<List> fetchUserHobbies(String userId) async {
 
   if (response.statusCode == 200) {
     Map<String, dynamic> post = jsonDecode(response.body);
-    print(post['body']['rows']);
-    return post['body']['rows'];
+    print(post['body']);
+    return post['body'];
   } else {
     print(response.statusCode);
     throw Exception('Failed to get your hobby list');
