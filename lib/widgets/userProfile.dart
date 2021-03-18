@@ -16,6 +16,7 @@ class UsersProfile extends StatefulWidget {
       city,
       sex,
       image2;
+  final List<dynamic> hobbies;
 
   const UsersProfile({
     Key key,
@@ -28,6 +29,7 @@ class UsersProfile extends StatefulWidget {
     this.age,
     this.city,
     this.sex,
+    this.hobbies,
     this.image2,
   }) : super(key: key);
 
@@ -41,13 +43,13 @@ class _UsersProfile extends State<UsersProfile> {
   @override
   void initState() {
     super.initState();
-    futureHobbies = fetchUserHobbies(widget.userId.toString());
+    /*futureHobbies = fetchUserHobbies(widget.userId.toString());
     futureHobbies.then((values) {
       for (var hobby in values) {
         hobbieList.add(hobby['description']);
       }
       print('TUS HOBBIES: ' + hobbieList.toString());
-    });
+    });*/
   }
 
   @override
@@ -147,39 +149,6 @@ class _UsersProfile extends State<UsersProfile> {
               ],
             ),
           ),
-          FutureBuilder(
-            future: futureHobbies,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Container(
-                  padding: EdgeInsets.all(10),
-                  width: MediaQuery.of(context).size.width,
-                  child: Wrap(
-                    spacing: 8.0, // gap between adjacent chips
-                    runSpacing: 4.0, // gap between lines
-                    children: <Widget>[
-                      for (var hobby in hobbieList)
-                        Chip(
-                          label: Text(
-                            hobby,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                          backgroundColor: Colors.orange,
-                        )
-                    ],
-                  ),
-                );
-              } else if (snapshot.hasError) {
-                Text('Error on getting your hobby list');
-              }
-
-              return Text('No hobbies');
-            },
-          ),
           Container(
             padding: EdgeInsets.all(10),
             width: MediaQuery.of(context).size.width,
@@ -187,36 +156,23 @@ class _UsersProfile extends State<UsersProfile> {
               spacing: 8.0, // gap between adjacent chips
               runSpacing: 4.0, // gap between lines
               children: <Widget>[
-                Chip(
+                if (widget.hobbies.length == 0)
+                  Chip(
                     label: Text(
-                      'Rubik',
+                      "No hobbies",
                       style: TextStyle(color: Colors.white),
                     ),
-                    backgroundColor: Colors.orange),
-                Chip(
-                    label: Text(
-                      'Coffe',
-                      style: TextStyle(color: Colors.white),
+                    backgroundColor: Colors.orange,
+                  )
+                else
+                  for (var hobbie in widget.hobbies)
+                    Chip(
+                      label: Text(
+                        hobbie['description'],
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.orange,
                     ),
-                    backgroundColor: Colors.orange),
-                Chip(
-                    label: Text(
-                      'Bondage',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.orange),
-                Chip(
-                    label: Text(
-                      'Traveling',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.orange),
-                Chip(
-                    label: Text(
-                      'Coding',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.orange),
               ],
             ),
           ),

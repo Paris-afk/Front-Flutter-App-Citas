@@ -4,14 +4,29 @@ import 'package:get/get.dart';
 import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import 'dart:io';
 
-
 Future<List<dynamic>> fetchUserProfiles() async {
-  final response = await http.get('http://10.0.2.2:3000/api/user/');
+  final userJWTcontroller = Get.put(UserJWT());
+  String token = userJWTcontroller.jwt.value;
+
+  final response = await http.patch(
+    'http://10.0.2.2:3000/api/user/',
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader: "Bearer $token",
+    },
+    body: jsonEncode(
+      <String, dynamic>{
+        'id': userJWTcontroller.data['id_user'].toString(),
+        "userType": "intrivertida",
+        "idSexualPreference": "1"
+      },
+    ),
+  );
 
   if (response.statusCode == 200) {
     Map<String, dynamic> post = jsonDecode(response.body);
-    print(post['body']['rows']);
-    return post['body']['rows'];
+    print(post['body'].reversed.toList());
+    return post['body'];
   } else {
     throw Exception('Could not find user profiles');
   }
@@ -21,7 +36,7 @@ Future actionForUserProfile(String type, String likedUserId) async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value, url, actionMsg;
 
-  if(type == 'like'){
+  if (type == 'like') {
     actionMsg = 'DISTE UN LIKE: ';
     url = 'http://10.0.2.2:3000/api/user/likes/';
   } else {

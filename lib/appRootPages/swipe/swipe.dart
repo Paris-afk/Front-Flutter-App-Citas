@@ -13,13 +13,19 @@ class Swipes extends StatefulWidget {
 
 class _Swipes extends State<Swipes> {
   List<dynamic> profiles = [];
+  int numOfProfiles;
   Future<List<dynamic>> futureProfiles;
 
   @override
   void initState() {
     super.initState();
     futureProfiles = fetchUserProfiles();
-    futureProfiles.then((value) => profiles = value.reversed.toList());
+    futureProfiles.then((value) => {
+          setState(() {
+            profiles = value.reversed.toList();
+            numOfProfiles = profiles.length;
+          })
+        });
   }
 
   @override
@@ -31,107 +37,135 @@ class _Swipes extends State<Swipes> {
         SizedBox(
           height: 50,
         ),
-        Container(
-          height: MediaQuery.of(context).size.width + 200,
-          child: FutureBuilder<List<dynamic>>(
-            future: futureProfiles,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                //print(profiles);
-                return TinderSwapCard(
-                  swipeUp: false,
-                  swipeDown: false,
-                  orientation: AmassOrientation.BOTTOM,
-                  totalNum: profiles.length,
-                  stackNum: 2,
-                  swipeEdge: 2.0,
-                  maxWidth: MediaQuery.of(context).size.width,
-                  maxHeight: MediaQuery.of(context).size.width * 2,
-                  minWidth: MediaQuery.of(context).size.width * 0.8,
-                  minHeight: MediaQuery.of(context).size.width * 0.8,
-                  cardBuilder: (context, index) => Card(
+        Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.width + 200,
+              child: Center(
+                child: Text(
+                    'No more users found\nCome later or change your preferences'),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.width + 200,
+              child: FutureBuilder<List<dynamic>>(
+                future: futureProfiles,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    //print(profiles);
+                    return TinderSwapCard(
+                      swipeUp: false,
+                      swipeDown: false,
+                      orientation: AmassOrientation.BOTTOM,
+                      totalNum: profiles.length,
+                      stackNum: 2,
+                      swipeEdge: 2.0,
+                      maxWidth: MediaQuery.of(context).size.width,
+                      maxHeight: MediaQuery.of(context).size.width * 2,
+                      minWidth: MediaQuery.of(context).size.width * 0.8,
+                      minHeight: MediaQuery.of(context).size.width * 0.8,
+                      cardBuilder: (context, index) => Card(
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: UsersProfile(
+                            userId: profiles[index]['id_user'].toString(),
+                            image1: profiles[index]['profile_picture'] ??
+                                '1613691970195image_picker4608841315600757623.jpg',
+                            name: profiles[index]['name'],
+                            lastname: profiles[index]['lastname'],
+                            description: profiles[index]['description'] ??
+                                '1613691970195image_picker4608841315600757623.jpg',
+                            preferences:
+                                profiles[index]['sexual_preference'].toString(),
+                            age: profiles[index]['age'].toString(),
+                            city: 'Unknown',
+                            sex: profiles[index]['gender'].toString(),
+                            hobbies:
+                                profiles[index]['hobbies'] ?? [{ "description": 'No hobbies'}],
+                            image2: profiles[index]['profile_picture'] ??
+                                '1613691970195image_picker4608841315600757623.jpg',
+                          ),
+                        ),
+                      ),
+                      cardController: controller = CardController(),
+                      swipeUpdateCallback:
+                          (DragUpdateDetails details, Alignment align) {
+                        /// Get swiping card's alignment
+                        if (align.x < -5) {
+                          //Card is LEFT swiping
+                          print('SWIPE LEFT');
+                        } else if (align.x > 5) {
+                          //Card is RIGHT swiping
+                          print('SWIPE RIGHT');
+                        }
+                      },
+                      swipeCompleteCallback:
+                          (CardSwipeOrientation orientation, int index) {
+                        /// Get orientation & index of swiped card!
+                        if (orientation == CardSwipeOrientation.RIGHT) {
+                          print('LIKE');
+                          actionForUserProfile(
+                              'like', profiles[index]['id_user'].toString());
+                        } else {
+                          print('PASS');
+                          actionForUserProfile(
+                              'dislike', profiles[index]['id_user'].toString());
+                        }
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Card(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.width + 150,
+                        child: Center(child: Text("${snapshot.error}")),
+                      ),
+                    );
+                  }
+                  return Card(
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: UsersProfile(
-                        userId: profiles[index]['id_user'].toString(),
-                        image1: profiles[index]['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
-                        name: profiles[index]['name'],
-                        lastname: profiles[index]['lastname'],
-                        description: profiles[index]['description'] ?? '1613691970195image_picker4608841315600757623.jpg',
-                        preferences: profiles[index]['id_sexual_preference'].toString(),
-                        age: profiles[index]['age'].toString(),
-                        city: 'Tabasco',
-                        sex: profiles[index]['id_genre'].toString(),
-                        image2: profiles[index]['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
-                      ),
+                      height: MediaQuery.of(context).size.width + 150,
+                      child: Center(child: CircularProgressIndicator()),
                     ),
-                  ),
-                  cardController: controller = CardController(),
-                  swipeUpdateCallback:
-                      (DragUpdateDetails details, Alignment align) {
-                    /// Get swiping card's alignment
-                    if (align.x < -5) {
-                      //Card is LEFT swiping
-                      print('SWIPE LEFT');
-                    } else if (align.x > 5) {
-                      //Card is RIGHT swiping
-                      print('SWIPE RIGHT');
-                    }
-                  },
-                  swipeCompleteCallback:
-                      (CardSwipeOrientation orientation, int index) {
-                    /// Get orientation & index of swiped card!
-                    if (orientation == CardSwipeOrientation.RIGHT) {
-                      print('LIKE');
-                      actionForUserProfile('like', profiles[index]['id_user'].toString());
-                    } else {
-                      print('PASS');
-                      actionForUserProfile('dislike', profiles[index]['id_user'].toString());
-                    }
-                  },
-                );
-              } else if (snapshot.hasError) {
-                return Card(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width + 150,
-                    child: Center(child: Text("${snapshot.error}")),
-                  ),
-                );
-              }
-              return Card(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width + 150,
-                  child: Center(child: CircularProgressIndicator()),
-                ),
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: 20,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            FloatingActionButton(
-                child: Icon(Icons.close),
-                backgroundColor: Colors.redAccent,
-                onPressed: () {
-                  controller.triggerLeft();
-                  print("Swipe left");
-                }),
-            FloatingActionButton(
-                child: Icon(Icons.check),
-                backgroundColor: Colors.greenAccent,
-                onPressed: () {
-                  controller.triggerRight();
-                  print("Swipe right");
-                }),
-          ],
-        ),
+        if (numOfProfiles != 0)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FloatingActionButton(
+                  child: Icon(Icons.close),
+                  backgroundColor: Colors.redAccent,
+                  onPressed: () {
+                    controller.triggerLeft();
+                    setState(() {
+                      numOfProfiles -=1;
+                    });
+                    print('Length of profiles: ' + numOfProfiles.toString());
+                    print("Swipe left");
+                  }),
+              FloatingActionButton(
+                  child: Icon(Icons.check),
+                  backgroundColor: Colors.greenAccent,
+                  onPressed: () {
+                    controller.triggerRight();
+                    setState(() {
+                      numOfProfiles -= 1;
+                    });
+                    print('Length of profiles: ' + numOfProfiles.toString());
+                    print("Swipe right");
+                  }),
+            ],
+          ),
       ],
     );
   }
