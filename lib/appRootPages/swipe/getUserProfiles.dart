@@ -18,7 +18,7 @@ Future<List<dynamic>> fetchUserProfiles() async {
       <String, dynamic>{
         'id': userJWTcontroller.data['id_user'].toString(),
         "userType": "intrivertida",
-        "idSexualPreference": "1"
+        "idSexualPreference": "2"
       },
     ),
   );

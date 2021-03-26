@@ -43,13 +43,6 @@ class _UsersProfile extends State<UsersProfile> {
   @override
   void initState() {
     super.initState();
-    /*futureHobbies = fetchUserHobbies(widget.userId.toString());
-    futureHobbies.then((values) {
-      for (var hobby in values) {
-        hobbieList.add(hobby['description']);
-      }
-      print('TUS HOBBIES: ' + hobbieList.toString());
-    });*/
   }
 
   @override
