@@ -35,11 +35,13 @@ Future<User> getUserLogin(String email, String password) async {
 
     userJWTcontroller.jwt.value = user.jwt.toString();
     userJWTcontroller.data.addAll(user.data);
+
+    userJWTcontroller.userType.value = user.data['type'];
     print('User JWT: ' + userJWTcontroller.jwt.value + '   with data: ' + userJWTcontroller.data['id_user'].toString());
 
     return user;
   } else {
     print('STATUS FAILED: ' + response.statusCode.toString());
-    throw Exception('Failed to log in');
+    throw Exception('Incorrect mail or password');
   }
 }

@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'chat/chatLayout.dart';
 
 class UserTile extends StatefulWidget {
@@ -20,6 +24,8 @@ class UserTile extends StatefulWidget {
 }
 
 class _UserTile extends State<UserTile> {
+  final userJWTcontroller = Get.put(UserJWT());
+  
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -27,11 +33,20 @@ class _UserTile extends State<UserTile> {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(200),
         child: Image.network(
-          widget.img
-          //tile['picture']['thumbnail']
-          ,
+          userJWTcontroller.backendRootLink + 'image/profile/' +
+              widget.img.split('\\').last.toString(),
+          headers: {
+            HttpHeaders.authorizationHeader:
+                "Bearer " + userJWTcontroller.jwt.value
+          },
+          loadingBuilder: (context, child, progress) {
+            return progress == null
+                ? child
+                : Center(child: CircularProgressIndicator());
+          },
           width: 50,
           fit: BoxFit.cover,
+          //height: MediaQuery.of(context).size.height,
         ),
       ),
       title: Text(

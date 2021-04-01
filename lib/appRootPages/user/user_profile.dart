@@ -41,6 +41,16 @@ class _UserProfile extends State<UserProfile> {
     });
   }
 
+  String preferencesText(int sexualPreference ){
+    if(sexualPreference == 1){
+      return 'Men';
+    } else if(sexualPreference == 2){
+      return 'Women';
+    } else {
+      return 'Both sexes';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<Map<String, dynamic>>(
@@ -179,9 +189,8 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                (snapshot.data['id_sexual_preference'] == 1)
-                                    ? 'Preferences: Men'
-                                    : 'Preferences: Women',
+                                'Preferences: ' +
+                                preferencesText(snapshot.data['id_sexual_preference']),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -197,9 +206,8 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                (snapshot.data['id_sexual_preference'] == 1)
-                                    ? 'Show me: Men'
-                                    : 'Show me: Women',
+                                'Show me: ' +
+                                preferencesText(snapshot.data['id_sexual_preference']),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),

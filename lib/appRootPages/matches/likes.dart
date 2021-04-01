@@ -55,7 +55,8 @@ class _Likes extends State<Likes> {
                       child: Stack(
                         children: [
                           Image.network(
-                            'http://10.0.2.2:3000/api/image/profile/' +
+                            userJWTcontroller.backendRootLink +
+                                'image/profile/' +
                                 tile['profile_picture'],
                             headers: {
                               HttpHeaders.authorizationHeader:

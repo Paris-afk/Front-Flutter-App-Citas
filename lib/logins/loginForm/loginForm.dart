@@ -297,38 +297,51 @@ class _LoginForm extends State<LoginForm> {
                           } else if (snapshot.hasError) {
                             print('Mal hecho: ' + snapshot.error.toString());
                             return Center(
-                              child: Column(
-                                children: [
-                                  Text("${snapshot.error}"),
-                                  SizedBox(
-                                    height: 50,
-                                  ),
-                                  Text(
-                                      "Could not create user. Please try again"),
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor: MaterialStateProperty
-                                          .resolveWith<Color>(
-                                        (Set<MaterialState> states) {
-                                          if (states
-                                              .contains(MaterialState.pressed))
-                                            return Colors.redAccent;
-                                          return Colors
-                                              .deepOrangeAccent; // Use the component's default.
-                                        },
-                                      ),
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                height: MediaQuery.of(context).size.height /4,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color:
+                                              Color.fromRGBO(225, 95, 27, .3),
+                                          blurRadius: 20,
+                                          offset: Offset(0, 10))
+                                    ]),
+                                child: Column(
+                                  children: [
+                                    Text("${snapshot.error}"),
+                                    SizedBox(
+                                      height: 50,
                                     ),
-                                    child: Text('Try again'),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomePage()));
-                                    },
-                                  )
-                                ],
+                                    Text("Could not log in. Please try again"),
+                                    ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty
+                                            .resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                            if (states.contains(
+                                                MaterialState.pressed))
+                                              return Colors.redAccent;
+                                            return Colors
+                                                .deepOrangeAccent; // Use the component's default.
+                                          },
+                                        ),
+                                      ),
+                                      child: Text('Try again'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HomePage()));
+                                      },
+                                    )
+                                  ],
+                                ),
                               ),
                             );
                           }

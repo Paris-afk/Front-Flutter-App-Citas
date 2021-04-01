@@ -18,7 +18,7 @@ Future<List<dynamic>> fetchLikes() async {
   if (response.statusCode == 200) {
     Map<String, dynamic> post = jsonDecode(response.body);
     print(post['body']['rows']);
-    return post['body']['rows'];
+    return post['body']['rows'].reversed.toList();
   } else {
     throw Exception('Failed to load likes');
   }

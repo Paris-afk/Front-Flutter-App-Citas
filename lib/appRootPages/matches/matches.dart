@@ -27,16 +27,26 @@ class _Matches extends State<Matches> {
         future: futureMatches,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            if (snapshot.data.length == 0)
+              return Center(
+                child: Text(
+                  'You don\'t have any match yet',
+                  style: TextStyle(fontSize: 20),
+                ),
+              );
+
+            print(snapshot.data);
+
             return ListView(
               children: [
                 for (var tile in snapshot.data)
                   UserTile(
-                    img: tile['picture']['thumbnail'],
-                    name: tile['name']['first'],
-                    lastname: tile['name']['last'],
-                    city: tile['location']['city'],
-                    sex: tile['gender'],
-                    age: tile['dob']['age'].toString(),
+                    img: tile['profile_picture'],
+                    name: tile['name'],
+                    lastname: tile['lastname'],
+                    city: tile['city'] ?? 'Unknown',
+                    sex: tile['id_genre'].toString(),
+                    age: tile['age'].toString(),
                   ),
               ],
             );

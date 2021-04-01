@@ -9,13 +9,17 @@ Future<Map<String, dynamic>> fetchUser() async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.get(
-    'http://10.0.2.2:3000/api/user/' + userJWTcontroller.data['id_user'].toString(),
+    userJWTcontroller.backendRootLink + 
+    'user/' + userJWTcontroller.data['id_user'].toString(),
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
   );
 
   if (response.statusCode == 200) {
     Map<String, dynamic> post = jsonDecode(response.body);
     print(post['body']['rows'][0]);
+
+    userJWTcontroller.preference.value = post['body']['rows'][0]['id_sexual_preference'];
+
     return post['body']['rows'][0];
   } else {
     print(response.statusCode);

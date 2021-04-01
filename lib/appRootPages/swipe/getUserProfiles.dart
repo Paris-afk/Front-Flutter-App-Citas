@@ -9,7 +9,8 @@ Future<List<dynamic>> fetchUserProfiles() async {
   String token = userJWTcontroller.jwt.value;
 
   final response = await http.patch(
-    'http://10.0.2.2:3000/api/user/',
+    userJWTcontroller.backendRootLink +
+    'user/',
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: "Bearer $token",
@@ -17,8 +18,8 @@ Future<List<dynamic>> fetchUserProfiles() async {
     body: jsonEncode(
       <String, dynamic>{
         'id': userJWTcontroller.data['id_user'].toString(),
-        "userType": "intrivertida",
-        "idSexualPreference": "2"
+        "userType": userJWTcontroller.userType ?? "Extrovertida",
+        "idSexualPreference": userJWTcontroller.preference.toString()
       },
     ),
   );
@@ -38,10 +39,10 @@ Future actionForUserProfile(String type, String likedUserId) async {
 
   if (type == 'like') {
     actionMsg = 'DISTE UN LIKE: ';
-    url = 'http://10.0.2.2:3000/api/user/likes/';
+    url = userJWTcontroller.backendRootLink + 'user/likes/';
   } else {
     actionMsg = 'PASASTE A ESTA PERSONA: ';
-    url = 'http://10.0.2.2:3000/api/user/dislikes/';
+    url = userJWTcontroller.backendRootLink + 'user/dislikes/';
   }
 
   final response = await http.post(
