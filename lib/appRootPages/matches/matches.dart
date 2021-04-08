@@ -41,7 +41,7 @@ class _Matches extends State<Matches> {
               children: [
                 for (var tile in snapshot.data)
                   UserTile(
-                    img: tile['profile_picture'],
+                    img: tile['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
                     name: tile['name'],
                     lastname: tile['lastname'],
                     city: tile['city'] ?? 'Unknown',
