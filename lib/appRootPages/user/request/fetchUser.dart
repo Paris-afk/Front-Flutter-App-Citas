@@ -26,3 +26,23 @@ Future<Map<String, dynamic>> fetchUser() async {
     throw Exception('Failed to load your profile');
   }
 }
+
+Future<Map<String, dynamic>> fetchUserById(String userId) async {
+  final userJWTcontroller = Get.put(UserJWT());
+  String token = userJWTcontroller.jwt.value;
+  final response = await http.get(
+    userJWTcontroller.backendRootLink + 
+    'user/' + userId,
+    headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
+  );
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> post = jsonDecode(response.body);
+    print(post['body']['rows'][0]);
+    
+    return post['body']['rows'][0];
+  } else {
+    print(response.statusCode);
+    throw Exception('Failed to load this user: ' + userId.toString());
+  }
+}
