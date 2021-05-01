@@ -95,7 +95,6 @@ class _Search extends State<Search> {
                       img: tile['picture']['thumbnail'],
                       name: tile['name']['first'],
                       lastname: tile['name']['last'],
-                      city: tile['location']['city'],
                       sex: tile['gender'],
                       age: tile['dob']['age'].toString(),
                     )

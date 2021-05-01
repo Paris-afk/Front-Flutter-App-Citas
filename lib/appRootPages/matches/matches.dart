@@ -17,14 +17,31 @@ class _Matches extends State<Matches> {
   Future<List<dynamic>> futureMatches;
   final userJWTcontroller = Get.put(UserJWT());
   Future<Map<String, dynamic>> futureUser;
+  List userList = [];
 
   @override
   void initState() {
-    super.initState();
     futureMatches = getMatches();
-    futureMatches.then((value) => {
-      //futureUser = fetchUserById();
+    futureMatches.then((matches) {
+      for(var match in matches){
+        if(userJWTcontroller.data['id_user'] == match['id_of_user']){
+          futureUser = fetchUserById(match['id_of_match'].toString());
+          futureUser.then((value) => {
+            setState((){
+              userList.add(value);
+            })
+          });
+        } else {
+          futureUser = fetchUserById(match['id_of_user'].toString());
+          futureUser.then((value) => {
+            setState((){
+              userList.add(value);
+            })
+          });
+        }
+      }
     });
+    super.initState();
   }
 
   @override
@@ -47,20 +64,14 @@ class _Matches extends State<Matches> {
 
             return ListView(
               children: [
-                for (var tile in snapshot.data)
-                  if( userJWTcontroller.data['id_user'] == tile['id_of_user'])
-                    Text(tile['id_of_match'].toString())
-                  else
-                    Text(tile['id_of_user'].toString())
-
-                  /*UserTile(
+                for (var tile in userList)
+                  UserTile(
                     img: tile['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
                     name: tile['name'],
                     lastname: tile['lastname'],
-                    city: tile['city'] ?? 'Unknown',
                     sex: tile['id_genre'].toString(),
                     age: tile['age'].toString(),
-                  ),*/
+                  ),
               ],
             );
           } else if (snapshot.hasError) {

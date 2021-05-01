@@ -7,13 +7,12 @@ import 'package:get/get.dart';
 import 'chat/chatLayout.dart';
 
 class UserTile extends StatefulWidget {
-  final String name, lastname, city, sex, age, img;
+  final String name, lastname, sex, age, img;
 
   UserTile(
       {Key key,
       @required this.name,
       this.lastname,
-      this.city,
       this.sex,
       this.age,
       this.img})
@@ -29,7 +28,7 @@ class _UserTile extends State<UserTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
+      //contentPadding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 10),
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(200),
         child: Image.network(
@@ -61,7 +60,6 @@ class _UserTile extends State<UserTile> {
       subtitle: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('City: ' + widget.city),
           Text('Sex: ' + widget.sex),
           Text('Age: ' + widget.age),
           /*
