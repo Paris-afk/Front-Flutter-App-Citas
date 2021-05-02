@@ -61,7 +61,7 @@ class _UserTile extends State<UserTile> {
       subtitle: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('Sex: ' + widget.sex),
+          Text((widget.sex == "1")? 'Sex: Male': 'Sex: Female'),
           Text('Age: ' + widget.age),
         ],
       ),
