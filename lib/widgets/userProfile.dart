@@ -13,7 +13,6 @@ class UsersProfile extends StatefulWidget {
       description,
       preferences,
       age,
-      city,
       sex,
       image2;
   final List<dynamic> hobbies;
@@ -27,7 +26,6 @@ class UsersProfile extends StatefulWidget {
     this.description,
     this.preferences,
     this.age,
-    this.city,
     this.sex,
     this.hobbies,
     this.image2,
@@ -119,12 +117,6 @@ class _UsersProfile extends State<UsersProfile> {
                   child: Text(
                     widget.description,
                     textAlign: TextAlign.justify,
-                  ),
-                ),
-                Text(
-                  'City: ' + widget.city,
-                  style: TextStyle(
-                    fontSize: 20,
                   ),
                 ),
                 Text(

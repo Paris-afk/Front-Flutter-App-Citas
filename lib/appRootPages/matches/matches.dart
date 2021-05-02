@@ -7,7 +7,9 @@ import 'package:citas_proyecto/appRootPages/user/request/fetchUser.dart';
 import '../../widgets/tile.dart';
 
 class Matches extends StatefulWidget {
-  Matches({Key key}) : super(key: key);
+  Matches({
+    Key key,
+    }) : super(key: key);
 
   @override
   _Matches createState() => _Matches();
@@ -66,6 +68,7 @@ class _Matches extends State<Matches> {
               children: [
                 for (var tile in userList)
                   UserTile(
+                    userId: tile['id_user'].toString(),
                     img: tile['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
                     name: tile['name'],
                     lastname: tile['lastname'],

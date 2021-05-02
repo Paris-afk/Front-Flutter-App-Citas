@@ -7,10 +7,11 @@ import 'package:get/get.dart';
 import 'chat/chatLayout.dart';
 
 class UserTile extends StatefulWidget {
-  final String name, lastname, sex, age, img;
+  final String userId, name, lastname, sex, age, img;
 
   UserTile(
       {Key key,
+      @required this.userId,
       @required this.name,
       this.lastname,
       this.sex,
@@ -62,15 +63,12 @@ class _UserTile extends State<UserTile> {
         children: [
           Text('Sex: ' + widget.sex),
           Text('Age: ' + widget.age),
-          /*
-          Text('City: ' + tile['location']['city']),
-          Text('Sex: ' + tile['gender']),
-          Text('Age: ' + tile['dob']['age'].toString()),*/
         ],
       ),
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Chat()));
+        Get.to(Chat(userId: widget.userId, userName: widget.name,));
+        /*Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Chat()));*/
       },
     );
   }

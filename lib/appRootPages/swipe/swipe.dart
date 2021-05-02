@@ -79,7 +79,6 @@ class _Swipes extends State<Swipes> {
                             preferences:
                                 profiles[index]['sexual_preference'].toString(),
                             age: profiles[index]['age'].toString(),
-                            city: 'Unknown',
                             sex: profiles[index]['gender'].toString(),
                             hobbies:
                                 profiles[index]['hobbies'] ?? [{ "description": 'No hobbies'}],
