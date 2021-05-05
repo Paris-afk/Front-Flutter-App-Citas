@@ -14,7 +14,7 @@ class SignInStructure extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                "Sign In",
+                "Sign up",
                 style: TextStyle(color: Colors.white, fontSize: 40),
               ),
               SizedBox(

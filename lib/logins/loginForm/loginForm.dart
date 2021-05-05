@@ -43,7 +43,7 @@ class _LoginForm extends State<LoginForm> {
                     height: 10,
                   ),
                   Text(
-                    "Bienvenido",
+                    "Welcome",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   )
                 ],
@@ -92,7 +92,7 @@ class _LoginForm extends State<LoginForm> {
                                               TextInputType.emailAddress,
                                           decoration: InputDecoration(
                                             hintText:
-                                                "Email o numero de telefono",
+                                                "Email",
                                             hintStyle:
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none,
@@ -153,10 +153,10 @@ class _LoginForm extends State<LoginForm> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                Text(
+                                /*Text(
                                   "Olvidaste tu contraseña?",
                                   style: TextStyle(color: Colors.grey),
-                                ),
+                                ),*/
                                 SizedBox(
                                   height: 15,
                                 ),
@@ -172,7 +172,7 @@ class _LoginForm extends State<LoginForm> {
                                         children: [
                                           FlatButton(
                                             child: Text(
-                                              "Iniciar Sesion",
+                                              "Log in",
                                               style: TextStyle(
                                                   color: Colors.white,
                                                   fontWeight: FontWeight.bold),
@@ -211,79 +211,30 @@ class _LoginForm extends State<LoginForm> {
                                   height: 15,
                                 ),
                                 Container(
-                                    height: 50,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 60),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                        color: Colors.orange[900]),
-                                    child: Center(
-                                      child: Column(
-                                        children: [
-                                          FlatButton(
-                                            child: Text(
-                                              "Sign In",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            onPressed: () {
-                                              print('Sign in');
-                                              Get.to(SignInLayout());
-                                            },
+                                  height: 50,
+                                  margin: EdgeInsets.symmetric(horizontal: 60),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.orange[900]),
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        FlatButton(
+                                          child: Text(
+                                            "Sign up",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
                                           ),
-                                        ],
-                                      ),
-                                    )),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Continua con redes sociales?",
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                                SizedBox(
-                                  height: 20,
-                                ),
-                                Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Container(
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              color: Colors.blue),
-                                          child: Center(
-                                            child: Text(
-                                              "Facebook",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          )),
+                                          onPressed: () {
+                                            print('Sign in');
+                                            Get.to(SignInLayout());
+                                          },
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(
-                                      width: 30,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              color: Colors.red),
-                                          child: Center(
-                                            child: Text(
-                                              "Google",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          )),
-                                    )
-                                  ],
-                                )
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -299,7 +250,7 @@ class _LoginForm extends State<LoginForm> {
                             return Center(
                               child: Container(
                                 padding: EdgeInsets.all(20),
-                                height: MediaQuery.of(context).size.height /4,
+                                height: MediaQuery.of(context).size.height / 4,
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10),

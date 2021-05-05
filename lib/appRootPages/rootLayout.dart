@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 //---------Widgets of the root pages
 //import 'matches/matches.dart';
 import 'matches/rootmatches.dart';
-import 'randChat/randChat.dart';
-import 'searchSeaction/search.dart';
 import 'user/user_profile.dart';
 import 'swipe/swipe.dart';
 
@@ -19,8 +17,6 @@ class _RootLayout extends State<RootLayout> {
 
   static List<Widget> _widgetOptions = <Widget>[
     RootMatches(),
-    /*RandChat(),
-    Search(),*/
     UserProfile(),
     Swipes(),
   ];
@@ -33,12 +29,6 @@ class _RootLayout extends State<RootLayout> {
           title: Text('Activity'),
         );
         break;
-      /*case 1:
-        return AppBar(
-          backgroundColor: Colors.redAccent,
-          title: Text('Chat with random people near you'),
-        );
-        break;*/
       default:
         return null;
         break;
@@ -70,18 +60,6 @@ class _RootLayout extends State<RootLayout> {
             ),
             label: 'Match',
           ),
-          /*BottomNavigationBarItem(
-            icon: Icon(
-              Icons.chat,
-            ),
-            label: 'RandChat',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search,
-            ),
-            label: 'Search',
-          ),*/
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
