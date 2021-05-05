@@ -30,7 +30,7 @@ class _Chat extends State<Chat> with SingleTickerProviderStateMixin {
   void initState() {
     print('GOT CHAT: ' + widget.userId);
     views = [
-      ChatMessages(),
+      ChatMessages(userId: widget.userId),
       ChatProfile(userId: widget.userId),
     ];
     super.initState();

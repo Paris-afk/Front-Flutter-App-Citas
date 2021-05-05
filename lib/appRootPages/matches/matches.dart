@@ -9,7 +9,7 @@ import '../../widgets/tile.dart';
 class Matches extends StatefulWidget {
   Matches({
     Key key,
-    }) : super(key: key);
+  }) : super(key: key);
 
   @override
   _Matches createState() => _Matches();
@@ -25,21 +25,21 @@ class _Matches extends State<Matches> {
   void initState() {
     futureMatches = getMatches();
     futureMatches.then((matches) {
-      for(var match in matches){
-        if(userJWTcontroller.data['id_user'] == match['id_of_user']){
+      for (var match in matches) {
+        if (userJWTcontroller.data['id_user'] == match['id_of_user']) {
           futureUser = fetchUserById(match['id_of_match'].toString());
           futureUser.then((value) => {
-            setState((){
-              userList.add(value);
-            })
-          });
+                setState(() {
+                  userList.add(value);
+                })
+              });
         } else {
           futureUser = fetchUserById(match['id_of_user'].toString());
           futureUser.then((value) => {
-            setState((){
-              userList.add(value);
-            })
-          });
+                setState(() {
+                  userList.add(value);
+                })
+              });
         }
       }
     });
@@ -69,7 +69,8 @@ class _Matches extends State<Matches> {
                 for (var tile in userList)
                   UserTile(
                     userId: tile['id_user'].toString(),
-                    img: tile['profile_picture'] ?? '1613691970195image_picker4608841315600757623.jpg',
+                    img: tile['profile_picture'] ??
+                        '1613691970195image_picker4608841315600757623.jpg',
                     name: tile['name'],
                     lastname: tile['lastname'],
                     sex: tile['id_genre'].toString(),

@@ -1,12 +1,21 @@
+import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
 
 class ChatMessages extends StatefulWidget {
+  final String userId;
+  ChatMessages({
+    Key key,
+    this.userId,
+  }) : super(key: key);
+
   @override
   _ChatMessages createState() => _ChatMessages();
 }
 
 class _ChatMessages extends State<ChatMessages> {
+  final userJWTcontroller = Get.put(UserJWT());
   List<Widget> messages = <Widget>[
     Container(
       margin: EdgeInsets.all(15),
@@ -19,8 +28,7 @@ class _ChatMessages extends State<ChatMessages> {
   ];
 
   @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
+  Widget build(BuildContext context) {return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: messages,
