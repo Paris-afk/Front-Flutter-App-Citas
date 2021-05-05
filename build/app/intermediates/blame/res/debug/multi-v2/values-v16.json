@@ -4,13 +4,32 @@
             "outputFile": "D:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v16\\values-v16.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.1.0.aar\\742302b733cac4aeee0f7490264c16a9\\res\\values-v16\\values-v16.xml",
+                    "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.5.0-beta01.aar\\4521f2b2ab0521938274fd94a0020bdc\\res\\values-v16\\values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
                         "startOffsets": "55",
                         "endColumns": "65",
                         "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\yassi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0.aar\\9d4b010b88587819ca0b9dc5619c82f6\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
                     }
                 }
             ]

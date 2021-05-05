@@ -1,4 +1,7 @@
-#Tue May 04 13:42:27 CDT 2021
-base.0=D\:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+#Tue May 04 20:27:57 CDT 2021
+base.0=D\:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\1
+path.1=classes.dex
+renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
+base.1=D\:\\yassi\\Documents\\programming\\flutter_proj\\Front-Flutter-App-Citas\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
