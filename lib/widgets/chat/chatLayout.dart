@@ -59,7 +59,7 @@ class _Chat extends State<Chat> with SingleTickerProviderStateMixin {
         controller: _tabController,
         children: views,
       ),
-      bottomNavigationBar: BottomAppBar(
+      /*bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         child: Container(
           height: 50.0,
@@ -108,7 +108,7 @@ class _Chat extends State<Chat> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-      ),
+      ),*/
     );
   }
 }

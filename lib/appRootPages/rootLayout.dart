@@ -19,8 +19,8 @@ class _RootLayout extends State<RootLayout> {
 
   static List<Widget> _widgetOptions = <Widget>[
     RootMatches(),
-    RandChat(),
-    Search(),
+    /*RandChat(),
+    Search(),*/
     UserProfile(),
     Swipes(),
   ];
@@ -33,12 +33,12 @@ class _RootLayout extends State<RootLayout> {
           title: Text('Activity'),
         );
         break;
-      case 1:
+      /*case 1:
         return AppBar(
           backgroundColor: Colors.redAccent,
           title: Text('Chat with random people near you'),
         );
-        break;
+        break;*/
       default:
         return null;
         break;
@@ -70,7 +70,7 @@ class _RootLayout extends State<RootLayout> {
             ),
             label: 'Match',
           ),
-          BottomNavigationBarItem(
+          /*BottomNavigationBarItem(
             icon: Icon(
               Icons.chat,
             ),
@@ -81,7 +81,7 @@ class _RootLayout extends State<RootLayout> {
               Icons.search,
             ),
             label: 'Search',
-          ),
+          ),*/
           BottomNavigationBarItem(
             icon: Icon(
               Icons.person,
