@@ -9,7 +9,7 @@ Future<List<dynamic>> getHobbiesList() async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.get(
-    'http://10.0.2.2:3000/api/user/hobbies',
+    Uri.parse('http://10.0.2.2:3000/api/user/hobbies'),
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
   );
 
@@ -27,7 +27,7 @@ Future postHobbies(List hobbiesList) async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.post(
-    'http://10.0.2.2:3000/api/user/hobbies',
+    Uri.parse('http://10.0.2.2:3000/api/user/hobbies'),
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: "Bearer $token"

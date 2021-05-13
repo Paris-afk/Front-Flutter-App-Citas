@@ -9,8 +9,8 @@ Future<Map<String, dynamic>> fetchUser() async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.get(
-    userJWTcontroller.backendRootLink + 
-    'user/' + userJWTcontroller.data['id_user'].toString(),
+    Uri.parse(userJWTcontroller.backendRootLink + 
+    'user/' + userJWTcontroller.data['id_user'].toString()),
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
   );
 
@@ -31,8 +31,8 @@ Future<Map<String, dynamic>> fetchUserById(String userId) async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.get(
-    userJWTcontroller.backendRootLink + 
-    'user/' + userId,
+    Uri.parse(userJWTcontroller.backendRootLink + 
+    'user/' + userId),
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
   );
 

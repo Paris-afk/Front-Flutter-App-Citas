@@ -9,8 +9,8 @@ Future<List<dynamic>> fetchUserProfiles() async {
   String token = userJWTcontroller.jwt.value;
 
   final response = await http.patch(
-    userJWTcontroller.backendRootLink +
-    'user/',
+    Uri.parse(userJWTcontroller.backendRootLink +
+    'user/'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: "Bearer $token",
@@ -46,7 +46,7 @@ Future actionForUserProfile(String type, String likedUserId) async {
   }
 
   final response = await http.post(
-    url,
+    Uri.parse(url),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: "Bearer $token",

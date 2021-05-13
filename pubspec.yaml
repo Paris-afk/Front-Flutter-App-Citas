@@ -19,11 +19,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.2
+  http: ^0.13.0
   flutter_tindercard: ^0.2.0
   meta: ^1.1.8
   get: ^3.24.0
-  image_picker: ^0.6.7+22
+  image_picker: ^0.7.4
+
+  #Firebase 
+  firebase_core: ^1.1.1
+  cloud_firestore: ^2.1.0
+
   # stream_chat_flutter: ^1.5.0
 
   # The following adds the Cupertino Icons font to your application.

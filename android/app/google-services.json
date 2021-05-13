@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1004405099776",
+    "project_id": "paikot-chat",
+    "storage_bucket": "paikot-chat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004405099776:android:82c2ab128a5a255d4437e5",
+        "android_client_info": {
+          "package_name": "com.example.citas_proyecto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004405099776-n22t50b6nefnhhdlgo7apam5lcvq7auk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHNsoEBm_OSqvXxPWEK-boaRLnCMJeoWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004405099776-n22t50b6nefnhhdlgo7apam5lcvq7auk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

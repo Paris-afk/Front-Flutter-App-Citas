@@ -59,56 +59,6 @@ class _Chat extends State<Chat> with SingleTickerProviderStateMixin {
         controller: _tabController,
         children: views,
       ),
-      /*bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(
-          height: 50.0,
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.all(10),
-          child: Form(
-            key: _formKey,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      hintText: 'Search for people',
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter some text';
-                      }
-                    },
-                  ),
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                        if (states.contains(MaterialState.pressed))
-                          return Colors.redAccent;
-                        return Colors
-                            .yellowAccent; // Use the component's default.
-                      },
-                    ),
-                  ),
-                  onPressed: () {
-                    if (_formKey.currentState.validate() && _message != '') {
-                      //Process data
-                      print('Message sent');
-                    }
-                  },
-                  child: Icon(
-                    Icons.send,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),*/
     );
   }
 }

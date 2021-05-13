@@ -43,6 +43,12 @@ class _ChatMessages extends State<ChatMessages> {
     Chip(label: Text('This is a message')),
   ];
 
+  void sendMessage() async {
+    FocusScope.of(context).unfocus();
+
+    // await FirebaseApi.uploadMessage(widget.idUser, message)
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -76,6 +82,11 @@ class _ChatMessages extends State<ChatMessages> {
                       decoration: const InputDecoration(
                         hintText: 'Say something',
                       ),
+                      onChanged: (newMessage){
+                        setState(() {
+                          _message = newMessage;
+                        });
+                      },
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please enter some text';
@@ -98,6 +109,7 @@ class _ChatMessages extends State<ChatMessages> {
                       if (_formKey.currentState.validate() && _message != '') {
                         //Process data
                         print('Message sent');
+                        FocusScope.of(context).unfocus();
                       }
                     },
                     child: Icon(

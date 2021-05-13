@@ -9,8 +9,8 @@ Future<List> fetchUserHobbies(String userId) async {
   final userJWTcontroller = Get.put(UserJWT());
   String token = userJWTcontroller.jwt.value;
   final response = await http.get(
-    'http://10.0.2.2:3000/api/user/hobbies/' +
-        userId,
+    Uri.parse('http://10.0.2.2:3000/api/user/hobbies/' +
+        userId),
     headers: {
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader: "Bearer $token"

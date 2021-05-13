@@ -28,7 +28,7 @@ Future<User> createUser(
     String description) async {
   final userJWTcontroller = Get.put(UserJWT());
   final http.Response response = await http.post(
-    'http://10.0.2.2:3000/api/user/',
+    Uri.parse('http://10.0.2.2:3000/api/user/'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

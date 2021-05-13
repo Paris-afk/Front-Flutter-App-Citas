@@ -6,9 +6,9 @@ import 'dart:convert';
 Future<List<dynamic>> getMatches() async {
   final userJWTcontroller = Get.put(UserJWT());
   final response = await http.get(
-    userJWTcontroller.backendRootLink +
+    Uri.parse(userJWTcontroller.backendRootLink +
         'matches/' +
-        userJWTcontroller.data['id_user'].toString(),
+        userJWTcontroller.data['id_user'].toString()),
   );
 
   if (response.statusCode == 200) {
