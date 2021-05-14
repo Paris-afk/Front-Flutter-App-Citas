@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -33,6 +34,16 @@ class _RootLayout extends State<RootLayout> {
         return null;
         break;
     }
+  }
+
+  void initFirebase() async{
+    await Firebase.initializeApp();
+  }
+
+  @override
+  void initState() {
+    initFirebase();
+    super.initState();
   }
 
   void _onItemTapped(int index) {
