@@ -138,9 +138,65 @@ class _ChatMessages extends State<ChatMessages> {
                     children: snapshot.data.docs.map<Widget>((document) {
                       var isMe = document.data()['transmitter_id'].toString() ==
                           userJWTcontroller.data['id_user'].toString();
-                      print(isMe);
+                      //print(isMe);
 
-                      return Align(
+                      if ((document.data()['transmitter_id'].toString() ==
+                                  userJWTcontroller.data['id_user']
+                                      .toString() ||
+                              document.data()['receptor_id'].toString() ==
+                                  userJWTcontroller.data['id_user']
+                                      .toString()) &&
+                          (document.data()['transmitter_id'].toString() ==
+                                  widget.userId ||
+                              document.data()['receptor_id'].toString() ==
+                                  widget.userId)) {
+                        print('Es de este chat');
+                        return Align(
+                          alignment: isMe
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth:
+                                  MediaQuery.of(context).size.width / 1.35,
+                              minWidth: MediaQuery.of(context).size.width / 1.8,
+                            ),
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                left: 15,
+                                right: 15,
+                                top: 3,
+                                bottom: 4,
+                              ),
+                              padding: EdgeInsets.all(10),
+                              alignment: Alignment.bottomRight,
+                              child: Text(
+                                document.data()['content'],
+                              ),
+                              decoration: BoxDecoration(
+                                color: isMe
+                                    ? Colors.deepOrangeAccent
+                                    : Colors.grey,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20.0),
+                                  topRight: Radius.circular(20.0),
+                                  bottomLeft: isMe
+                                      ? Radius.circular(20.0)
+                                      : Radius.zero,
+                                  bottomRight: !isMe
+                                      ? Radius.circular(20.0)
+                                      : Radius.zero,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      } else {
+                        print('No es de este chat');
+                        return Center();
+                      }
+
+                      /*return Align(
                         alignment:
                             isMe ? Alignment.centerRight : Alignment.centerLeft,
                         child: ConstrainedBox(
@@ -174,7 +230,7 @@ class _ChatMessages extends State<ChatMessages> {
                             ),
                           ),
                         ),
-                      );
+                      );*/
                     }).toList(),
                   );
                 }
