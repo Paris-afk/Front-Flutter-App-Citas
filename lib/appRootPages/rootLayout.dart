@@ -26,7 +26,7 @@ class _RootLayout extends State<RootLayout> {
     switch (_selectedIndex) {
       case 0:
         return AppBar(
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.deepOrangeAccent,
           title: Text('Activity'),
         );
         break;
@@ -63,7 +63,7 @@ class _RootLayout extends State<RootLayout> {
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.amberAccent,
         unselectedItemColor: Colors.white,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.deepOrangeAccent,
         items: [
           BottomNavigationBarItem(
             icon: Icon(
