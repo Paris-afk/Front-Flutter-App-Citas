@@ -16,6 +16,10 @@ class _LoginForm extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   String _email, _password;
   Future<User> _futureUser;
+  final Shader linearGradient = LinearGradient(
+          begin: Alignment.topCenter,
+          colors: [Colors.orange[900], Colors.orange[400]])
+      .createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +28,10 @@ class _LoginForm extends State<LoginForm> {
         padding: EdgeInsets.symmetric(vertical: 30),
         width: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                colors: [Colors.orange[900], Colors.orange[400]])),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              colors: [Colors.orange[900], Colors.orange[400]]),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -35,17 +40,9 @@ class _LoginForm extends State<LoginForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white, fontSize: 40),
-                  ),
                   SizedBox(
-                    height: 10,
+                    height: 50,
                   ),
-                  Text(
-                    "Welcome",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  )
                 ],
               ),
             ),
@@ -65,6 +62,23 @@ class _LoginForm extends State<LoginForm> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: <Widget>[
+                                Text(
+                                  'PAIKOT',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    //color: Colors.white,
+                                    foreground: Paint()
+                                      ..shader = linearGradient,
+                                    fontSize: 60,
+                                  ),
+                                ),
+                                Text(
+                                  'Find people like you',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black87,
+                                  ),
+                                ),
                                 SizedBox(
                                   height: 40,
                                 ),
@@ -91,8 +105,7 @@ class _LoginForm extends State<LoginForm> {
                                           keyboardType:
                                               TextInputType.emailAddress,
                                           decoration: InputDecoration(
-                                            hintText:
-                                                "Email",
+                                            hintText: "Email",
                                             hintStyle:
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none,

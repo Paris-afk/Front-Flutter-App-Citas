@@ -248,21 +248,56 @@ class _SignInForm extends State<SignInForm> {
                     if (_formKey.currentState.validate()) {
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
+                      showDialog(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: Text('Terms and conditions'),
+                          content: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxHeight: MediaQuery.of(context).size.height / 2,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Text(
+                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in est eleifend, semper ex auctor, pretium est. Vestibulum ut pellentesque purus, at sagittis nunc. Nunc ullamcorper sit amet ipsum in ullamcorper. Morbi ornare quis velit et euismod.Curabitur interdum non elit ac consectetur. Donec posuere et nisi vitae dictum. Cras pellentesque id enim ut finibus. Nulla tincidunt, nunc vel congue dapibus, erat elit laoreet ante, et cursus magna nulla vel nisl. Vivamus venenatis aliquam ultricies. Vestibulum scelerisque tincidunt bibendum. Mauris vitae pharetra mi. Maecenas accumsan risus sit amet ligula cursus rutrum.\n\nMauris vitae imperdiet justo. Sed pulvinar eros in libero laoreet, sit amet feugiat dui vehicula. Maecenas eget volutpat urna, ac posuere lacus. Duis vulputate, ex a fermentum efficitur, turpis metus viverra ex, nec tristique odio leo congue elit. Nam a nibh nec sapien mollis ultricies. Proin a massa id orci mollis varius. Nunc bibendum nunc viverra feugiat luctus.',
+                              ),
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text(
+                                'Don\'t accept',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            TextButton(
+                              child: Text('I accept'),
+                              onPressed: () {
+                                setState(() {
+                                  _futureUser = createUser(
+                                      _name,
+                                      _last_name,
+                                      _email,
+                                      _password,
+                                      _selected_preference,
+                                      _selected_sex,
+                                      _age.toInt(),
+                                      _description);
+                                });
+                                
+                                Navigator.pop(context);
 
-                      setState(() {
-                        _futureUser = createUser(
-                            _name,
-                            _last_name,
-                            _email,
-                            _password,
-                            _selected_preference,
-                            _selected_sex,
-                            _age.toInt(),
-                            _description);
-                      });
-
-                      Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
+                                Scaffold.of(context).showSnackBar(
+                                    SnackBar(content: Text('Processing Data')));
+                              },
+                            ),
+                          ],
+                        ),
+                      );
                     }
                   },
                 )
@@ -273,10 +308,11 @@ class _SignInForm extends State<SignInForm> {
             future: _futureUser,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                print('Bien hecho: ' + snapshot.data.data.toString() + snapshot.data.jwt);
+                print('Bien hecho: ' +
+                    snapshot.data.data.toString() +
+                    snapshot.data.jwt);
 
                 return UserImgPicker();
-                
               } else if (snapshot.hasError) {
                 print('Mal hecho: ' + snapshot.error.toString());
                 return Center(

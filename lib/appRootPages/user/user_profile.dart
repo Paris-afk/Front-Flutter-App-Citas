@@ -311,6 +311,7 @@ class _UserProfile extends State<UserProfile> {
                                     ),
                                   ),
                                   onPressed: () {
+                                    Navigator.pop(context);
                                     Get.off(HomePage());
                                     userJWTcontroller.data({});
                                   },

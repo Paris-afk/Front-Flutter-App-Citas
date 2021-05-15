@@ -38,9 +38,8 @@ class _ChatMessages extends State<ChatMessages> {
 
   @override
   void initState() {
-    if (_scrollController.hasClients)
-      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
+    //_scrollController.animateTo(_scrollController.position.maxScrollExtent,
+    //    duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
     super.initState();
   }
 
@@ -64,8 +63,7 @@ class _ChatMessages extends State<ChatMessages> {
 
                 return ListView.builder(
                   //controller: ScrollController().animateTo(ScrollController().position.maxScrollExtent, duration: const Duration(milliseconds: 500), curve: Curves.easeOut),
-                  //controller: _scrollController,
-                  shrinkWrap: true,
+                  controller: _scrollController,
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
                     var isMe = snapshot.data.docs[index]['transmitter_id']
@@ -84,6 +82,12 @@ class _ChatMessages extends State<ChatMessages> {
                             snapshot.data.docs[index]['receptor_id']
                                     .toString() ==
                                 widget.userId)) {
+
+                      _scrollController.animateTo(
+                          MediaQuery.of(context).size.height.toDouble(),
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeOut);
+                      
                       return Align(
                         alignment:
                             isMe ? Alignment.centerRight : Alignment.centerLeft,

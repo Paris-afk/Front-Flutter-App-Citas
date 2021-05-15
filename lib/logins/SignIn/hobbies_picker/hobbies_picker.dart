@@ -94,6 +94,7 @@ class _HobbiesPicker extends State<HobbiesPicker> {
                             _postingUsers = postHobbies(selectedHobbies);
                             _postingUsers.then((value) {
                               if(value == 'success'){
+                                Navigator.pop(context);
                                 Get.off(RootLayout());
                               }
                             });
