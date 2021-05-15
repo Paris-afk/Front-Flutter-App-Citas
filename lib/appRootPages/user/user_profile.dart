@@ -1,4 +1,5 @@
 import 'package:citas_proyecto/controllers/user_jwt_n_data_controller.dart';
+import 'package:citas_proyecto/main.dart';
 import 'package:citas_proyecto/widgets/get_user_hobbies.dart';
 import 'edit profile/edit_profile.dart';
 import 'package:flutter/material.dart';
@@ -41,10 +42,10 @@ class _UserProfile extends State<UserProfile> {
     });
   }
 
-  String preferencesText(int sexualPreference ){
-    if(sexualPreference == 1){
+  String preferencesText(int sexualPreference) {
+    if (sexualPreference == 1) {
       return 'Men';
-    } else if(sexualPreference == 2){
+    } else if (sexualPreference == 2) {
       return 'Women';
     } else {
       return 'Both sexes';
@@ -190,7 +191,8 @@ class _UserProfile extends State<UserProfile> {
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
                                 'Preferences: ' +
-                                preferencesText(snapshot.data['id_sexual_preference']),
+                                    preferencesText(
+                                        snapshot.data['id_sexual_preference']),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -207,7 +209,8 @@ class _UserProfile extends State<UserProfile> {
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
                                 'Show me: ' +
-                                preferencesText(snapshot.data['id_sexual_preference']),
+                                    preferencesText(
+                                        snapshot.data['id_sexual_preference']),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -262,16 +265,61 @@ class _UserProfile extends State<UserProfile> {
                           return Text('No hobbies');
                         },
                       ),
-                      IconButton(
-                        icon: Icon(Icons.edit),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.yellow[600]),
+                        ),
+                        child: Text(
+                          'Edit profile',
+                          style: TextStyle(color: Colors.black),
+                        ),
                         onPressed: () {
-                          print('Moving to edit your profile');
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => UserEdit()),
                           ).then((value) => onGoBack(value));
                         },
-                      )
+                      ),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.red),
+                        ),
+                        child: Text(
+                          'Log out',
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: Text('Wait'),
+                              content:
+                                  Text('Are you sure you want to log out?'),
+                              actions: [
+                                TextButton(
+                                  child: Text('No'),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text(
+                                    'Yes',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Get.off(HomePage());
+                                    userJWTcontroller.data({});
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 )
