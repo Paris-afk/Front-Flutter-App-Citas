@@ -6,6 +6,7 @@ import '../SignInLayout.dart';
 import '../../main.dart';
 import './postUser.dart';
 import 'package:get/get.dart';
+import 'package:citas_proyecto/priv_policy.dart';
 
 class SignInForm extends StatefulWidget {
   SignInForm({Key key}) : super(key: key);
@@ -251,14 +252,14 @@ class _SignInForm extends State<SignInForm> {
                       showDialog(
                         context: context,
                         builder: (_) => AlertDialog(
-                          title: Text('Terms and conditions'),
+                          title: Text('Privacy policy'),
                           content: ConstrainedBox(
                             constraints: BoxConstraints(
                               maxHeight: MediaQuery.of(context).size.height / 2,
                             ),
                             child: SingleChildScrollView(
                               child: Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in est eleifend, semper ex auctor, pretium est. Vestibulum ut pellentesque purus, at sagittis nunc. Nunc ullamcorper sit amet ipsum in ullamcorper. Morbi ornare quis velit et euismod.Curabitur interdum non elit ac consectetur. Donec posuere et nisi vitae dictum. Cras pellentesque id enim ut finibus. Nulla tincidunt, nunc vel congue dapibus, erat elit laoreet ante, et cursus magna nulla vel nisl. Vivamus venenatis aliquam ultricies. Vestibulum scelerisque tincidunt bibendum. Mauris vitae pharetra mi. Maecenas accumsan risus sit amet ligula cursus rutrum.\n\nMauris vitae imperdiet justo. Sed pulvinar eros in libero laoreet, sit amet feugiat dui vehicula. Maecenas eget volutpat urna, ac posuere lacus. Duis vulputate, ex a fermentum efficitur, turpis metus viverra ex, nec tristique odio leo congue elit. Nam a nibh nec sapien mollis ultricies. Proin a massa id orci mollis varius. Nunc bibendum nunc viverra feugiat luctus.',
+                                privPolicy,
                               ),
                             ),
                           ),
