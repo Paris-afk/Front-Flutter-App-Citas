@@ -5,5 +5,5 @@ class UserJWT extends GetxController{
   RxMap data = {}.obs;
   RxInt preference = 0.obs;
   final userType = "".obs;
-  final String backendRootLink = "http://10.0.2.2:3000/api/";
+  final String backendRootLink = 'https://proyecto-citas-node-backend.herokuapp.com/api/';
 }
