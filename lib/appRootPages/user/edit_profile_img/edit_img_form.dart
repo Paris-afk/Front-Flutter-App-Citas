@@ -54,7 +54,7 @@ class _EditProfileImg extends State<EditProfileImg> {
                   Padding(
                     padding: EdgeInsets.all(20),
                     child: Image.network(
-                      'http://10.0.2.2:3000/api/image/profile/' +
+                      userJWTcontroller.backendRootLink + 'image/profile/' +
                           widget.imgName,
                       headers: {
                         HttpHeaders.authorizationHeader:

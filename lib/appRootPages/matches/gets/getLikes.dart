@@ -11,7 +11,7 @@ Future<List<dynamic>> fetchLikes() async {
   String userId = userJWTcontroller.data['id_user'].toString();
 
   final response = await http.get(
-    Uri.parse('http://10.0.2.2:3000/api/user/likes/' + userId),
+    Uri.parse(userJWTcontroller.backendRootLink + 'user/likes/' + userId),
     headers: {HttpHeaders.authorizationHeader: "Bearer $token"},
   );
 

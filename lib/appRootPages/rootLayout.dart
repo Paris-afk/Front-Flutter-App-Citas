@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 //---------Widgets of the root pages
-//import 'matches/matches.dart';
 import 'matches/rootmatches.dart';
 import 'user/user_profile.dart';
 import 'swipe/swipe.dart';
@@ -67,7 +66,7 @@ class _RootLayout extends State<RootLayout> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.insert_emoticon,
+              Icons.people,
             ),
             label: 'Match',
           ),
@@ -79,7 +78,7 @@ class _RootLayout extends State<RootLayout> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.people,
+              Icons.insert_emoticon,
             ),
             label: 'Swipes',
           ),

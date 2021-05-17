@@ -56,8 +56,6 @@ class _ChatProfile extends State<ChatProfile> {
         future: futureUser,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data.toString());
-            print('ALAVERGA: ' + hobbieList.toString());
             return UsersProfile(
               userId: snapshot.data['id_user'].toString(),
               image1: snapshot.data['profile_picture'] ??

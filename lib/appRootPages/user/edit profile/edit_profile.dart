@@ -96,7 +96,7 @@ class _UserEdit extends State<UserEdit> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
-                                  'http://10.0.2.2:3000/api/image/profile/' +
+                                  userJWTcontroller.backendRootLink + 'image/profile/' +
                                       snapshot.data['profile_picture']
                                           .split('\\')
                                           .last

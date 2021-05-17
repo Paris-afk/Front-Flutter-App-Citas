@@ -165,9 +165,6 @@ class _ChatMessages extends State<ChatMessages> {
                         ),
                       ),
                       onChanged: (newMessage) {
-                        /*setState(() {
-                          _message = newMessage;
-                        });*/
                         _message = newMessage;
                       },
                       validator: (value) {

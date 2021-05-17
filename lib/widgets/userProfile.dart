@@ -53,7 +53,7 @@ class _UsersProfile extends State<UsersProfile> {
           Stack(
             children: [
               Image.network(
-                'http://10.0.2.2:3000/api/image/profile/' +
+                userJWTcontroller.backendRootLink + 'image/profile/' +
                     widget.image1.split('\\').last.toString(),
                 headers: {
                   HttpHeaders.authorizationHeader:
@@ -162,7 +162,7 @@ class _UsersProfile extends State<UsersProfile> {
             ),
           ),
           Image.network(
-            'http://10.0.2.2:3000/api/image/profile/' +
+            userJWTcontroller.backendRootLink + 'image/profile/' +
                 widget.image2.split('\\').last.toString(),
             headers: {
               HttpHeaders.authorizationHeader:

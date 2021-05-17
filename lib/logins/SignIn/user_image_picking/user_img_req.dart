@@ -11,7 +11,7 @@ Future postUserProfileImg(File file) async {
   String token = userJWTcontroller.jwt.value;
   http.MultipartFile multipartFile;
 
-  var uri = Uri.parse('http://10.0.2.2:3000/api/image/');
+  var uri = Uri.parse(userJWTcontroller.backendRootLink + 'image/');
 
   var request = http.MultipartRequest("PATCH", uri);
   request.headers.addAll(
