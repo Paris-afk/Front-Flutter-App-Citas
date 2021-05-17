@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:intl/intl.dart';
 import '../api_firebase.dart';
 
 class ChatMessages extends StatefulWidget {
@@ -53,7 +53,8 @@ class _ChatMessages extends State<ChatMessages> {
                   itemBuilder: (context, index) {
                     final reversedIndex = snapshot.data.docs.length - 1 - index;
 
-                    var isMe = snapshot.data.docs[reversedIndex]['transmitter_id']
+                    var isMe = snapshot
+                            .data.docs[reversedIndex]['transmitter_id']
                             .toString() ==
                         userJWTcontroller.data['id_user'].toString();
 
@@ -69,6 +70,9 @@ class _ChatMessages extends State<ChatMessages> {
                             snapshot.data.docs[reversedIndex]['receptor_id']
                                     .toString() ==
                                 widget.userId)) {
+
+                      var date = DateTime.parse(snapshot.data.docs[reversedIndex]['created_at'].toDate().toString());
+                      String msgHour = DateFormat('MM-dd-yy | kk:mm').format(date);
                       
                       return Align(
                         alignment:
@@ -86,9 +90,19 @@ class _ChatMessages extends State<ChatMessages> {
                               bottom: 4,
                             ),
                             padding: EdgeInsets.all(10),
-                            //alignment: Alignment.bottomRight,
-                            child: Text(
-                              snapshot.data.docs[reversedIndex]['content'],
+                            child: Column(
+                              crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  snapshot.data.docs[reversedIndex]['content'],
+                                ),
+                                Text(
+                                  msgHour,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ],
                             ),
                             decoration: BoxDecoration(
                               color:
@@ -108,110 +122,11 @@ class _ChatMessages extends State<ChatMessages> {
                     } else {
                       return Center();
                     }
-                    /*return ListTile(
-                      //title: Text('esto es un mensage'),
-                      title: Text(snapshot.data.docs[index]['content']),
-                      //subtitle: Text(document.data()['company']),
-                    );*/
                   },
-                  /*children: snapshot.data.docs.map<Widget>((document) {
-                    return ListTile(
-                      //title: Text('esto es un mensage'),
-                      title: Text(document.data()['content']),
-                      //subtitle: Text(document.data()['company']),
-                    );
-                  }).toList(),*/
                 );
               },
             ),
           ),
-          /*child: SingleChildScrollView(
-            controller: ScrollController(
-              initialScrollOffset: 0.0,
-              keepScrollOffset: true,
-            ),
-            child: StreamBuilder(
-              stream: FirebaseApi.getMessages(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                //print(snapshot.data.docs);
-                if (snapshot.hasError) {
-                  return Text('Something went wrong. Please try again');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                }
-
-                if (snapshot.data == null)
-                  return Center(child: CircularProgressIndicator());
-
-                if (snapshot.hasData) {
-                  return Column(
-                    children: snapshot.data.docs.map<Widget>((document) {
-                      var isMe = document.data()['transmitter_id'].toString() ==
-                          userJWTcontroller.data['id_user'].toString();
-
-                      if ((document.data()['transmitter_id'].toString() ==
-                                  userJWTcontroller.data['id_user']
-                                      .toString() ||
-                              document.data()['receptor_id'].toString() ==
-                                  userJWTcontroller.data['id_user']
-                                      .toString()) &&
-                          (document.data()['transmitter_id'].toString() ==
-                                  widget.userId ||
-                              document.data()['receptor_id'].toString() ==
-                                  widget.userId)) {
-                        return Align(
-                          alignment: isMe
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width / 1.35,
-                              minWidth: MediaQuery.of(context).size.width / 1.8,
-                            ),
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                left: 15,
-                                right: 15,
-                                top: 3,
-                                bottom: 4,
-                              ),
-                              padding: EdgeInsets.all(10),
-                              alignment: Alignment.bottomRight,
-                              child: Text(
-                                document.data()['content'],
-                              ),
-                              decoration: BoxDecoration(
-                                color: isMe
-                                    ? Colors.deepOrangeAccent
-                                    : Colors.grey,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
-                                  bottomLeft: isMe
-                                      ? Radius.circular(20.0)
-                                      : Radius.zero,
-                                  bottomRight: !isMe
-                                      ? Radius.circular(20.0)
-                                      : Radius.zero,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      } else {
-                        return Center();
-                      }
-                    }).toList(),
-                  );
-                }
-
-                return Center(child: Text('Say hi to this person'));
-              },
-            ),
-          ),*/
         ),
         Container(
           color: Colors.deepOrangeAccent,
