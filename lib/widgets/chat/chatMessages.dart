@@ -21,26 +21,12 @@ class _ChatMessages extends State<ChatMessages> {
   final _formKey = GlobalKey<FormState>();
   String _message = '';
   final userJWTcontroller = Get.put(UserJWT());
-  ScrollController _scrollController = ScrollController();
 
   void sendMessage(String idUser, String msg) async {
     FocusScope.of(context).unfocus();
     await FirebaseApi.uploadMessage(idUser, widget.userId, msg.trim());
-    /*setState(() {
-      _message = '';
-      _formKey.currentState.reset();
-    });*/
     _message = '';
     _formKey.currentState.reset();
-    //_scrollController.animateTo(_scrollController.position.maxScrollExtent,
-    //    duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-  }
-
-  @override
-  void initState() {
-    //_scrollController.animateTo(_scrollController.position.maxScrollExtent,
-    //    duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
-    super.initState();
   }
 
   @override
@@ -62,31 +48,27 @@ class _ChatMessages extends State<ChatMessages> {
                 }
 
                 return ListView.builder(
-                  //controller: ScrollController().animateTo(ScrollController().position.maxScrollExtent, duration: const Duration(milliseconds: 500), curve: Curves.easeOut),
-                  controller: _scrollController,
                   itemCount: snapshot.data.docs.length,
+                  reverse: true,
                   itemBuilder: (context, index) {
-                    var isMe = snapshot.data.docs[index]['transmitter_id']
+                    final reversedIndex = snapshot.data.docs.length - 1 - index;
+
+                    var isMe = snapshot.data.docs[reversedIndex]['transmitter_id']
                             .toString() ==
                         userJWTcontroller.data['id_user'].toString();
 
-                    if ((snapshot.data.docs[index]['transmitter_id']
+                    if ((snapshot.data.docs[reversedIndex]['transmitter_id']
                                     .toString() ==
                                 userJWTcontroller.data['id_user'].toString() ||
-                            snapshot.data.docs[index]['receptor_id']
+                            snapshot.data.docs[reversedIndex]['receptor_id']
                                     .toString() ==
                                 userJWTcontroller.data['id_user'].toString()) &&
-                        (snapshot.data.docs[index]['transmitter_id']
+                        (snapshot.data.docs[reversedIndex]['transmitter_id']
                                     .toString() ==
                                 widget.userId ||
-                            snapshot.data.docs[index]['receptor_id']
+                            snapshot.data.docs[reversedIndex]['receptor_id']
                                     .toString() ==
                                 widget.userId)) {
-
-                      _scrollController.animateTo(
-                          MediaQuery.of(context).size.height.toDouble(),
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeOut);
                       
                       return Align(
                         alignment:
@@ -106,7 +88,7 @@ class _ChatMessages extends State<ChatMessages> {
                             padding: EdgeInsets.all(10),
                             //alignment: Alignment.bottomRight,
                             child: Text(
-                              snapshot.data.docs[index]['content'],
+                              snapshot.data.docs[reversedIndex]['content'],
                             ),
                             decoration: BoxDecoration(
                               color:
