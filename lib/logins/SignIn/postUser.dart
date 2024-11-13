@@ -7,7 +7,7 @@ class User {
   final String jwt;
   final Map data;
 
-  User({this.jwt, this.data});
+  User({required this.jwt, required this.data});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

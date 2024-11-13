@@ -10,13 +10,13 @@ class UserTile extends StatefulWidget {
   final String userId, name, lastname, sex, age, img;
 
   UserTile(
-      {Key key,
-      @required this.userId,
-      @required this.name,
-      this.lastname,
-      this.sex,
-      this.age,
-      this.img})
+      {required Key key,
+      required this.userId,
+      required this.name,
+      required this.lastname,
+      required this.sex,
+      required this.age,
+      required this.img})
       : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class UserTile extends StatefulWidget {
 
 class _UserTile extends State<UserTile> {
   final userJWTcontroller = Get.put(UserJWT());
-  
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -33,7 +33,8 @@ class _UserTile extends State<UserTile> {
       leading: ClipRRect(
         borderRadius: BorderRadius.circular(200),
         child: Image.network(
-          userJWTcontroller.backendRootLink + 'image/profile/' +
+          userJWTcontroller.backendRootLink +
+              'image/profile/' +
               widget.img.split('\\').last.toString(),
           headers: {
             HttpHeaders.authorizationHeader:
@@ -61,12 +62,15 @@ class _UserTile extends State<UserTile> {
       subtitle: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text((widget.sex == "1")? 'Sex: Male': 'Sex: Female'),
+          Text((widget.sex == "1") ? 'Sex: Male' : 'Sex: Female'),
           Text('Age: ' + widget.age),
         ],
       ),
       onTap: () {
-        Get.to(Chat(userId: widget.userId, userName: widget.name,));
+        Get.to(Chat(
+          userId: widget.userId,
+          userName: widget.name,
+        ));
         /*Navigator.push(
             context, MaterialPageRoute(builder: (context) => Chat()));*/
       },

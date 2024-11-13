@@ -7,7 +7,7 @@ class User {
   final String jwt;
   final Map data;
 
-  User({this.jwt, this.data});
+  User({required this.jwt, required this.data});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
@@ -24,20 +24,19 @@ Future<User> getUserLogin(String email, String password) async {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
-    body: jsonEncode(<String, String>{
-      'email': email,
-      'password': password
-    }),
+    body: jsonEncode(<String, String>{'email': email, 'password': password}),
   );
   if (response.statusCode == 200) {
     var user = User.fromJson(jsonDecode(response.body));
-    
 
     userJWTcontroller.jwt.value = user.jwt.toString();
     userJWTcontroller.data.addAll(user.data);
 
     userJWTcontroller.userType.value = user.data['type'];
-    print('User JWT: ' + userJWTcontroller.jwt.value + '   with data: ' + userJWTcontroller.data['id_user'].toString());
+    print('User JWT: ' +
+        userJWTcontroller.jwt.value +
+        '   with data: ' +
+        userJWTcontroller.data['id_user'].toString());
 
     return user;
   } else {

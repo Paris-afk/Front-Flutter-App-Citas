@@ -12,7 +12,7 @@ class SignInLayout extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
-                colors: [Colors.orange[900], Colors.orange[400]])),
+                colors: [Colors.orange.shade900, Colors.orange.shade400])),
         child: SignInStructure(),
       ),
     );

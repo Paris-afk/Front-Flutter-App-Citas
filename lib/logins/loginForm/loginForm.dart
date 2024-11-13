@@ -14,11 +14,11 @@ class LoginForm extends StatefulWidget {
 
 class _LoginForm extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  String _email, _password;
-  Future<User> _futureUser;
+  late String _email, _password;
+  late Future<User> _futureUser;
   final Shader linearGradient = LinearGradient(
           begin: Alignment.topCenter,
-          colors: [Colors.orange[900], Colors.orange[400]])
+          colors: [Colors.orange[900]!, Colors.orange[400]!])
       .createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
 
   @override
@@ -30,7 +30,7 @@ class _LoginForm extends State<LoginForm> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topCenter,
-              colors: [Colors.orange[900], Colors.orange[400]]),
+              colors: [Colors.orange[900]!, Colors.orange[400]!]),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +100,7 @@ class _LoginForm extends State<LoginForm> {
                                         decoration: BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                    color: Colors.grey[200]))),
+                                                    color: Colors.grey[200]!))),
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.emailAddress,
@@ -110,8 +110,9 @@ class _LoginForm extends State<LoginForm> {
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none,
                                           ),
-                                          validator: (String value) {
-                                            if (value.isEmpty) {
+                                          validator: (String? value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
                                               return 'Please enter some text';
                                             }
                                             if (!value.contains('@') ||
@@ -135,7 +136,7 @@ class _LoginForm extends State<LoginForm> {
                                         decoration: BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                    color: Colors.grey[200]))),
+                                                    color: Colors.grey[200]!))),
                                         child: TextFormField(
                                           obscureText: true,
                                           decoration: InputDecoration(
@@ -144,8 +145,9 @@ class _LoginForm extends State<LoginForm> {
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none,
                                           ),
-                                          validator: (String value) {
-                                            if (value.isEmpty) {
+                                          validator: (String? value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
                                               return 'Please enter some text';
                                             }
                                             if (value.contains(' ')) {
@@ -183,7 +185,7 @@ class _LoginForm extends State<LoginForm> {
                                     child: Center(
                                       child: Column(
                                         children: [
-                                          FlatButton(
+                                          TextButton(
                                             child: Text(
                                               "Log in",
                                               style: TextStyle(
@@ -193,7 +195,8 @@ class _LoginForm extends State<LoginForm> {
                                             onPressed: () {
                                               print('Session started');
                                               if (_formKey.currentState
-                                                  .validate()) {
+                                                      ?.validate() ??
+                                                  false) {
                                                 // If the form is valid, display a snackbar. In the real world,
                                                 // you'd often call a server or save the information in a database.
 
@@ -232,7 +235,7 @@ class _LoginForm extends State<LoginForm> {
                                   child: Center(
                                     child: Column(
                                       children: [
-                                        FlatButton(
+                                        TextButton(
                                           child: Text(
                                             "Sign up",
                                             style: TextStyle(
@@ -257,7 +260,8 @@ class _LoginForm extends State<LoginForm> {
                         future: _futureUser,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            print('Bien hecho: ' + snapshot.data.jwt);
+                            print('Bien hecho: ' +
+                                (snapshot.data?.jwt ?? 'No JWT'));
                           } else if (snapshot.hasError) {
                             print('Mal hecho: ' + snapshot.error.toString());
                             return Center(

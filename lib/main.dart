@@ -9,7 +9,8 @@ void main() => runApp(
         home: HomePage(),
         theme: ThemeData(
           primaryColor: Colors.deepOrangeAccent,
-          accentColor: Colors.yellow,
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: Colors.yellow),
         ),
       ),
     );

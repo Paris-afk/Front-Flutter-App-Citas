@@ -7,14 +7,14 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class Likes extends StatefulWidget {
-  Likes({Key key}) : super(key: key);
+  Likes({required Key key}) : super(key: key);
 
   @override
   _Likes createState() => _Likes();
 }
 
 class _Likes extends State<Likes> {
-  Future<List<dynamic>> futureLikes;
+  late Future<List<dynamic>> futureLikes;
   final userJWTcontroller = Get.put(UserJWT());
 
   @override
@@ -32,9 +32,9 @@ class _Likes extends State<Likes> {
         future: futureLikes,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data.length);
+            print(snapshot.data?.length);
             print(snapshot.data);
-            if (snapshot.data.length == 0)
+            if (snapshot.data?.length == 0)
               return Center(
                 child: Text(
                   'You don\'t have any likes yet',
@@ -50,7 +50,7 @@ class _Likes extends State<Likes> {
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 children: [
-                  for (var tile in snapshot.data)
+                  for (var tile in snapshot.data!)
                     Container(
                       child: Stack(
                         children: [

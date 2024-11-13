@@ -5,16 +5,16 @@ import 'package:get/get.dart';
 import 'package:citas_proyecto/appRootPages/rootLayout.dart';
 
 class HobbiesPicker extends StatefulWidget {
-  HobbiesPicker({Key key}) : super(key: key);
+  HobbiesPicker({required Key key}) : super(key: key);
 
   @override
   _HobbiesPicker createState() => _HobbiesPicker();
 }
 
 class _HobbiesPicker extends State<HobbiesPicker> {
-  Future<List<dynamic>> _futureGetHobbies;
-  List<dynamic> hobbies;
-  Future<dynamic> _postingUsers;
+  late Future<List<dynamic>> _futureGetHobbies;
+  late List<dynamic> hobbies;
+  late Future<dynamic> _postingUsers;
 
   @override
   void initState() {
@@ -51,12 +51,12 @@ class _HobbiesPicker extends State<HobbiesPicker> {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              for (var hobby in snapshot.data)
+                              for (var hobby in snapshot.data ?? [])
                                 CheckboxListTile(
                                   title: Text(hobby['description']),
                                   value: hobby['active'],
                                   activeColor: Colors.deepOrangeAccent,
-                                  onChanged: (bool value) {
+                                  onChanged: (bool? value) {
                                     setState(() {
                                       hobby['active'] = !hobby['active'];
                                     });
@@ -93,7 +93,7 @@ class _HobbiesPicker extends State<HobbiesPicker> {
 
                             _postingUsers = postHobbies(selectedHobbies);
                             _postingUsers.then((value) {
-                              if(value == 'success'){
+                              if (value == 'success') {
                                 Navigator.pop(context);
                                 Get.off(RootLayout());
                               }
@@ -134,7 +134,7 @@ class _HobbiesPicker extends State<HobbiesPicker> {
                               child: Text('Try again'),
                               onPressed: () {
                                 setState(() {
-                                  _postingUsers = null;
+                                  _postingUsers = Future.value(null);
                                   _futureGetHobbies = getHobbiesList();
                                 });
                               },

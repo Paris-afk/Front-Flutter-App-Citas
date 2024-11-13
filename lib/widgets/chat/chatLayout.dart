@@ -6,10 +6,10 @@ import './chatMessages.dart';
 class Chat extends StatefulWidget {
   final String userId, userName;
   const Chat({
-    Key key,
-    this.userId,
-    this.userName,
-    }) : super(key: key);
+    Key? key,
+    required this.userId,
+    required this.userName,
+  }) : super(key: key);
   @override
   _Chat createState() => _Chat();
 }
@@ -24,14 +24,14 @@ class _Chat extends State<Chat> with SingleTickerProviderStateMixin {
 
   List<Widget> views = <Widget>[];
 
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {
     print('GOT CHAT: ' + widget.userId);
     views = [
-      ChatMessages(userId: widget.userId),
-      ChatProfile(userId: widget.userId),
+      ChatMessages(key: UniqueKey(), userId: widget.userId),
+      ChatProfile(key: UniqueKey(), userId: widget.userId),
     ];
     super.initState();
     _tabController = TabController(vsync: this, length: myTabs.length);

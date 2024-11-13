@@ -8,13 +8,15 @@ class Utils {
       StreamTransformer<QuerySnapshot, List<T>>.fromHandlers(
         handleData: (QuerySnapshot data, EventSink<List<T>> sink) {
           final snaps = data.docs.map((doc) => doc.data()).toList();
-          final users = snaps.map((json) => fromJson(json)).toList();
+          final users = snaps
+              .map((json) => fromJson(json as Map<String, dynamic>))
+              .toList();
 
           sink.add(users);
         },
       );
 
-  static DateTime toDateTime(Timestamp value) {
+  static DateTime? toDateTime(Timestamp value) {
     if (value == null) return null;
 
     return value.toDate();

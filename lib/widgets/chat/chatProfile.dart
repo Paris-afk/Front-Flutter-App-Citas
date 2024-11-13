@@ -8,8 +8,8 @@ import '../userProfile.dart';
 class ChatProfile extends StatefulWidget {
   final String userId;
   ChatProfile({
-    Key key,
-    this.userId,
+    required Key key,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -17,14 +17,14 @@ class ChatProfile extends StatefulWidget {
 }
 
 class _ChatProfile extends State<ChatProfile> {
-  Future<Map<String, dynamic>> futureUser;
-  Future<List> futureHobbies;
+  late Future<Map<String, dynamic>> futureUser;
+  late Future<List> futureHobbies;
   List hobbieList = [];
 
-  String preferencesText(int sexualPreference ){
-    if(sexualPreference == 1){
+  String preferencesText(int sexualPreference) {
+    if (sexualPreference == 1) {
       return 'Men';
-    } else if(sexualPreference == 2){
+    } else if (sexualPreference == 2) {
       return 'Women';
     } else {
       return 'Both sexes';
@@ -57,24 +57,23 @@ class _ChatProfile extends State<ChatProfile> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return UsersProfile(
-              userId: snapshot.data['id_user'].toString(),
-              image1: snapshot.data['profile_picture'] ??
+              userId: snapshot.data!['id_user'].toString(),
+              image1: snapshot.data!['profile_picture'] ??
                   '1613691970195image_picker4608841315600757623.jpg',
-              name: snapshot.data['name'],
-              lastname: snapshot.data['lastname'],
-              description: snapshot.data['description'] ??
+              name: snapshot.data!['name'],
+              lastname: snapshot.data!['lastname'],
+              description: snapshot.data!['description'] ??
                   '1613691970195image_picker4608841315600757623.jpg',
-              preferences: preferencesText(snapshot.data['sexual_preference']),
-              age: snapshot.data['age'].toString(),
-              sex: (snapshot.data['id_genre'] == 1)
-                                    ? 'Male'
-                                    : 'Female',
+              preferences: preferencesText(snapshot.data!['sexual_preference']),
+              age: snapshot.data!['age'].toString(),
+              sex: (snapshot.data!['id_genre'] == 1) ? 'Male' : 'Female',
               hobbies: hobbieList ??
                   [
                     {"description": 'No hobbies'}
                   ],
-              image2: snapshot.data['profile_picture'] ??
+              image2: snapshot.data!['profile_picture'] ??
                   '1613691970195image_picker4608841315600757623.jpg',
+              key: UniqueKey(),
             );
             //return Text('Perfil cargado');
           } else if (snapshot.hasError) {

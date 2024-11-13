@@ -4,7 +4,7 @@ import './matches.dart';
 import './likes.dart';
 
 class RootMatches extends StatefulWidget {
-  const RootMatches({Key key}) : super(key: key);
+  const RootMatches({required Key key}) : super(key: key);
   @override
   _RootMatches createState() => _RootMatches();
 }
@@ -16,7 +16,7 @@ class _RootMatches extends State<RootMatches>
     Tab(text: 'Likes'),
   ];
 
-  TabController _tabController;
+  late TabController _tabController;
 
   @override
   void initState() {
@@ -47,8 +47,8 @@ class _RootMatches extends State<RootMatches>
           child: TabBarView(
             controller: _tabController,
             children: [
-              Matches(),
-              Likes(),
+              Matches(key: UniqueKey()),
+              Likes(key: UniqueKey()),
             ],
           ),
         ),

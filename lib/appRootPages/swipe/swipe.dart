@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
+import 'package:flutter_tindercard_2/flutter_tindercard_2.dart';
 import 'getUserProfiles.dart';
 import '../../widgets/userProfile.dart';
 
 class Swipes extends StatefulWidget {
-  Swipes({Key key}) : super(key: key);
+  Swipes({required Key key}) : super(key: key);
 
   @override
   _Swipes createState() => _Swipes();
@@ -13,8 +13,8 @@ class Swipes extends StatefulWidget {
 
 class _Swipes extends State<Swipes> {
   List<dynamic> profiles = [];
-  int numOfProfiles;
-  Future<List<dynamic>> futureProfiles;
+  late int numOfProfiles;
+  late Future<List<dynamic>> futureProfiles;
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _Swipes extends State<Swipes> {
 
   @override
   Widget build(BuildContext context) {
-    CardController controller;
+    CardController controller = CardController();
 
     return Column(
       children: [
@@ -56,7 +56,7 @@ class _Swipes extends State<Swipes> {
                     return TinderSwapCard(
                       swipeUp: false,
                       swipeDown: false,
-                      orientation: AmassOrientation.BOTTOM,
+                      orientation: AmassOrientation.bottom,
                       totalNum: profiles.length,
                       stackNum: 2,
                       swipeEdge: 2.0,
@@ -80,10 +80,13 @@ class _Swipes extends State<Swipes> {
                                 profiles[index]['sexual_preference'].toString(),
                             age: profiles[index]['age'].toString(),
                             sex: profiles[index]['gender'].toString(),
-                            hobbies:
-                                profiles[index]['hobbies'] ?? [{ "description": 'No hobbies'}],
+                            hobbies: profiles[index]['hobbies'] ??
+                                [
+                                  {"description": 'No hobbies'}
+                                ],
                             image2: profiles[index]['profile_picture'] ??
                                 '1613691970195image_picker4608841315600757623.jpg',
+                            key: UniqueKey(),
                           ),
                         ),
                       ),
@@ -102,7 +105,7 @@ class _Swipes extends State<Swipes> {
                       swipeCompleteCallback:
                           (CardSwipeOrientation orientation, int index) {
                         /// Get orientation & index of swiped card!
-                        if (orientation == CardSwipeOrientation.RIGHT) {
+                        if (orientation == CardSwipeOrientation.right) {
                           print('LIKE');
                           actionForUserProfile(
                               'like', profiles[index]['id_user'].toString());
@@ -147,7 +150,7 @@ class _Swipes extends State<Swipes> {
                   onPressed: () {
                     controller.triggerLeft();
                     setState(() {
-                      numOfProfiles -=1;
+                      numOfProfiles -= 1;
                     });
                     print('Length of profiles: ' + numOfProfiles.toString());
                     print("Swipe left");

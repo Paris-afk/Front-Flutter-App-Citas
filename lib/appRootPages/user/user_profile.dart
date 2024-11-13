@@ -17,8 +17,8 @@ class _UserProfile extends State<UserProfile> {
   List hobbieList = [];
   final userJWTcontroller = Get.put(UserJWT());
 
-  Future<Map<String, dynamic>> futureUser;
-  Future<List> futureHobbies;
+  late Future<Map<String, dynamic>> futureUser;
+  late Future<List> futureHobbies;
 
   @override
   void initState() {
@@ -32,7 +32,11 @@ class _UserProfile extends State<UserProfile> {
           hobbieList.add(hobby['description']);
         }
         print('TUS HOBBIES: ' + hobbieList.toString());
+      }).catchError((error) {
+        print('Error fetching hobbies: $error');
       });
+    }).catchError((error) {
+      print('Error fetching user: $error');
     });
   }
 
@@ -57,8 +61,29 @@ class _UserProfile extends State<UserProfile> {
     return FutureBuilder<Map<String, dynamic>>(
       future: futureUser,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          print(snapshot.data['profile_picture'].split('\\').last.toString());
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                ),
+                CircularProgressIndicator()
+              ],
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Center(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                ),
+                Text("Error: ${snapshot.error}")
+              ],
+            ),
+          );
+        } else if (snapshot.hasData && snapshot.data != null) {
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -74,8 +99,9 @@ class _UserProfile extends State<UserProfile> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(200),
                         child: Image.network(
-                          userJWTcontroller.backendRootLink + 'image/profile/' +
-                              snapshot.data['profile_picture']
+                          userJWTcontroller.backendRootLink +
+                              'image/profile/' +
+                              snapshot.data!['profile_picture']
                                   .split('\\')
                                   .last
                                   .toString(),
@@ -105,7 +131,7 @@ class _UserProfile extends State<UserProfile> {
                               color: Colors.redAccent,
                               borderRadius: BorderRadius.circular(200)),
                           child: Text(
-                            snapshot.data['age'].toString(),
+                            snapshot.data!['age'].toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 40,
@@ -124,7 +150,7 @@ class _UserProfile extends State<UserProfile> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   child: Text(
-                    snapshot.data['name'] + '\n' + snapshot.data['lastname'],
+                    snapshot.data!['name'] + '\n' + snapshot.data!['lastname'],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -136,7 +162,7 @@ class _UserProfile extends State<UserProfile> {
                   padding: EdgeInsets.all(20),
                   width: MediaQuery.of(context).size.width,
                   child: Text(
-                    snapshot.data['description'],
+                    snapshot.data!['description'],
                     textAlign: TextAlign.justify,
                   ),
                 ),
@@ -156,7 +182,7 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                snapshot.data['email'],
+                                snapshot.data!['email'],
                                 style: TextStyle(fontSize: 20),
                               ),
                             ),
@@ -172,7 +198,7 @@ class _UserProfile extends State<UserProfile> {
                             Container(
                               margin: EdgeInsets.only(left: 15),
                               child: Text(
-                                (snapshot.data['id_genre'] == 1)
+                                (snapshot.data!['id_genre'] == 1)
                                     ? 'Sex: Male'
                                     : 'Sex: Female',
                                 style: TextStyle(fontSize: 22),
@@ -192,7 +218,7 @@ class _UserProfile extends State<UserProfile> {
                               child: Text(
                                 'Preferences: ' +
                                     preferencesText(
-                                        snapshot.data['id_sexual_preference']),
+                                        snapshot.data!['id_sexual_preference']),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -210,7 +236,7 @@ class _UserProfile extends State<UserProfile> {
                               child: Text(
                                 'Show me: ' +
                                     preferencesText(
-                                        snapshot.data['id_sexual_preference']),
+                                        snapshot.data!['id_sexual_preference']),
                                 style: TextStyle(fontSize: 22),
                               ),
                             ),
@@ -236,7 +262,12 @@ class _UserProfile extends State<UserProfile> {
                       FutureBuilder(
                         future: futureHobbies,
                         builder: (context, snapshot) {
-                          if (snapshot.hasData) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Text('Loading hobbies...');
+                          } else if (snapshot.hasError) {
+                            return Text('Error on getting your hobby list');
+                          } else if (snapshot.hasData) {
                             return Container(
                               padding: EdgeInsets.all(10),
                               width: MediaQuery.of(context).size.width,
@@ -258,10 +289,7 @@ class _UserProfile extends State<UserProfile> {
                                 ],
                               ),
                             );
-                          } else if (snapshot.hasError) {
-                            Text('Error on getting your hobby list');
                           }
-
                           return Text('No hobbies');
                         },
                       ),
@@ -325,26 +353,14 @@ class _UserProfile extends State<UserProfile> {
                   ),
                 )
               ]);
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 2,
-                ),
-                Text("${snapshot.error}")
-              ],
-            ),
-          );
         }
-        // By default, show a loading spinner.
         return Center(
           child: Column(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height / 2,
               ),
-              CircularProgressIndicator()
+              Text('No data available')
             ],
           ),
         );

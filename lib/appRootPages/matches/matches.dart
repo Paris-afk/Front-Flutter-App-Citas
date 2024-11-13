@@ -8,7 +8,7 @@ import '../../widgets/tile.dart';
 
 class Matches extends StatefulWidget {
   Matches({
-    Key key,
+    required Key key,
   }) : super(key: key);
 
   @override
@@ -16,9 +16,9 @@ class Matches extends StatefulWidget {
 }
 
 class _Matches extends State<Matches> {
-  Future<List<dynamic>> futureMatches;
+  late Future<List<dynamic>> futureMatches;
   final userJWTcontroller = Get.put(UserJWT());
-  Future<Map<String, dynamic>> futureUser;
+  late Future<Map<String, dynamic>> futureUser;
   List userList = [];
 
   @override
@@ -54,7 +54,7 @@ class _Matches extends State<Matches> {
         future: futureMatches,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            if (snapshot.data.length == 0)
+            if (snapshot.data?.length == 0)
               return Center(
                 child: Text(
                   'You don\'t have any match yet',
@@ -75,6 +75,7 @@ class _Matches extends State<Matches> {
                     lastname: tile['lastname'],
                     sex: tile['id_genre'].toString(),
                     age: tile['age'].toString(),
+                    key: UniqueKey(),
                   ),
               ],
             );

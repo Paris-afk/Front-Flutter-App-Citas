@@ -9,7 +9,7 @@ import 'package:citas_proyecto/logins/SignIn/user_image_picking/user_img_req.dar
 class EditProfileImg extends StatefulWidget {
   final String imgName;
 
-  const EditProfileImg({Key key, this.imgName}) : super(key: key);
+  const EditProfileImg({required Key key, required this.imgName}) : super(key: key);
 
   @override
   _EditProfileImg createState() => _EditProfileImg();
@@ -17,10 +17,10 @@ class EditProfileImg extends StatefulWidget {
 
 class _EditProfileImg extends State<EditProfileImg> {
   final userJWTcontroller = Get.put(UserJWT());
-  File _image;
+  late File _image;
   final picker = ImagePicker();
   var _pickImageError;
-  Future postImg = null;
+  Future<dynamic>? postImg;
 
   Future getImage() async {
     try {

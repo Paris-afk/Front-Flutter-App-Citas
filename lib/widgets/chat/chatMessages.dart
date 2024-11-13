@@ -9,8 +9,8 @@ import '../api_firebase.dart';
 class ChatMessages extends StatefulWidget {
   final String userId;
   ChatMessages({
-    Key key,
-    this.userId,
+    required Key key,
+    required this.userId,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class _ChatMessages extends State<ChatMessages> {
     FocusScope.of(context).unfocus();
     await FirebaseApi.uploadMessage(idUser, widget.userId, msg.trim());
     _message = '';
-    _formKey.currentState.reset();
+    _formKey.currentState?.reset();
   }
 
   @override
@@ -36,7 +36,7 @@ class _ChatMessages extends State<ChatMessages> {
         Expanded(
           child: Container(
             child: StreamBuilder<QuerySnapshot>(
-              stream: FirebaseApi.getMessages(),
+              stream: FirebaseApi.getMessages().cast<QuerySnapshot<Object?>>(),
               builder: (BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError) {
@@ -48,32 +48,37 @@ class _ChatMessages extends State<ChatMessages> {
                 }
 
                 return ListView.builder(
-                  itemCount: snapshot.data.docs.length,
+                  itemCount: snapshot.data?.docs.length ?? 0,
                   reverse: true,
                   itemBuilder: (context, index) {
-                    final reversedIndex = snapshot.data.docs.length - 1 - index;
+                    final reversedIndex =
+                        snapshot.data!.docs.length - 1 - index;
 
-                    var isMe = snapshot
-                            .data.docs[reversedIndex]['transmitter_id']
-                            .toString() ==
-                        userJWTcontroller.data['id_user'].toString();
+                    var isMe = snapshot.data != null &&
+                        snapshot.data!.docs[reversedIndex]['transmitter_id']
+                                .toString() ==
+                            userJWTcontroller.data['id_user'].toString();
 
-                    if ((snapshot.data.docs[reversedIndex]['transmitter_id']
+                    if (snapshot.data != null &&
+                        (snapshot.data!.docs[reversedIndex]['transmitter_id']
                                     .toString() ==
                                 userJWTcontroller.data['id_user'].toString() ||
-                            snapshot.data.docs[reversedIndex]['receptor_id']
+                            snapshot.data!.docs[reversedIndex]['receptor_id']
                                     .toString() ==
                                 userJWTcontroller.data['id_user'].toString()) &&
-                        (snapshot.data.docs[reversedIndex]['transmitter_id']
+                        (snapshot.data!.docs[reversedIndex]['transmitter_id']
                                     .toString() ==
                                 widget.userId ||
-                            snapshot.data.docs[reversedIndex]['receptor_id']
+                            snapshot.data!.docs[reversedIndex]['receptor_id']
                                     .toString() ==
                                 widget.userId)) {
+                      var date = DateTime.parse(snapshot
+                          .data!.docs[reversedIndex]['created_at']
+                          .toDate()
+                          .toString());
+                      String msgHour =
+                          DateFormat('MM-dd-yy | kk:mm').format(date);
 
-                      var date = DateTime.parse(snapshot.data.docs[reversedIndex]['created_at'].toDate().toString());
-                      String msgHour = DateFormat('MM-dd-yy | kk:mm').format(date);
-                      
                       return Align(
                         alignment:
                             isMe ? Alignment.centerRight : Alignment.centerLeft,
@@ -91,10 +96,12 @@ class _ChatMessages extends State<ChatMessages> {
                             ),
                             padding: EdgeInsets.all(10),
                             child: Column(
-                              crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                              crossAxisAlignment: isMe
+                                  ? CrossAxisAlignment.end
+                                  : CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  snapshot.data.docs[reversedIndex]['content'],
+                                  snapshot.data!.docs[reversedIndex]['content'],
                                 ),
                                 Text(
                                   msgHour,
@@ -168,7 +175,7 @@ class _ChatMessages extends State<ChatMessages> {
                         _message = newMessage;
                       },
                       validator: (value) {
-                        if (value.isEmpty) {
+                        if (value?.isEmpty ?? true) {
                           //return 'Please enter some text';
                           return;
                         }
@@ -187,7 +194,8 @@ class _ChatMessages extends State<ChatMessages> {
                       ),
                     ),
                     onPressed: () {
-                      if (_formKey.currentState.validate() && _message != '') {
+                      if (_formKey.currentState?.validate() == true &&
+                          _message != '') {
                         sendMessage(
                             userJWTcontroller.data['id_user'].toString(),
                             _message);

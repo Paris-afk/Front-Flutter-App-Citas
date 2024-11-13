@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:citas_proyecto/priv_policy.dart';
 
 class SignInForm extends StatefulWidget {
-  SignInForm({Key key}) : super(key: key);
+  SignInForm({required Key key}) : super(key: key);
 
   @override
   _SignInForm createState() => _SignInForm();
@@ -17,17 +17,17 @@ class SignInForm extends StatefulWidget {
 
 class _SignInForm extends State<SignInForm> {
   final _formKey = GlobalKey<FormState>();
-  String _name;
-  String _last_name;
-  String _email;
-  String _password;
-  String _sexual_preference;
-  int _selected_preference;
-  String _sex;
-  int _selected_sex;
-  int _age;
-  String _description;
-  Future<User> _futureUser;
+  late String _name;
+  late String _last_name;
+  late String _email;
+  late String _password;
+  late String _sexual_preference;
+  late int _selected_preference;
+  late String _sex;
+  late int _selected_sex;
+  late int _age;
+  late String _description;
+  late Future<User> _futureUser;
   //var changeToImgPicker = null;
 
   @override
@@ -44,8 +44,8 @@ class _SignInForm extends State<SignInForm> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty || value == null) {
                       return 'Please enter some text';
                     }
                     if (!value.contains('@') || !value.contains('.com')) {
@@ -70,8 +70,8 @@ class _SignInForm extends State<SignInForm> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty || value == null) {
                       return 'Please enter some text';
                     }
                     if (value.contains(' ')) {
@@ -91,8 +91,8 @@ class _SignInForm extends State<SignInForm> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty || value == null) {
                       return 'Please enter some text';
                     }
                     return null;
@@ -109,8 +109,8 @@ class _SignInForm extends State<SignInForm> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty || value == null) {
                       return 'Please enter some text';
                     }
                     return null;
@@ -127,8 +127,8 @@ class _SignInForm extends State<SignInForm> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty || value == null) {
                       return 'Please enter some text';
                     }
                     return null;
@@ -147,8 +147,8 @@ class _SignInForm extends State<SignInForm> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
                   ),
-                  validator: (String value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty || value == null) {
                       return 'Please enter some text';
                     }
                     if (value.contains('.') ||
@@ -181,14 +181,14 @@ class _SignInForm extends State<SignInForm> {
                     }
                     return null;
                   },
-                  onChanged: (String newSex) {
+                  onChanged: (String? newSex) {
                     setState(() {
                       if (newSex == 'Male') {
                         _selected_sex = 1;
                       } else {
                         _selected_sex = 2;
                       }
-                      _sex = newSex;
+                      _sex = newSex!;
                     });
                   },
                   items: <String>['Male', 'Female']
@@ -212,7 +212,7 @@ class _SignInForm extends State<SignInForm> {
                     }
                     return null;
                   },
-                  onChanged: (String newPreferences) {
+                  onChanged: (String? newPreferences) {
                     setState(() {
                       if (newPreferences == 'Male') {
                         _selected_preference = 1;
@@ -221,7 +221,7 @@ class _SignInForm extends State<SignInForm> {
                       } else {
                         _selected_preference = 3;
                       }
-                      _sexual_preference = newPreferences;
+                      _sexual_preference = newPreferences!;
                     });
                   },
                   items: <String>['Male', 'Female', 'Both']
@@ -246,7 +246,8 @@ class _SignInForm extends State<SignInForm> {
                   child: Text('Create account'),
                   onPressed: () {
                     // Validate returns true if the form is valid, otherwise false.
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState != null &&
+                        _formKey.currentState!.validate()) {
                       // If the form is valid, display a snackbar. In the real world,
                       // you'd often call a server or save the information in a database.
                       showDialog(
@@ -289,10 +290,10 @@ class _SignInForm extends State<SignInForm> {
                                       _age.toInt(),
                                       _description);
                                 });
-                                
+
                                 Navigator.pop(context);
 
-                                Scaffold.of(context).showSnackBar(
+                                ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text('Processing Data')));
                               },
                             ),
@@ -310,10 +311,10 @@ class _SignInForm extends State<SignInForm> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 print('Bien hecho: ' +
-                    snapshot.data.data.toString() +
-                    snapshot.data.jwt);
+                    (snapshot.data?.data?.toString() ?? 'No data') +
+                    (snapshot.data?.jwt ?? 'No JWT'));
 
-                return UserImgPicker();
+                return UserImgPicker(key: UniqueKey());
               } else if (snapshot.hasError) {
                 print('Mal hecho: ' + snapshot.error.toString());
                 return Center(

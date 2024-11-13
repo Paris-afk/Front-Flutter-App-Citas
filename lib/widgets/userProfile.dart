@@ -18,25 +18,25 @@ class UsersProfile extends StatefulWidget {
   final List<dynamic> hobbies;
 
   const UsersProfile({
-    Key key,
-    this.userId,
-    this.image1,
-    this.name,
-    this.lastname,
-    this.description,
-    this.preferences,
-    this.age,
-    this.sex,
-    this.hobbies,
-    this.image2,
+    required Key key,
+    required this.userId,
+    required this.image1,
+    required this.name,
+    required this.lastname,
+    required this.description,
+    required this.preferences,
+    required this.age,
+    required this.sex,
+    required this.hobbies,
+    required this.image2,
   }) : super(key: key);
 
   _UsersProfile createState() => _UsersProfile();
 }
 
 class _UsersProfile extends State<UsersProfile> {
-  Future<List> futureHobbies;
-  List hobbieList;
+  late Future<List> futureHobbies;
+  late List hobbieList;
 
   @override
   void initState() {
@@ -53,7 +53,8 @@ class _UsersProfile extends State<UsersProfile> {
           Stack(
             children: [
               Image.network(
-                userJWTcontroller.backendRootLink + 'image/profile/' +
+                userJWTcontroller.backendRootLink +
+                    'image/profile/' +
                     widget.image1.split('\\').last.toString(),
                 headers: {
                   HttpHeaders.authorizationHeader:
@@ -162,7 +163,8 @@ class _UsersProfile extends State<UsersProfile> {
             ),
           ),
           Image.network(
-            userJWTcontroller.backendRootLink + 'image/profile/' +
+            userJWTcontroller.backendRootLink +
+                'image/profile/' +
                 widget.image2.split('\\').last.toString(),
             headers: {
               HttpHeaders.authorizationHeader:

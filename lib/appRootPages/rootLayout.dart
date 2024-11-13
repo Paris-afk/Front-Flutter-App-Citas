@@ -16,9 +16,9 @@ class _RootLayout extends State<RootLayout> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    RootMatches(),
+    RootMatches(key: Key('RootMatches')),
     UserProfile(),
-    Swipes(),
+    Swipes(key: Key('Swipes')),
   ];
 
   _appBarFunction() {
@@ -35,7 +35,7 @@ class _RootLayout extends State<RootLayout> {
     }
   }
 
-  void initFirebase() async{
+  void initFirebase() async {
     await Firebase.initializeApp();
   }
 

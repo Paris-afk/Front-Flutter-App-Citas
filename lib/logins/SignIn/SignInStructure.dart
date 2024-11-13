@@ -53,7 +53,7 @@ class SignInStructure extends StatelessWidget {
                                 blurRadius: 20,
                                 offset: Offset(0, 10))
                           ]),
-                      child: SignInForm(),
+                      child: SignInForm(key: UniqueKey()),
                     ),
                   ],
                 ),

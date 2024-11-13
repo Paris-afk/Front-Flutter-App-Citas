@@ -18,12 +18,12 @@ class _UserEdit extends State<UserEdit> {
   //final userDataController = Get.put(UserJWT());
   final _formKey = GlobalKey<FormState>();
   final userJWTcontroller = Get.put(UserJWT());
-  Future<Map<String, dynamic>> futureUser;
-  Future<Map<String, dynamic>> _futureUserUpdate;
-  String profileImgName;
+  late Future<Map<String, dynamic>> futureUser;
+  late Future<Map<String, dynamic>> _futureUserUpdate;
+  late String profileImgName;
 
-  String _name, _last_name, _email, _description, _sex, _sexual_preference;
-  int _idUser, _age, _selected_sex, _selected_preference;
+  late String _name, _last_name, _email, _description, _sex, _sexual_preference;
+  late int _idUser, _age, _selected_sex, _selected_preference;
 
   onGoBack(dynamic value) {
     setState(() {
@@ -68,8 +68,9 @@ class _UserEdit extends State<UserEdit> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Get.to(EditProfileImg(
+            key: UniqueKey(),
             imgName: this.profileImgName,
-          )).then((value) => onGoBack(value));
+          ))?.then((value) => onGoBack(value));
         },
         label: Text('Change image'),
         icon: Icon(Icons.edit),
@@ -96,11 +97,10 @@ class _UserEdit extends State<UserEdit> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(200),
                                 child: Image.network(
-                                  userJWTcontroller.backendRootLink + 'image/profile/' +
-                                      snapshot.data['profile_picture']
-                                          .split('\\')
-                                          .last
-                                          .toString(),
+                                  userJWTcontroller.backendRootLink +
+                                          'image/profile/' +
+                                          snapshot.data?['profile_picture'] ??
+                                      ''.split('\\').last.toString(),
                                   headers: {
                                     HttpHeaders.authorizationHeader:
                                         "Bearer " + userJWTcontroller.jwt.value
@@ -168,8 +168,8 @@ class _UserEdit extends State<UserEdit> {
                                           border: OutlineInputBorder(),
                                           labelText: 'Name',
                                         ),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
                                             return 'Please enter some text';
                                           }
                                           return null;
@@ -195,8 +195,8 @@ class _UserEdit extends State<UserEdit> {
                                           border: OutlineInputBorder(),
                                           labelText: 'Last name',
                                         ),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
                                             return 'Please enter some text';
                                           }
                                           return null;
@@ -224,8 +224,8 @@ class _UserEdit extends State<UserEdit> {
                                           border: OutlineInputBorder(),
                                           labelText: 'Email',
                                         ),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
                                             return 'Please enter some text';
                                           }
                                           if (!value.contains('@') ||
@@ -261,8 +261,8 @@ class _UserEdit extends State<UserEdit> {
                                           border: OutlineInputBorder(),
                                           labelText: 'Age',
                                         ),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
                                             return 'Please enter some text';
                                           }
                                           if (value.contains('.') ||
@@ -297,8 +297,8 @@ class _UserEdit extends State<UserEdit> {
                                           border: OutlineInputBorder(),
                                           labelText: 'Description',
                                         ),
-                                        validator: (String value) {
-                                          if (value.isEmpty) {
+                                        validator: (String? value) {
+                                          if (value == null || value.isEmpty) {
                                             return 'Please enter some text';
                                           }
                                           return null;
@@ -329,14 +329,14 @@ class _UserEdit extends State<UserEdit> {
                                         }
                                         return null;
                                       },
-                                      onChanged: (String newSex) {
+                                      onChanged: (String? newSex) {
                                         setState(() {
                                           if (newSex == 'Male') {
                                             _selected_sex = 1;
                                           } else {
                                             _selected_sex = 2;
                                           }
-                                          _sex = newSex;
+                                          _sex = newSex!;
                                         });
                                       },
                                       items: <String>['Male', 'Female']
@@ -366,7 +366,7 @@ class _UserEdit extends State<UserEdit> {
                                         }
                                         return null;
                                       },
-                                      onChanged: (String newPreferences) {
+                                      onChanged: (String? newPreferences) {
                                         setState(() {
                                           if (newPreferences == 'Male') {
                                             _selected_preference = 1;
@@ -376,7 +376,7 @@ class _UserEdit extends State<UserEdit> {
                                           } else {
                                             _selected_preference = 3;
                                           }
-                                          _sexual_preference = newPreferences;
+                                          _sexual_preference = newPreferences!;
                                         });
                                       },
                                       items: <String>['Male', 'Female', 'Both']
@@ -396,7 +396,8 @@ class _UserEdit extends State<UserEdit> {
                                       child: FloatingActionButton(
                                         onPressed: () {
                                           if (_formKey.currentState
-                                              .validate()) {
+                                                  ?.validate() ??
+                                              false) {
                                             setState(() {
                                               _futureUserUpdate = updateUser(
                                                 _idUser,

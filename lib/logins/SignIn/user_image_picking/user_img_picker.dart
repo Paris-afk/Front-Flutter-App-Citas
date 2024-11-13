@@ -10,17 +10,17 @@ import 'package:citas_proyecto/appRootPages/rootLayout.dart';
 import '../hobbies_picker/hobbies_picker.dart';
 
 class UserImgPicker extends StatefulWidget {
-  UserImgPicker({Key key}) : super(key: key);
+  UserImgPicker({required Key key}) : super(key: key);
 
   @override
   _UserImgPicker createState() => _UserImgPicker();
 }
 
 class _UserImgPicker extends State<UserImgPicker> {
-  File _image;
+  late File _image;
   final picker = ImagePicker();
   var _pickImageError;
-  Future postImg = null;
+  Future<dynamic>? postImg;
 
   Future getImage() async {
     try {
@@ -84,9 +84,9 @@ class _UserImgPicker extends State<UserImgPicker> {
                       onPressed: () {
                         setState(() {
                           postImg = postUserProfileImg(_image);
-                          postImg.then((value) {
+                          postImg?.then((value) {
                             if (value.toString() == 'success') {
-                              HobbiesPicker();
+                              HobbiesPicker(key: UniqueKey());
                             }
                           });
                         });
@@ -100,7 +100,7 @@ class _UserImgPicker extends State<UserImgPicker> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       print('IMAGE POSTED');
-                      return HobbiesPicker();
+                      return HobbiesPicker(key: UniqueKey());
                     } else if (snapshot.hasError) {
                       print('Mal hecho: ' + snapshot.error.toString());
                       return Center(
